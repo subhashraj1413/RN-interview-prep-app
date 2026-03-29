@@ -1,0 +1,753 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --panel:rgba(10,21,39,0.76);
+  --panel-strong:rgba(10,21,39,0.92);
+  --line:rgba(255,255,255,0.11);
+  --text:#f3f6fb;
+  --muted:#99a8bf;
+  --accent:#7dd3fc;
+  --accent-strong:#38bdf8;
+  --shadow:0 24px 80px rgba(0,0,0,0.35);
+  --radius-xl:28px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:'Sora',ui-sans-serif,system-ui,sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 26rem),
+    radial-gradient(circle at top right, rgba(251,113,133,0.16), transparent 24rem),
+    linear-gradient(180deg, #07111f 0%, #09162a 45%, #050b16 100%);
+  color:var(--text);
+  padding:32px 20px 64px;
+  overflow-x:hidden;
+}
+body::before,
+body::after{
+  content:'';
+  position:fixed;
+  border-radius:999px;
+  filter:blur(80px);
+  pointer-events:none;
+  opacity:0.55;
+}
+body::before{
+  width:20rem;
+  height:20rem;
+  top:4rem;
+  right:-6rem;
+  background:rgba(56,189,248,0.18);
+}
+body::after{
+  width:18rem;
+  height:18rem;
+  bottom:8rem;
+  left:-5rem;
+  background:rgba(245,158,11,0.12);
+}
+
+.wrap{
+  max-width:1160px;
+  margin:0 auto;
+  position:relative;
+}
+.hero,
+.tour,
+.diagram-card,
+.caption-card{
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0, 1.7fr) minmax(260px, 0.9fr);
+  gap:24px;
+  padding:34px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(125,211,252,0.12), rgba(255,255,255,0.03) 35%, rgba(251,113,133,0.08)),
+    var(--panel);
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.05) 45%, transparent 85%);
+  pointer-events:none;
+}
+.hero-copy,
+.hero-side{position:relative;z-index:1}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border:1px solid rgba(125,211,252,0.25);
+  border-radius:999px;
+  background:rgba(8,23,42,0.62);
+  color:#c4e9fb;
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.eyebrow::before{
+  content:'';
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--accent), #fff);
+  box-shadow:0 0 18px rgba(125,211,252,0.8);
+}
+.hero h1{
+  font-size:clamp(2rem, 4vw, 3.8rem);
+  line-height:0.98;
+  letter-spacing:-0.04em;
+  max-width:11ch;
+}
+.hero p{
+  margin-top:18px;
+  max-width:62ch;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.8;
+}
+.hero-highlights{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:22px;
+}
+.hero-pill{
+  padding:12px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#dce8f8;
+  font-size:12px;
+  line-height:1.5;
+}
+.hero-side{
+  display:grid;
+  gap:14px;
+  align-content:start;
+}
+.hero-card{
+  padding:18px 18px 16px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.hero-card-label{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  margin-bottom:10px;
+}
+.hero-card-value{
+  font-size:30px;
+  font-weight:700;
+  letter-spacing:-0.04em;
+  margin-bottom:6px;
+}
+.hero-card p{
+  color:#bfd1e5;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.tour{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:var(--panel-strong);
+  box-shadow:var(--shadow);
+}
+.toolbar-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:16px;
+}
+.section-label{
+  color:#d8e6f6;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:8px;
+}
+.section-title{
+  font-size:24px;
+  letter-spacing:-0.03em;
+}
+.result-meta{
+  min-height:42px;
+  min-width:220px;
+  padding:10px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#d8e6f6;
+  font-size:12px;
+  line-height:1.6;
+  text-align:right;
+}
+.stepper{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.step-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  background:rgba(255,255,255,0.03);
+  color:#a8bbd1;
+  transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.step-btn:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,0.22);
+  color:#eef7ff;
+}
+.step-btn.active{
+  background:linear-gradient(135deg, rgba(56,189,248,0.24), rgba(125,211,252,0.08));
+  color:#eef9ff;
+  border-color:rgba(125,211,252,0.38);
+}
+.step-index{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.09);
+  color:inherit;
+  font-size:10px;
+  font-weight:700;
+}
+.panel{display:none}
+.panel.active{display:block}
+.panel-grid{
+  display:grid;
+  gap:16px;
+}
+.diagram-card{
+  overflow:hidden;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  padding:18px;
+  animation:fadeUp 0.55s ease both;
+}
+.diagram-card svg{
+  width:100%;
+  height:auto;
+  display:block;
+  animation:diagramFloat 9s ease-in-out infinite;
+}
+.caption-card{
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  padding:18px 20px;
+  animation:fadeUp 0.6s ease both;
+}
+.caption-label{
+  color:#b7c9de;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:10px;
+}
+.caption{
+  font-size:14px;
+  color:#c8d7e7;
+  line-height:1.85;
+}
+.caption strong{font-weight:700;color:#f4f8ff}
+.caption em{color:#dce8f8}
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  margin-top:18px;
+}
+.nav-btn{
+  padding:10px 18px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  background:rgba(255,255,255,0.05);
+  color:#eef9ff;
+  transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+.nav-btn:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:rgba(125,211,252,0.32);
+  background:rgba(56,189,248,0.12);
+}
+.nav-btn:disabled{opacity:0.35;cursor:default}
+.progress-dots{display:flex;gap:10px;align-items:center}
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.18);
+  transition:transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.dot.active{
+  background:#dff4ff;
+  transform:scale(1.15);
+  box-shadow:0 0 16px rgba(125,211,252,0.65);
+}
+.animated .diagram-card,
+.animated .caption-card{
+  animation:fadeUp 0.5s ease both;
+}
+
+svg .th{
+  font:700 16px/1.2 'Sora', ui-sans-serif, system-ui, sans-serif;
+}
+svg .ts{
+  font:500 12px/1.45 'Sora', ui-sans-serif, system-ui, sans-serif;
+}
+svg .c-purple rect{
+  fill:#eeedfe;
+  stroke:#534ab7;
+}
+svg .c-teal rect{
+  fill:#e1f5ee;
+  stroke:#0f6e56;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes diagramFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+
+@media (max-width: 980px){
+  .hero{grid-template-columns:1fr}
+}
+
+@media (max-width: 720px){
+  body{padding:18px 14px 40px}
+  .hero,
+  .tour{padding:20px}
+  .toolbar-top,
+  .nav{flex-direction:column;align-items:stretch}
+  .result-meta{text-align:left;min-width:0;width:100%}
+  .nav-btn{width:100%}
+}
+</style>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">New Architecture Explainer</div>
+      <h1>JSI, TurboModules, Fabric, and Codegen Explained</h1>
+      <p>A visual walkthrough of how React Native moved from the old JSON bridge to a direct C++ interface, generated native bindings, lazy native modules, and a new renderer. Use the step navigator to move from the old bridge mental model to how the full new architecture fits together.</p>
+      <div class="hero-highlights">
+        <div class="hero-pill">Built around diagrams first, then plain-English explanations that map each concept to an intuitive mental model.</div>
+        <div class="hero-pill">Designed as a sequence: old bridge, JSI, TurboModules, Codegen, Fabric, the full architecture, and a simple analogy.</div>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="hero-card">
+        <div class="hero-card-label">Format</div>
+        <div class="hero-card-value">7 Steps</div>
+        <p>Move through the architecture one idea at a time instead of trying to absorb every moving part at once.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-label">Goal</div>
+        <div class="hero-card-value">Mental Model</div>
+        <p>This page is built to make the relationships obvious: JSI is the foundation, Codegen generates the contracts, and TurboModules and Fabric build on both.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tour">
+    <div class="toolbar-top">
+      <div>
+        <div class="section-label">Explainer Navigator</div>
+        <div class="section-title">Walk the old bridge to JSI, Codegen, TurboModules, and Fabric</div>
+      </div>
+      <div class="result-meta" id="step-meta"></div>
+    </div>
+
+    <div class="stepper" id="stepper"></div>
+    <div id="panels"></div>
+    <div class="nav">
+      <button class="nav-btn" id="prev-btn" onclick="go(-1)">Previous Step</button>
+      <div class="progress-dots" id="dots"></div>
+      <button class="nav-btn" id="next-btn" onclick="go(1)">Next Step</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const steps = [
+
+{label:'Old Bridge',
+svg:`<svg width="100%" viewBox="0 0 680 360">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<!-- JS side -->
+<g class="c-purple"><rect x="40" y="80" width="160" height="60" rx="8" stroke-width="0.5"/>
+<text class="th" x="120" y="104" text-anchor="middle" dominant-baseline="central">JavaScript</text>
+<text class="ts" x="120" y="122" text-anchor="middle" dominant-baseline="central">your React code</text></g>
+
+<!-- Bridge box -->
+<rect x="250" y="60" width="180" height="240" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="th" x="340" y="90" text-anchor="middle" dominant-baseline="central" fill="#633806">THE BRIDGE</text>
+<text class="ts" x="340" y="114" text-anchor="middle" dominant-baseline="central" fill="#854F0B">Step 1: JS serializes</text>
+<text class="ts" x="340" y="134" text-anchor="middle" dominant-baseline="central" fill="#854F0B">data to JSON string</text>
+<text class="ts" x="340" y="162" text-anchor="middle" dominant-baseline="central" fill="#854F0B">Step 2: String sent</text>
+<text class="ts" x="340" y="182" text-anchor="middle" dominant-baseline="central" fill="#854F0B">asynchronously</text>
+<text class="ts" x="340" y="210" text-anchor="middle" dominant-baseline="central" fill="#854F0B">Step 3: Native parses</text>
+<text class="ts" x="340" y="230" text-anchor="middle" dominant-baseline="central" fill="#854F0B">JSON back to object</text>
+<text class="ts" x="340" y="258" text-anchor="middle" dominant-baseline="central" fill="#854F0B">Step 4: Result goes</text>
+<text class="ts" x="340" y="278" text-anchor="middle" dominant-baseline="central" fill="#854F0B">back same way</text>
+
+<!-- Native side -->
+<g class="c-teal"><rect x="480" y="80" width="160" height="60" rx="8" stroke-width="0.5"/>
+<text class="th" x="560" y="104" text-anchor="middle" dominant-baseline="central">Native</text>
+<text class="ts" x="560" y="122" text-anchor="middle" dominant-baseline="central">iOS / Android</text></g>
+
+<!-- Arrows -->
+<line x1="200" y1="105" x2="248" y2="140" stroke="#854F0B" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+<line x1="432" y1="140" x2="479" y2="110" stroke="#854F0B" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+<line x1="479" y1="130" x2="432" y2="200" stroke="#854F0B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#a)" fill="none"/>
+<line x1="248" y1="220" x2="200" y2="125" stroke="#854F0B" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#a)" fill="none"/>
+
+<!-- Problem label -->
+<rect x="40" y="270" width="600" height="56" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text class="ts" x="340" y="290" text-anchor="middle" dominant-baseline="central" fill="#791F1F">Problem: Every JS ↔ Native call converts data to JSON text and back.</text>
+<text class="ts" x="340" y="310" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">Slow. Only async. Bottleneck for animations, gestures, 60fps scrolling.</text>
+</svg>`,
+caption:`<strong>The Old Bridge — the telephone game.</strong> Imagine your waiter (JS) has to write every order on paper in a very specific language (JSON), pass it through a tiny window, wait for the kitchen to translate it, cook, then translate the reply back. Every single call. Even "is the door open?" required the full paper translation. This was React Native's original design — everything passed through one shared JSON bridge, serially. Fast apps could feel it.`},
+
+{label:'What is JSI?',
+svg:`<svg width="100%" viewBox="0 0 680 360">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<!-- JS -->
+<g class="c-purple"><rect x="40" y="60" width="160" height="60" rx="8" stroke-width="0.5"/>
+<text class="th" x="120" y="84" text-anchor="middle" dominant-baseline="central">JavaScript</text>
+<text class="ts" x="120" y="102" text-anchor="middle" dominant-baseline="central">your React code</text></g>
+
+<!-- JSI box -->
+<rect x="250" y="40" width="180" height="100" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text class="th" x="340" y="68" text-anchor="middle" dominant-baseline="central" fill="#0C447C">JSI</text>
+<text class="ts" x="340" y="88" text-anchor="middle" dominant-baseline="central" fill="#185FA5">JavaScript Interface</text>
+<text class="ts" x="340" y="108" text-anchor="middle" dominant-baseline="central" fill="#185FA5">Direct C++ memory ref</text>
+<text class="ts" x="340" y="126" text-anchor="middle" dominant-baseline="central" fill="#185FA5">No JSON. No async wait.</text>
+
+<!-- Native C++ -->
+<g class="c-teal"><rect x="480" y="60" width="160" height="60" rx="8" stroke-width="0.5"/>
+<text class="th" x="560" y="84" text-anchor="middle" dominant-baseline="central">C++ Host</text>
+<text class="ts" x="560" y="102" text-anchor="middle" dominant-baseline="central">native objects</text></g>
+
+<!-- Direct arrow -->
+<line x1="200" y1="90" x2="248" y2="90" stroke="#185FA5" stroke-width="2" marker-end="url(#a)" fill="none"/>
+<text class="ts" x="224" y="82" text-anchor="middle" fill="#0C447C">direct</text>
+<line x1="432" y1="90" x2="480" y2="90" stroke="#185FA5" stroke-width="2" marker-end="url(#a)" fill="none"/>
+
+<!-- What JSI enables -->
+<rect x="40" y="168" width="600" height="80" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text class="th" x="340" y="195" text-anchor="middle" dominant-baseline="central" fill="#0C447C">What JSI enables</text>
+<text class="ts" x="340" y="218" text-anchor="middle" dominant-baseline="central" fill="#185FA5">JS holds a real C++ reference — like having the kitchen chef's phone number directly.</text>
+<text class="ts" x="340" y="238" text-anchor="middle" dominant-baseline="central" fill="#185FA5">You call them. They pick up. No translation. Synchronous if needed.</text>
+
+<!-- Real world analogy -->
+<rect x="40" y="272" width="600" height="66" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="th" x="340" y="294" text-anchor="middle" dominant-baseline="central" fill="#085041">Real-world analogy</text>
+<text class="ts" x="340" y="316" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">Old bridge = waiter writes on paper, passes through window. JSI = waiter walks into the kitchen directly.</text>
+</svg>`,
+caption:`<strong>JSI = JavaScript Interface.</strong> The foundation of the new architecture. JSI gives JavaScript a direct C++ reference to native objects — like having a phone number that calls the kitchen directly instead of writing notes. No JSON. No serialization. No async round-trip forced on every call. JSI is the <em>infrastructure</em> that makes everything else possible. TurboModules and Fabric are built on top of it.`},
+
+{label:'TurboModules',
+svg:`<svg width="100%" viewBox="0 0 680 390">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<!-- Old NativeModules -->
+<rect x="40" y="30" width="280" height="130" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text class="th" x="180" y="55" text-anchor="middle" dominant-baseline="central" fill="#791F1F">Old: NativeModules</text>
+<text class="ts" x="180" y="78" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">ALL modules loaded at startup</text>
+<text class="ts" x="180" y="98" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">Camera, Bluetooth, Maps, Payments,</text>
+<text class="ts" x="180" y="118" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">Contacts, Sensors — all initialized</text>
+<text class="ts" x="180" y="138" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">even if never used</text>
+
+<!-- New TurboModules -->
+<rect x="360" y="30" width="280" height="130" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="th" x="500" y="55" text-anchor="middle" dominant-baseline="central" fill="#085041">New: TurboModules</text>
+<text class="ts" x="500" y="78" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">Modules load ONLY when first called</text>
+<text class="ts" x="500" y="98" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">(lazy initialization)</text>
+<text class="ts" x="500" y="118" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">JS has direct JSI reference</text>
+<text class="ts" x="500" y="138" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">to native module — no bridge</text>
+
+<!-- Timeline comparison -->
+<rect x="40" y="182" width="600" height="56" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="th" x="340" y="200" text-anchor="middle" dominant-baseline="central" fill="#633806">Startup time comparison</text>
+<text class="ts" x="340" y="220" text-anchor="middle" dominant-baseline="central" fill="#854F0B">Old: load 30 modules at boot whether you use them or not → slow cold start</text>
+
+<!-- Startup bars -->
+<rect x="40" y="256" width="4" height="44" rx="2" fill="var(--color-border-secondary)"/>
+<rect x="44" y="264" width="380" height="28" rx="4" fill="#F09595"/>
+<text class="ts" x="434" y="282" text-anchor="start" dominant-baseline="central" fill="#A32D2D">Old — loads everything</text>
+<rect x="40" y="310" width="4" height="44" rx="2" fill="var(--color-border-secondary)"/>
+<rect x="44" y="318" width="130" height="28" rx="4" fill="#5DCAA5"/>
+<text class="ts" x="184" y="336" text-anchor="start" dominant-baseline="central" fill="#085041">TurboModules — loads only what's needed at launch</text>
+</svg>`,
+caption:`<strong>TurboModules = lazy native modules via JSI.</strong> In the old system, every native capability (Camera, Bluetooth, GPS, Payments) was loaded and initialized when your app started — whether you needed them or not. It's like a restaurant that preps every dish on the menu before any customer arrives. TurboModules change this: a module is loaded only the first time your JS code actually calls it. Plus, because they use JSI, the call is direct — no JSON translation. Result: dramatically faster cold start, lower memory usage.`},
+
+{label:'Codegen',
+svg:`<svg width="100%" viewBox="0 0 680 390">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<!-- JS spec -->
+<rect x="40" y="42" width="200" height="110" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text class="th" x="140" y="68" text-anchor="middle" dominant-baseline="central" fill="#0C447C">JS Spec File</text>
+<text class="ts" x="140" y="92" text-anchor="middle" dominant-baseline="central" fill="#185FA5">TypeScript / Flow declares</text>
+<text class="ts" x="140" y="112" text-anchor="middle" dominant-baseline="central" fill="#185FA5">the native contract:</text>
+<text class="ts" x="140" y="132" text-anchor="middle" dominant-baseline="central" fill="#185FA5">method names, args, returns</text>
+
+<!-- Codegen engine -->
+<rect x="270" y="32" width="140" height="130" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="th" x="340" y="66" text-anchor="middle" dominant-baseline="central" fill="#633806">Codegen</text>
+<text class="ts" x="340" y="92" text-anchor="middle" dominant-baseline="central" fill="#854F0B">Reads the spec</text>
+<text class="ts" x="340" y="112" text-anchor="middle" dominant-baseline="central" fill="#854F0B">and generates typed</text>
+<text class="ts" x="340" y="132" text-anchor="middle" dominant-baseline="central" fill="#854F0B">native bindings</text>
+
+<!-- Native outputs -->
+<rect x="440" y="32" width="200" height="58" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="th" x="540" y="54" text-anchor="middle" dominant-baseline="central" fill="#085041">Generated Native Interfaces</text>
+<text class="ts" x="540" y="74" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">C++ / Java / ObjC / Swift glue</text>
+
+<rect x="440" y="104" width="200" height="58" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="540" y="126" text-anchor="middle" dominant-baseline="central" fill="#26215C">Result</text>
+<text class="ts" x="540" y="146" text-anchor="middle" dominant-baseline="central" fill="#3C3489">JS and native stay in sync</text>
+
+<!-- arrows -->
+<line x1="240" y1="97" x2="268" y2="97" stroke="#185FA5" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+<line x1="412" y1="72" x2="438" y2="72" stroke="#854F0B" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+<line x1="412" y1="122" x2="438" y2="132" stroke="#854F0B" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+
+<!-- bottom explanation -->
+<rect x="40" y="210" width="600" height="126" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text class="th" x="340" y="236" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">Why Codegen exists</text>
+<text class="ts" x="340" y="262" text-anchor="middle" dominant-baseline="central" fill="#444441">Without Codegen, JS types and native signatures drift apart manually.</text>
+<text class="ts" x="340" y="284" text-anchor="middle" dominant-baseline="central" fill="#444441">With Codegen, one spec becomes the source of truth for both sides.</text>
+<text class="ts" x="340" y="306" text-anchor="middle" dominant-baseline="central" fill="#444441">TurboModules use it for typed module bindings. Fabric uses it for typed component/event contracts.</text>
+</svg>`,
+caption:`<strong>Codegen = the contract factory.</strong> JSI gives React Native the low-level direct connection, but Codegen is what makes that connection practical at scale. You write a JavaScript-side spec describing the module or component contract once, and React Native generates the native binding code from it. That means your JS types, native method signatures, and generated glue stay aligned instead of drifting by hand.\n\nFor TurboModules, Codegen generates the typed native module interfaces. For Fabric, it generates typed component and event plumbing. The big idea is that Codegen is not "another bridge." It is the code-generation layer that turns a single contract into the correct native integration pieces for the new architecture.`},
+
+{label:'Fabric',
+svg:`<svg width="100%" viewBox="0 0 680 400">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<!-- Old Renderer -->
+<rect x="40" y="28" width="280" height="160" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text class="th" x="180" y="52" text-anchor="middle" dominant-baseline="central" fill="#791F1F">Old Renderer</text>
+<text class="ts" x="180" y="74" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">1. React computes UI on JS thread</text>
+<text class="ts" x="180" y="94" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">2. Sends layout via bridge (JSON)</text>
+<text class="ts" x="180" y="114" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">3. Native renders on UI thread</text>
+<text class="ts" x="180" y="140" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">Problem: JS busy = UI freezes.</text>
+<text class="ts" x="180" y="160" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">Scroll = dropped frames.</text>
+
+<!-- Fabric -->
+<rect x="360" y="28" width="280" height="160" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="500" y="52" text-anchor="middle" dominant-baseline="central" fill="#26215C">Fabric (New Renderer)</text>
+<text class="ts" x="500" y="74" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Renders concurrently — can</text>
+<text class="ts" x="500" y="94" text-anchor="middle" dominant-baseline="central" fill="#3C3489">pause/resume/prioritize work</text>
+<text class="ts" x="500" y="114" text-anchor="middle" dominant-baseline="central" fill="#534AB7">Layout computed in C++ (JSI)</text>
+<text class="ts" x="500" y="134" text-anchor="middle" dominant-baseline="central" fill="#534AB7">Synchronous reading of host views</text>
+<text class="ts" x="500" y="154" text-anchor="middle" dominant-baseline="central" fill="#534AB7">No bridge crossing for layout</text>
+
+<!-- Thread model -->
+<rect x="40" y="212" width="600" height="164" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text class="th" x="340" y="236" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">Thread model — Fabric</text>
+
+<!-- JS Thread bar -->
+<rect x="60" y="254" width="80" height="22" rx="4" fill="#AFA9EC"/>
+<text class="ts" x="60" y="250" text-anchor="start" fill="#3C3489">JS Thread</text>
+<text class="ts" x="148" y="269" text-anchor="start" dominant-baseline="central" fill="#444441">React computes component tree (can be interrupted)</text>
+
+<!-- Background Thread bar -->
+<rect x="60" y="298" width="140" height="22" rx="4" fill="#9FE1CB"/>
+<text class="ts" x="60" y="294" text-anchor="start" fill="#085041">Background Thread</text>
+<text class="ts" x="208" y="313" text-anchor="start" dominant-baseline="central" fill="#444441">C++ layout engine (Yoga) calculates positions</text>
+
+<!-- UI Thread bar -->
+<rect x="60" y="342" width="200" height="22" rx="4" fill="#85B7EB"/>
+<text class="ts" x="60" y="338" text-anchor="start" fill="#0C447C">UI Thread</text>
+<text class="ts" x="268" y="357" text-anchor="start" dominant-baseline="central" fill="#444441">Commits render — always smooth, never blocked</text>
+</svg>`,
+caption:`<strong>Fabric = the new UI renderer.</strong> In the old system, React's shadow tree (the layout calculation layer) lived in JavaScript and had to communicate with native views through the bridge. If JS was busy, your UI stuttered. Fabric moves the renderer to C++ and uses JSI — so layout calculation happens natively, UI commits happen synchronously when needed, and rendering can happen concurrently across threads. The UI thread stays free. Scrolling, animations, and transitions stay smooth even when JS is doing heavy work.`},
+
+{label:'All Together',
+svg:`<svg width="100%" viewBox="0 0 680 420">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<!-- JS Layer -->
+<g class="c-purple"><rect x="220" y="30" width="240" height="52" rx="8" stroke-width="0.5"/>
+<text class="th" x="340" y="52" text-anchor="middle" dominant-baseline="central">Your React Code (JS)</text>
+<text class="ts" x="340" y="70" text-anchor="middle" dominant-baseline="central">components, state, business logic</text></g>
+
+<!-- JSI -->
+<rect x="180" y="110" width="320" height="48" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+<text class="th" x="340" y="128" text-anchor="middle" dominant-baseline="central" fill="#0C447C">JSI — JavaScript Interface</text>
+<text class="ts" x="340" y="146" text-anchor="middle" dominant-baseline="central" fill="#185FA5">The C++ bridge — gives JS direct references to native objects</text>
+
+<!-- TurboModules -->
+<rect x="40" y="188" width="260" height="80" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="th" x="170" y="214" text-anchor="middle" dominant-baseline="central" fill="#085041">TurboModules</text>
+<text class="ts" x="170" y="234" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">Lazy native modules</text>
+<text class="ts" x="170" y="252" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">Camera, BT, GPS, Payments…</text>
+
+<!-- Fabric -->
+<rect x="380" y="188" width="260" height="80" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="510" y="214" text-anchor="middle" dominant-baseline="central" fill="#26215C">Fabric</text>
+<text class="ts" x="510" y="234" text-anchor="middle" dominant-baseline="central" fill="#3C3489">New UI renderer</text>
+<text class="ts" x="510" y="252" text-anchor="middle" dominant-baseline="central" fill="#534AB7">Concurrent. C++ layout.</text>
+
+<!-- Native Platform -->
+<rect x="40" y="298" width="600" height="52" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text class="th" x="340" y="316" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">Native Platform</text>
+<text class="ts" x="340" y="336" text-anchor="middle" dominant-baseline="central" fill="#444441">iOS (Swift/ObjC) and Android (Kotlin/Java) — the actual OS APIs</text>
+
+<!-- Arrows -->
+<line x1="340" y1="82" x2="340" y2="108" stroke="#185FA5" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+<line x1="270" y1="158" x2="200" y2="186" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+<line x1="410" y1="158" x2="480" y2="186" stroke="#534AB7" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+<line x1="170" y1="268" x2="200" y2="296" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+<line x1="510" y1="268" x2="480" y2="296" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#a)" fill="none"/>
+
+<!-- Summary box -->
+<rect x="40" y="366" width="600" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="340" y="386" text-anchor="middle" dominant-baseline="central" fill="#085041">JSI is the foundation. Codegen creates typed glue. TurboModules and Fabric use both.</text>
+</svg>`,
+caption:`<strong>How they fit together.</strong> JSI is the foundation — the direct wiring. Codegen turns one JS-side contract into typed native glue. TurboModules sit on top of that stack to replace the old native module system (anything your app calls from native: camera, GPS, biometrics). Fabric sits on top of that stack to replace the old renderer (how your components become actual pixels on screen). Together they eliminate the old bridge entirely — no JSON, no bottleneck, no single-threaded queue. The result: faster startup, smoother animations, and a React Native that can genuinely compete with fully native apps.`},
+
+{label:'Simple Analogy',
+svg:`<svg width="100%" viewBox="0 0 680 380">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<!-- Restaurant scene -->
+<rect x="40" y="30" width="600" height="320" rx="12" fill="none" stroke="var(--color-border-tertiary)" stroke-width="0.5"/>
+<text class="th" x="340" y="56" text-anchor="middle" dominant-baseline="central">The restaurant analogy</text>
+
+<!-- Old system -->
+<rect x="60" y="72" width="260" height="124" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text class="th" x="190" y="96" text-anchor="middle" dominant-baseline="central" fill="#791F1F">Old Bridge</text>
+<text class="ts" x="190" y="118" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">Waiter writes every order</text>
+<text class="ts" x="190" y="138" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">on paper, passes through</text>
+<text class="ts" x="190" y="158" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">a tiny translation window.</text>
+<text class="ts" x="190" y="178" text-anchor="middle" dominant-baseline="central" fill="#A32D2D">Kitchen translates back.</text>
+
+<!-- New system -->
+<rect x="360" y="72" width="260" height="124" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="th" x="490" y="96" text-anchor="middle" dominant-baseline="central" fill="#085041">JSI + TurboModules + Fabric</text>
+<text class="ts" x="490" y="118" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">Waiter walks directly into</text>
+<text class="ts" x="490" y="138" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">the kitchen. Speaks directly.</text>
+<text class="ts" x="490" y="158" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">Kitchen already prepped</text>
+<text class="ts" x="490" y="178" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">only dishes on order.</text>
+
+<!-- What each thing is -->
+<rect x="60" y="216" width="560" height="116" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="340" y="238" text-anchor="middle" dominant-baseline="central" fill="#26215C">One-line definitions</text>
+<text class="ts" x="80" y="264" text-anchor="start" dominant-baseline="central" fill="#3C3489">JSI</text>
+<text class="ts" x="180" y="264" text-anchor="start" dominant-baseline="central" fill="#444441">— the direct door between JS and C++ native. No JSON.</text>
+<text class="ts" x="80" y="290" text-anchor="start" dominant-baseline="central" fill="#633806">Codegen</text>
+<text class="ts" x="200" y="290" text-anchor="start" dominant-baseline="central" fill="#444441">— generates typed native glue from one JS-side spec.</text>
+<text class="ts" x="80" y="316" text-anchor="start" dominant-baseline="central" fill="#085041">TurboModules</text>
+<text class="ts" x="200" y="316" text-anchor="start" dominant-baseline="central" fill="#444441">— native features (Camera, GPS…) loaded only when called.</text>
+<text class="ts" x="80" y="342" text-anchor="start" dominant-baseline="central" fill="#26215C">Fabric</text>
+<text class="ts" x="180" y="342" text-anchor="start" dominant-baseline="central" fill="#444441">— the new UI renderer. Smooth, concurrent, C++ powered.</text>
+</svg>`,
+caption:`<strong>The one-paragraph summary.</strong> The old bridge was a bottleneck — every JS↔Native call had to be converted to JSON, queued, sent, and converted back. <strong>JSI</strong> replaces that with a direct C++ connection. <strong>Codegen</strong> turns one JS-side contract into generated native bindings so both sides stay aligned. <strong>TurboModules</strong> uses that stack to make native modules load lazily and call directly. <strong>Fabric</strong> uses that stack to render your UI concurrently without blocking the UI thread. Together: faster startup, smoother scrolling, smoother animations — and a foundation for everything the React Native team is building next.`},
+
+];
+
+let current = 0;
+
+function buildUI(){
+  const stepper=document.getElementById('stepper');
+  const panels=document.getElementById('panels');
+  const dots=document.getElementById('dots');
+  const meta=document.getElementById('step-meta');
+  stepper.innerHTML=steps.map((s,i)=>
+    `<button class="step-btn${i===0?' active':''}" id="tab${i}" onclick="goto(${i})"><span class="step-index">${String(i+1).padStart(2,'0')}</span><span>${s.label}</span></button>`
+  ).join('');
+  panels.innerHTML=steps.map((s,i)=>
+    `<div class="panel${i===0?' active animated':''}" id="panel${i}">
+      <div class="panel-grid">
+        <div class="diagram-card">${s.svg}</div>
+        <div class="caption-card">
+          <div class="caption-label">Key Idea</div>
+          <div class="caption">${s.caption}</div>
+        </div>
+      </div>
+    </div>`
+  ).join('');
+  dots.innerHTML=steps.map((_,i)=>
+    `<div class="dot${i===0?' active':''}" id="dot${i}"></div>`
+  ).join('');
+  meta.innerHTML=`<strong>Step 1</strong> of ${steps.length}<br><strong>${steps[0].label}</strong>`;
+  updateNav();
+}
+
+function goto(i){
+  document.getElementById('tab'+current).classList.remove('active');
+  document.getElementById('panel'+current).classList.remove('active');
+  document.getElementById('dot'+current).classList.remove('active');
+  current=i;
+  document.getElementById('tab'+i).classList.add('active');
+  const p=document.getElementById('panel'+i);
+  p.classList.add('active','animated');
+  setTimeout(()=>p.classList.remove('animated'),400);
+  document.getElementById('dot'+i).classList.add('active');
+  document.getElementById('step-meta').innerHTML=`<strong>Step ${i+1}</strong> of ${steps.length}<br><strong>${steps[i].label}</strong>`;
+  updateNav();
+}
+
+function go(dir){
+  const next=Math.max(0,Math.min(steps.length-1,current+dir));
+  if(next!==current)goto(next);
+}
+
+function updateNav(){
+  document.getElementById('prev-btn').disabled=current===0;
+  document.getElementById('next-btn').disabled=current===steps.length-1;
+}
+
+buildUI();
+</script>

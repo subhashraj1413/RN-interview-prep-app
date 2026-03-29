@@ -1,0 +1,715 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg:#07111f;
+  --bg-elev:#0d1a2d;
+  --panel:rgba(10,21,39,0.76);
+  --panel-strong:rgba(10,21,39,0.92);
+  --panel-soft:rgba(255,255,255,0.06);
+  --line:rgba(255,255,255,0.11);
+  --line-strong:rgba(255,255,255,0.2);
+  --text:#f3f6fb;
+  --muted:#99a8bf;
+  --accent:#7dd3fc;
+  --accent-strong:#38bdf8;
+  --accent-warm:#f59e0b;
+  --accent-pink:#fb7185;
+  --success:#86efac;
+  --shadow:0 24px 80px rgba(0,0,0,0.35);
+  --radius-xl:28px;
+  --radius-lg:20px;
+  --radius-md:14px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:'Sora',ui-sans-serif,system-ui,sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 26rem),
+    radial-gradient(circle at top right, rgba(251,113,133,0.16), transparent 24rem),
+    linear-gradient(180deg, #07111f 0%, #09162a 45%, #050b16 100%);
+  color:var(--text);
+  padding:32px 20px 64px;
+  overflow-x:hidden;
+}
+body::before,
+body::after{
+  content:'';
+  position:fixed;
+  inset:auto;
+  border-radius:999px;
+  filter:blur(80px);
+  pointer-events:none;
+  opacity:0.55;
+}
+body::before{
+  width:20rem;
+  height:20rem;
+  top:4rem;
+  right:-6rem;
+  background:rgba(56,189,248,0.18);
+}
+body::after{
+  width:18rem;
+  height:18rem;
+  bottom:8rem;
+  left:-5rem;
+  background:rgba(245,158,11,0.12);
+}
+
+.wrap{
+  max-width:1160px;
+  margin:0 auto;
+  position:relative;
+}
+.hero,
+.toolbar,
+.qcard,
+.stat{
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0, 1.7fr) minmax(260px, 0.9fr);
+  gap:24px;
+  padding:34px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(125,211,252,0.12), rgba(255,255,255,0.03) 35%, rgba(251,113,133,0.08)),
+    var(--panel);
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.05) 45%, transparent 85%);
+  pointer-events:none;
+}
+.hero-copy{position:relative;z-index:1}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border:1px solid rgba(125,211,252,0.25);
+  border-radius:999px;
+  background:rgba(8,23,42,0.62);
+  color:#c4e9fb;
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.eyebrow::before{
+  content:'';
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--accent), #fff);
+  box-shadow:0 0 18px rgba(125,211,252,0.8);
+}
+.hero h1{
+  font-size:clamp(2rem, 4vw, 3.8rem);
+  line-height:0.98;
+  letter-spacing:-0.04em;
+  max-width:11ch;
+}
+.hero p{
+  margin-top:18px;
+  max-width:62ch;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.8;
+}
+.hero-highlights{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:22px;
+}
+.hero-pill{
+  padding:12px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#dce8f8;
+  font-size:12px;
+  line-height:1.5;
+}
+.hero-side{
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:14px;
+  align-content:start;
+}
+.hero-card{
+  padding:18px 18px 16px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.hero-card-label{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  margin-bottom:10px;
+}
+.hero-card-value{
+  font-size:30px;
+  font-weight:700;
+  letter-spacing:-0.04em;
+  margin-bottom:6px;
+}
+.hero-card p{
+  color:#bfd1e5;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.toolbar{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:var(--panel-strong);
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
+}
+.toolbar-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:16px;
+}
+.section-label{
+  color:#d8e6f6;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:8px;
+}
+.section-title{
+  font-size:24px;
+  letter-spacing:-0.03em;
+}
+.result-meta{
+  min-height:42px;
+  min-width:220px;
+  padding:10px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#d8e6f6;
+  font-size:12px;
+  line-height:1.6;
+  text-align:right;
+}
+.search-shell{
+  position:relative;
+  margin-bottom:18px;
+}
+.search-icon{
+  position:absolute;
+  top:50%;
+  left:16px;
+  transform:translateY(-50%);
+  color:#85a8c8;
+  font-size:16px;
+  pointer-events:none;
+}
+.search{
+  width:100%;
+  padding:16px 18px 16px 44px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.05);
+  color:var(--text);
+  font-size:14px;
+  transition:border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.search::placeholder{color:#7d92aa}
+.search:focus{
+  outline:none;
+  border-color:rgba(125,211,252,0.45);
+  background:rgba(255,255,255,0.07);
+  box-shadow:0 0 0 4px rgba(56,189,248,0.12);
+}
+
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.tab{
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.03);
+  color:#a8bbd1;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.01em;
+  cursor:pointer;
+  transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.tab:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,0.22);
+  color:#eef7ff;
+}
+.tab.active{
+  background:linear-gradient(135deg, rgba(56,189,248,0.24), rgba(125,211,252,0.08));
+  border-color:rgba(125,211,252,0.38);
+  color:#eef9ff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:14px;
+  margin-bottom:18px;
+}
+.stat{
+  padding:20px 18px;
+  border-radius:22px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+}
+.stat-l{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+}
+.stat-n{
+  margin-top:10px;
+  font-size:34px;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:-0.05em;
+  color:var(--text);
+}
+
+.qlist{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.qcard{
+  overflow:hidden;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  box-shadow:0 16px 48px rgba(0,0,0,0.18);
+  animation:cardIn 0.55s ease both;
+  animation-delay:calc(var(--i, 0) * 40ms);
+}
+.qcard:hover{
+  border-color:rgba(255,255,255,0.18);
+}
+.qhead{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:14px;
+  align-items:flex-start;
+  padding:20px 22px;
+  cursor:pointer;
+}
+.qnum{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:700;
+  flex-shrink:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22);
+}
+.qcopy{min-width:0}
+.qmeta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:10px;
+}
+.cat-tag,
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.cat-tag{
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.05);
+  color:#d5e6f7;
+}
+.qtxt{
+  font-size:16px;
+  line-height:1.65;
+  color:var(--text);
+}
+.badge{margin-top:2px}
+.chevron{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.04);
+  color:#d8e6f6;
+  font-size:15px;
+  transition:transform 0.2s ease, background 0.2s ease;
+}
+.chevron.open{
+  transform:rotate(180deg);
+  background:rgba(56,189,248,0.12);
+}
+.ans{
+  display:none;
+  padding:0 22px 22px 78px;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.ans.open{display:block}
+.ans-label{
+  margin:18px 0 10px;
+  color:#b7c9de;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+}
+.ans-txt{
+  color:#c8d7e7;
+  font-size:14px;
+  line-height:1.85;
+}
+.code{
+  margin-top:16px;
+  padding:16px 18px;
+  border-radius:18px;
+  border:1px solid rgba(125,211,252,0.14);
+  background:rgba(4,14,28,0.9);
+  color:#dff3ff;
+  font:13px/1.7 'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  overflow-x:auto;
+  white-space:pre;
+}
+.tip{
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:18px;
+  border:1px solid rgba(125,211,252,0.18);
+  background:linear-gradient(135deg, rgba(56,189,248,0.12), rgba(125,211,252,0.04));
+  color:#d8f2ff;
+  font-size:13px;
+  line-height:1.7;
+}
+.empty{
+  padding:42px 24px;
+  text-align:center;
+  border:1px dashed rgba(255,255,255,0.14);
+  border-radius:24px;
+  background:rgba(255,255,255,0.03);
+  color:var(--muted);
+  font-size:14px;
+}
+.diff-e{background:rgba(134,239,172,0.18);color:#b8f7ca}
+.diff-m{background:rgba(245,158,11,0.18);color:#ffd28b}
+.diff-h{background:rgba(251,113,133,0.18);color:#ffc3cc}
+.qnum-rn{background:linear-gradient(135deg, rgba(56,189,248,0.26), rgba(125,211,252,0.12));color:#dff4ff}
+.qnum-rj{background:linear-gradient(135deg, rgba(139,92,246,0.24), rgba(196,181,253,0.12));color:#efe7ff}
+.qnum-js{background:linear-gradient(135deg, rgba(245,158,11,0.24), rgba(253,224,71,0.12));color:#ffedb4}
+.qnum-sm{background:linear-gradient(135deg, rgba(16,185,129,0.24), rgba(134,239,172,0.12));color:#d5ffec}
+.qnum-perf{background:linear-gradient(135deg, rgba(249,115,22,0.24), rgba(251,191,36,0.12));color:#ffe0c2}
+.qnum-ci{background:linear-gradient(135deg, rgba(244,63,94,0.24), rgba(251,113,133,0.12));color:#ffd5dc}
+.qnum-lead{background:linear-gradient(135deg, rgba(148,163,184,0.24), rgba(226,232,240,0.12));color:#f0f5fa}
+.qnum-test{background:linear-gradient(135deg, rgba(34,197,94,0.24), rgba(163,230,53,0.12));color:#e4ffd2}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width: 980px){
+  .hero{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2, minmax(0, 1fr))}
+  .qhead{grid-template-columns:auto 1fr auto}
+  .chevron{grid-column:3}
+}
+
+@media (max-width: 720px){
+  body{padding:18px 14px 40px}
+  .hero,
+  .toolbar{padding:20px}
+  .toolbar-top{flex-direction:column}
+  .result-meta{text-align:left;min-width:0;width:100%}
+  .stats{grid-template-columns:1fr}
+  .qhead{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .qnum{width:38px;height:38px}
+  .badge,
+  .chevron{justify-self:start}
+  .ans{padding:0 18px 18px}
+  .hero h1{max-width:none}
+}
+</style>
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">Senior Mobile Interview System</div>
+      <h1>React Native Tech Lead Interview Prep</h1>
+      <p>Fifty high-signal questions across architecture, performance, testing, CI/CD, and leadership. Search fast, filter by domain, and expand answers only when you want the deeper model response.</p>
+      <div class="hero-highlights">
+        <div class="hero-pill">Built for senior-to-staff mobile interviews with architecture depth and trade-off language.</div>
+        <div class="hero-pill">Optimized for quick scanning first, then deep-answer review with code and tips.</div>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="hero-card">
+        <div class="hero-card-label">Coverage</div>
+        <div class="hero-card-value">8 Domains</div>
+        <p>React Native, React, JS/TS, state, performance, CI/CD, testing, and leadership.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-label">Mode</div>
+        <div class="hero-card-value">Interview Drill</div>
+        <p>Open cards one by one, rehearse your answer aloud, then compare against the model explanation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="toolbar-top">
+      <div>
+        <div class="section-label">Question Navigator</div>
+        <div class="section-title">Filter by domain. Search by concept.</div>
+      </div>
+      <div class="result-meta" id="resultMeta"></div>
+    </div>
+
+    <div class="search-shell">
+      <span class="search-icon">⌕</span>
+      <input class="search" id="search" placeholder="Search questions, answers, or keywords like Fabric, Detox, Hermes..." oninput="filterQ()">
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+  </section>
+
+  <div class="stats" id="stats"></div>
+  <div class="qlist" id="qlist"></div>
+</div>
+
+<script>
+const categories = [
+  {id:'all',label:'All',color:''},
+  {id:'rn',label:'React Native',color:'qnum-rn'},
+  {id:'rj',label:'React.js',color:'qnum-rj'},
+  {id:'js',label:'JS / TypeScript',color:'qnum-js'},
+  {id:'sm',label:'State Management',color:'qnum-sm'},
+  {id:'perf',label:'Performance',color:'qnum-perf'},
+  {id:'ci',label:'CI/CD & Deploy',color:'qnum-ci'},
+  {id:'test',label:'Testing',color:'qnum-test'},
+  {id:'lead',label:'Leadership',color:'qnum-lead'},
+];
+
+const Q = [
+  {cat:'rn',diff:'h',q:'Explain the React Native bridge architecture and how the new architecture (JSI + Fabric) improves upon it.',a:`The old bridge serializes all JS↔Native communication to JSON and passes it asynchronously over a single thread — this creates bottlenecks for high-frequency updates like animations or gestures.\n\nThe new architecture replaces this with JSI (JavaScript Interface), which gives JS a direct C++ reference to native objects — no serialization, no async round-trip. Fabric is the new renderer that uses this to compute layout concurrently and commit UI updates synchronously when needed. Turbo Modules replace NativeModules with lazy-loaded, type-safe native bindings.`,code:`// Old: async, JSON-serialized\nNativeModules.MyModule.doThing(data, callback);\n\n// New JSI: synchronous direct call via C++ host object\n// Your TS types are auto-generated from the native spec\nimport NativeMyModule from './NativeMyModule';\nNativeMyModule.doThing(data); // direct, no bridge`,tip:`Interviewers love depth here. Mention that JSI enables libraries like react-native-reanimated 2 to run animations entirely on the UI thread without crossing the bridge.`},
+
+  {cat:'rn',diff:'m',q:'How does navigation work in React Native and what are the trade-offs between React Navigation and react-native-navigation?',a:`React Navigation is JS-based — all navigation state lives in JS and screens are React components. It is flexible, cross-platform consistent, and easy to customize. The downside is that the navigation header and gestures are rendered in JS, which can be slightly less native-feeling.\n\nReact Native Navigation (Wix) uses actual native navigation primitives on each platform — UINavigationController on iOS, Activity on Android. This gives you fully native transitions and gestures at the cost of more complex setup, harder deep customization, and occasionally platform-divergent behavior.`,tip:`For most apps, React Navigation v6 with native stack is the right call — it uses UINavigationController and FragmentManager under the hood, giving you native transitions with JS-side flexibility.`},
+
+  {cat:'rn',diff:'h',q:'You notice frame drops during a FlatList with complex items. Walk through your complete diagnostic and optimization process.',a:`Step 1 — Profile first. Use the Perf Monitor (in-app) and Flipper's React DevTools to identify whether the bottleneck is JS thread (slow renders) or UI thread (layout/draw).\n\nStep 2 — Reduce render work: memoize list items with React.memo, provide a stable keyExtractor, move heavy computations out of render.\n\nStep 3 — Virtualization config: tune initialNumToRender, maxToRenderPerBatch, windowSize, and updateCellsBatchingPeriod to match scroll speed and item complexity.\n\nStep 4 — Move heavy work off JS thread: use react-native-fast-image for images, avoid inline styles, and consider Reanimated for item animations.`,code:`<FlatList\n  data={items}\n  keyExtractor={item => item.id}\n  initialNumToRender={8}\n  maxToRenderPerBatch={5}\n  windowSize={7}\n  removeClippedSubviews={true}\n  getItemLayout={(_, i) => ({length: ITEM_H, offset: ITEM_H * i, index: i})}\n  renderItem={renderItem} // memoized component\n/>`,tip:`getItemLayout is the single highest-impact optimization if your items are fixed height — it lets RN skip measuring completely.`},
+
+  {cat:'rn',diff:'m',q:'How do you handle deep linking and universal links in React Native across both platforms?',a:`Deep linking uses custom URL schemes (myapp://path) while Universal Links (iOS) and App Links (Android) use HTTPS domains with verified association files.\n\nOn iOS you configure the Associated Domains entitlement and host apple-app-site-association at /.well-known/. On Android you configure intent filters in AndroidManifest.xml and host assetlinks.json.\n\nIn React Native, react-navigation handles the linking config — you define a mapping from URL patterns to screens. Use Linking.getInitialURL() to handle cold-start deep links and a Linking event listener for foreground links.`,code:`const linking = {\n  prefixes: ['myapp://', 'https://myapp.com'],\n  config: {\n    screens: {\n      Home: '',\n      Profile: 'user/:id',\n      Order: 'orders/:orderId'\n    }\n  }\n};\n<NavigationContainer linking={linking}>`,tip:`Always test cold-start (app killed), background, and foreground deep link scenarios separately — they use different code paths.`},
+
+  {cat:'rn',diff:'h',q:'Explain how to build and bridge a Native Module in both iOS (Swift) and Android (Kotlin).',a:`You create a class that extends ReactContextBaseJavaModule on Android or implements RCTBridgeModule on iOS. You expose methods via @ReactMethod / RCT_EXPORT_METHOD. The JS side accesses it via NativeModules.MyModule.\n\nWith the new architecture you write a Codegen spec in TypeScript, run codegen, and implement the generated abstract class — this gives you type safety and JSI performance automatically.`,code:`// Kotlin\nclass MyModule(ctx: ReactApplicationContext) : ReactContextBaseJavaModule(ctx) {\n  override fun getName() = "MyModule"\n  @ReactMethod fun greet(name: String, promise: Promise) {\n    promise.resolve("Hello, $name")\n  }\n}\n\n// Swift\n@objc(MyModule)\nclass MyModule: NSObject {\n  @objc func greet(_ name: String, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {\n    resolve("Hello, \\(name)")\n  }\n}`,tip:`Always expose async methods via Promises, not callbacks — they compose better with async/await on the JS side.`},
+
+  {cat:'rn',diff:'m',q:'How do you manage background tasks and push notifications across iOS and Android in React Native?',a:`For push notifications use react-native-push-notification or @notifee/react-native (more feature-rich). Remote pushes go through APNs (iOS) and FCM (Android). You handle the device token registration, store it server-side, and send payloads from your backend.\n\nBackground tasks: iOS is very restrictive — use background fetch (15-min minimum interval) or background processing tasks. Android is more permissive with WorkManager via @react-native-community/async-storage or a headless JS task. For location use react-native-background-geolocation which handles both platforms natively.`,tip:`Always test notification permissions flow carefully — request at a meaningful moment (not on launch) and handle the denied state gracefully with a settings deep-link prompt.`},
+
+  {cat:'rj',diff:'m',q:'Explain the React reconciliation algorithm and the key role of the virtual DOM.',a:`React maintains a virtual DOM — a lightweight JS object tree mirroring the real DOM. On each state/props change, React creates a new virtual tree and diffs it against the previous one using the reconciliation algorithm.\n\nThe diff algorithm makes two key assumptions to run in O(n): (1) elements of different types produce completely different trees, (2) keys identify stable elements across renders. When keys match, React updates the existing element; when they differ, React unmounts and remounts.\n\nThis is why unstable keys (like array index for reordered lists) cause performance issues — React unmounts and remounts items instead of updating them.`,code:`// Bad: index key causes full remount on reorder\nitems.map((item, i) => <Card key={i} {...item} />)\n\n// Good: stable identity key\nitems.map(item => <Card key={item.id} {...item} />)`,tip:`React 18 adds concurrent rendering, which lets React interrupt, pause, and resume reconciliation — enabling features like useTransition and Suspense.`},
+
+  {cat:'rj',diff:'h',q:'Explain the difference between useEffect, useLayoutEffect, and useInsertionEffect. When does each fire?',a:`useEffect fires asynchronously after the browser has painted. This is correct for data fetching, subscriptions, and most side effects — it does not block the paint.\n\nuseLayoutEffect fires synchronously after DOM mutations but before the browser paints. Use it when you need to read DOM measurements (getBoundingClientRect) and update state/style before the user sees the result — otherwise they see a flash.\n\nuseInsertionEffect is designed for CSS-in-JS libraries. It fires before DOM mutations, allowing style injection before layout effects read the DOM. You almost never use this directly.`,code:`useLayoutEffect(() => {\n  // Measure and set tooltip position before paint\n  const rect = ref.current.getBoundingClientRect();\n  setPosition({ top: rect.bottom, left: rect.left });\n}, []);`,tip:`A common mistake is using useEffect for DOM measurements — you'll get a frame where styles are wrong. Always use useLayoutEffect for read-then-write DOM patterns.`},
+
+  {cat:'rj',diff:'m',q:'How does React 18 concurrent rendering work, and which hooks/APIs does it expose?',a:`Concurrent rendering allows React to prepare multiple versions of the UI at the same time and interrupt work in progress. React can pause rendering, discard stale trees, or reuse work across renders.\n\nKey APIs: useTransition marks a state update as non-urgent — React renders it in the background without blocking the current UI. useDeferredValue defers a value update to low priority. Suspense boundaries define loading states. startTransition wraps non-urgent updates outside components. The new root API (createRoot) opts your app in.`,code:`const [isPending, startTransition] = useTransition();\n\nfunction handleSearch(q) {\n  setInputValue(q); // urgent — update input immediately\n  startTransition(() => {\n    setSearchQuery(q); // non-urgent — can be interrupted\n  });\n}`,tip:`Use isPending to show a loading indicator on the stale UI while the background render completes — much smoother than showing a spinner.`},
+
+  {cat:'rj',diff:'h',q:'How do you prevent unnecessary re-renders in a large React component tree?',a:`Layer your memoization strategy. Use React.memo on pure presentational components. Use useMemo for expensive computations. Use useCallback for callbacks passed as props to memoized children — without it, a new function reference is created every render, breaking memo.\n\nSplit context into smaller pieces — a single large context forces all consumers to re-render on any field change. Use state colocation: keep state as close to where it is used as possible to limit blast radius. Consider useSyncExternalStore for external store subscriptions.`,code:`const Child = React.memo(({ onPress, data }) => (\n  <Pressable onPress={onPress}>\n    <Text>{data.label}</Text>\n  </Pressable>\n));\n\nfunction Parent() {\n  const handlePress = useCallback(() => doThing(), []);\n  const derived = useMemo(() => expensive(rawData), [rawData]);\n  return <Child onPress={handlePress} data={derived} />;\n}`,tip:`Profile before memoizing — React DevTools Profiler shows exactly which components re-render and why. Premature memoization adds complexity without benefit.`},
+
+  {cat:'js',diff:'m',q:'Explain the JavaScript event loop, microtask queue, and macrotask queue with a concrete example.',a:`The event loop continuously checks: is the call stack empty? If yes, drain the microtask queue completely, then take one macrotask from the macrotask queue and execute it.\n\nMicrotasks: Promise.then/catch/finally callbacks, queueMicrotask, MutationObserver. They always run before the next macrotask.\n\nMacrotasks: setTimeout, setInterval, setImmediate, I/O callbacks. They run one at a time, with a full microtask drain between each.`,code:`console.log('1');\nsetTimeout(() => console.log('2'), 0); // macrotask\nPromise.resolve().then(() => console.log('3')); // microtask\nconsole.log('4');\n// Output: 1, 4, 3, 2\n// Sync runs first, then microtask, then macrotask`,tip:`This explains why Promise.resolve().then() always runs before setTimeout(fn, 0) even though both are "asynchronous".`},
+
+  {cat:'js',diff:'h',q:'What are closures and how do they relate to common React bugs?',a:`A closure is a function that retains access to its lexical scope even after the outer function has returned. Every function in JS is a closure over the variables in scope when it was created.\n\nThe classic React bug: a useEffect with a stale closure captures an old value of a state/prop because the effect was created with that value and never re-ran. The fix is to include the value in the dependency array, or use a ref for values you need the latest of without re-running the effect.`,code:`// Bug: stale closure captures initial count=0\nuseEffect(() => {\n  const id = setInterval(() => {\n    setCount(count + 1); // always adds 1 to stale 0\n  }, 1000);\n  return () => clearInterval(id);\n}, []); // missing count\n\n// Fix: functional update avoids stale closure\nsetCount(prev => prev + 1);`,tip:`The functional update form of setState never closes over stale state — it always receives the latest value as an argument.`},
+
+  {cat:'js',diff:'h',q:'How do TypeScript generics work, and give a practical example in a React Native context.',a:`Generics allow you to write functions and types that work with any type while preserving type information. The type parameter acts as a placeholder resolved at call site. This eliminates the need to write the same logic for different types and avoids the loss of type safety that any causes.`,code:`// Generic API response wrapper\ninterface ApiResponse<T> {\n  data: T;\n  error: string | null;\n  loading: boolean;\n}\n\n// Generic hook\nfunction useApi<T>(url: string): ApiResponse<T> {\n  const [state, setState] = useState<ApiResponse<T>>({\n    data: null as T, loading: true, error: null\n  });\n  useEffect(() => {\n    fetch(url).then(r => r.json()).then(data =>\n      setState({ data, loading: false, error: null })\n    ).catch(e => setState(s => ({...s, loading:false, error:e.message})));\n  }, [url]);\n  return state;\n}\n\n// Usage — fully typed\nconst { data } = useApi<User[]>('/api/users');\n// data is User[] | null — no any`,tip:`Prefer unknown over any for data from external sources (APIs, JSON.parse). It forces you to narrow the type before using it.`},
+
+  {cat:'js',diff:'m',q:'Explain async/await error handling patterns and how to avoid silent failures.',a:`async/await is syntactic sugar over Promises. Rejections that are not caught become unhandled promise rejections — in Node/RN this can crash the app silently or log a warning.\n\nAlways wrap await calls in try/catch, or write a higher-order wrapper. For parallel async work, use Promise.allSettled instead of Promise.all if you want all results even when some fail — Promise.all rejects as soon as one promise rejects.`,code:`// HOF pattern for consistent error handling\nasync function safeAsync<T>(promise: Promise<T>): Promise<[T, null] | [null, Error]> {\n  try {\n    return [await promise, null];\n  } catch (e) {\n    return [null, e as Error];\n  }\n}\n\n// Usage\nconst [user, err] = await safeAsync(fetchUser(id));\nif (err) { /* handle */ return; }\nconsole.log(user.name);`,tip:`This tuple pattern (inspired by Go) makes error handling explicit and impossible to accidentally skip.`},
+
+  {cat:'sm',diff:'h',q:'Compare Redux Toolkit, Zustand, and Context API for state management. When do you choose each?',a:`Context API is built-in and good for low-frequency updates like theme, auth state, or locale. Because every consumer re-renders on any context value change, it is not suitable for high-frequency state like form input or real-time data without careful splitting and memoization.\n\nRedux Toolkit is the right choice for large apps with complex state interactions, time-travel debugging needs, or teams that benefit from strict patterns. RTK Query dramatically simplifies server state management on top of Redux.\n\nZustand is a lightweight store with a minimal API — no boilerplate, selective subscriptions, and easy to adopt incrementally. Great for medium apps or when you want Redux-like patterns without the ceremony.`,code:`// Zustand — minimal server-state-aware store\nimport { create } from 'zustand';\n\nconst useStore = create<AppState>((set, get) => ({\n  user: null,\n  setUser: (user) => set({ user }),\n  logout: () => set({ user: null }),\n}));\n\n// Component only re-renders when user changes\nconst user = useStore(s => s.user);`,tip:`Use React Query or RTK Query for server state (cached, background-refetched). Use Zustand or Redux for client-only state. Mixing them cleanly is the key architecture decision.`},
+
+  {cat:'sm',diff:'m',q:'How does Redux middleware work, and how do you write a custom middleware?',a:`Middleware sits between dispatching an action and the moment it reaches the reducer. It has access to getState and dispatch, and it can intercept, modify, delay, or swallow actions. Middleware is composed left-to-right — each calls next(action) to pass control to the next middleware.`,code:`// Custom logging middleware\nconst loggerMiddleware = (store) => (next) => (action) => {\n  console.group(action.type);\n  console.log('Before:', store.getState());\n  const result = next(action); // pass to next middleware/reducer\n  console.log('After:', store.getState());\n  console.groupEnd();\n  return result;\n};\n\nconst store = configureStore({\n  reducer: rootReducer,\n  middleware: (getDefault) => getDefault().concat(loggerMiddleware)\n});`,tip:`The curried (store) => (next) => (action) signature is the middleware contract. Understanding this makes redux-thunk and redux-saga immediately readable.`},
+
+  {cat:'perf',diff:'h',q:'What are the main React Native performance metrics you track and what tools do you use?',a:`Key metrics: JS thread FPS (should stay 60/120), UI thread FPS, time to interactive (TTI), memory usage (especially JS heap), and bundle size (initial + lazy chunks).\n\nTools: Flipper with React DevTools and Network inspector. The built-in Perf Monitor overlay. Xcode Instruments (Time Profiler, Core Animation, Allocations) for deep iOS profiling. Android Studio Profiler for CPU, memory, and network on Android. Hermes sampling profiler for JS-side CPU profiles. Flashlight (mobile performance CI tool) for automated metric tracking.`,tip:`Always profile on real devices, not simulators. The JS engine (Hermes vs V8) and native rendering pipeline behave very differently on physical hardware.`},
+
+  {cat:'perf',diff:'m',q:'Explain code splitting and lazy loading in a React Native context. How do you reduce startup time?',a:`Bundle size directly impacts startup time because the JS bundle must be downloaded, parsed, and executed before the first frame. Strategies: enable Hermes (it pre-compiles to bytecode, faster startup). Use Metro bundler's lazy require feature. For large apps, use inline requires (metro config) so module evaluation is deferred to first use.\n\nOn the React side, React.lazy + Suspense lets you split navigation routes so only the initial stack is evaluated at launch. Heavy libraries (like charting or PDF) should be imported dynamically.`,code:`// Lazy route in React Navigation\nconst ProfileScreen = React.lazy(() => import('./ProfileScreen'));\n\n// Inline require in Metro config\nmodule.exports = {\n  transformer: { inlineRequires: true }\n};\n// Now require('./HeavyLib') only executes when first called`,tip:`Run react-native-bundle-visualizer to see what is taking up space in your bundle — third-party libraries are almost always the culprit.`},
+
+  {cat:'perf',diff:'h',q:'How does react-native-reanimated 2/3 differ from Animated API, and when is each appropriate?',a:`The built-in Animated API runs on the JS thread by default. Even with useNativeDriver: true, only transform and opacity properties can be animated natively — and the animation setup still requires a JS round-trip.\n\nReanimated 2/3 uses JSI to run animation worklets entirely on the UI thread in C++. There is zero JS thread involvement during the animation — no frame drops even when the JS thread is busy. It also powers Gesture Handler v2 for smooth gesture-driven animations, and enables shared element transitions.`,code:`// Reanimated 3 — runs on UI thread\nimport Animated, { useSharedValue, useAnimatedStyle,\n  withSpring } from 'react-native-reanimated';\n\nfunction Card() {\n  const scale = useSharedValue(1);\n  const style = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));\n  return (\n    <GestureDetector gesture={Gesture.Tap().onEnd(() => { scale.value = withSpring(1.1) })}>\n      <Animated.View style={style} />\n    </GestureDetector>\n  );\n}`,tip:`Worklets — functions marked 'worklet' — run on the UI thread. Never access JS-thread state from a worklet; use shared values to communicate between threads.`},
+
+  {cat:'ci',diff:'m',q:'Describe your ideal React Native CI/CD pipeline from PR to App Store / Play Store.',a:`On PR: run ESLint, TypeScript check, Jest unit tests, and Detox smoke tests on an emulator. Block merge on any failure. On merge to main: build the JS bundle, increment build number, run full Detox test suite, upload build to Bitrise/GitHub Actions artifact store.\n\nFor release: use Fastlane to manage signing (match for iOS certificate management, supply for Android track management). Build with release flag, run Sentry source map upload, distribute to TestFlight / Play Internal Testing. On tag: promote to App Store / Production with manual approval gate in the pipeline.`,tip:`Store all secrets (certificates, API keys, signing keystores) in your CI secret manager — never in the repo. Use Fastlane match with an encrypted git repo or App Store Connect API for certificate automation.`},
+
+  {cat:'ci',diff:'h',q:'How do you manage app signing, versioning, and environment-specific config across dev, staging, and production?',a:`For iOS: use Fastlane match to store encrypted certificates and profiles in a git repo, synced to all machines and CI automatically. For Android: store the keystore encrypted in CI secrets, reference it in gradle via signing configs.\n\nVersioning: auto-increment build number in CI from git commit count or a counter. Keep the marketing version (CFBundleShortVersionString / versionName) as a manual decision.\n\nEnvironment config: use react-native-config to load .env.development / .env.staging / .env.production at build time. Never ship dev API endpoints or debug keys in a production build.`,code:`# Fastfile — iOS release lane\nlane :release_ios do\n  match(type: 'appstore')\n  increment_build_number(xcodeproj: 'App.xcodeproj')\n  build_app(scheme: 'AppProduction')\n  upload_to_testflight\n  upload_symbols_to_sentry\nend`,tip:`Use App Store Connect API (not Apple ID) for CI authentication — it does not require 2FA and generates scoped tokens.`},
+
+  {cat:'test',diff:'m',q:'What is your testing strategy for a React Native app? Describe the testing pyramid.',a:`Unit tests (Jest): test pure functions, custom hooks, Redux reducers and selectors in isolation. These are fast and should make up most of the test count. Use React Native Testing Library for component tests — it renders components and queries them like a user would.\n\nIntegration tests: test slices of functionality together — a screen component with its hooks and mocked API. Still run in Jest without a device.\n\nE2E tests (Detox): automate real user flows on a simulator/emulator or physical device. Slow but high confidence. Cover critical paths only — login, checkout, core feature. These run in CI on merge.`,code:`// Component test with RNTL\nimport { render, fireEvent, waitFor } from '@testing-library/react-native';\n\nit('shows error on failed login', async () => {\n  server.use(rest.post('/login', (_, res, ctx) => res(ctx.status(401))));\n  const { getByTestId } = render(<LoginScreen />);\n  fireEvent.changeText(getByTestId('email'), 'bad@test.com');\n  fireEvent.press(getByTestId('login-btn'));\n  await waitFor(() => expect(getByTestId('error-msg')).toBeTruthy());\n});`,tip:`Co-locate test files next to the source file they test. A test is documentation — it should read like a user story.`},
+
+  {cat:'test',diff:'h',q:'How do you test custom hooks in React Native, and what are common pitfalls?',a:`Use renderHook from @testing-library/react-hooks (now integrated into RNTL). It mounts the hook in a minimal component wrapper and gives you the result ref and an act utility for triggering state updates.\n\nCommon pitfalls: not wrapping state updates in act() causes warnings and unreliable assertions. Not providing the necessary context providers — use the wrapper option. Testing implementation details (internal state) instead of observable outputs (returned values, side effects).`,code:`import { renderHook, act } from '@testing-library/react-native';\n\nit('useCounter increments', () => {\n  const { result } = renderHook(() => useCounter(0));\n  expect(result.current.count).toBe(0);\n  act(() => result.current.increment());\n  expect(result.current.count).toBe(1);\n});\n\n// With context provider\nconst { result } = renderHook(() => useAuth(), {\n  wrapper: ({ children }) => <AuthProvider>{children}</AuthProvider>\n});`,tip:`Mock timers (jest.useFakeTimers) when testing hooks that use setTimeout or setInterval — otherwise tests are slow and flaky.`},
+
+  {cat:'lead',diff:'h',q:'How do you run effective code reviews that improve code quality without creating friction?',a:`Define a written review standard so expectations are consistent — document what reviewers should check (correctness, performance, tests, naming, patterns) versus what linting handles automatically.\n\nReview the design first in larger PRs — leave a top-level comment on architecture before line-level comments, so the author knows the scope of feedback upfront.\n\nDistinguish between blocking comments and suggestions — prefix with "Nit:", "Suggestion:", or "Blocker:" so the author knows what must change and what is optional. Explain the why behind feedback, not just the what. Approve PRs that are good enough to ship even if you would write them differently.`,tip:`The goal of a review is to ship working software and grow the team — not to demonstrate your own expertise or catch every imperfection.`},
+
+  {cat:'lead',diff:'m',q:'A mid-level developer is repeatedly missing edge cases in their PRs. How do you mentor them?',a:`First, have a direct 1:1 conversation — not a retrospective in front of the team. Frame it as a skill-building conversation, not a performance issue. Understand whether the gap is in understanding requirements, testing habits, or confidence.\n\nSet up a pair programming session on their next feature. Walk through how you think about edge cases — empty states, error states, race conditions, accessibility. Give them a checklist to self-review before marking a PR ready. Then gradually reduce scaffolding as confidence grows.\n\nTrack progress explicitly — acknowledge improvement in reviews publicly. People grow faster with recognition than correction alone.`,tip:`Mentoring is not fixing their code for them. It is teaching the mental models so they can catch issues independently.`},
+
+  {cat:'lead',diff:'h',q:'How do you evaluate and adopt a new third-party library for a React Native project?',a:`Evaluate on six dimensions: (1) Maintenance — last commit, open issues, release cadence, (2) Community — npm weekly downloads, GitHub stars, Stack Overflow presence, (3) License — MIT/Apache compatible with your distribution model, (4) Bundle size — use bundlephobia.com, (5) React Native compatibility — supports both old and new architecture? Expo compatible if needed?, (6) Security — run npm audit, check CVE databases.\n\nFor high-risk additions, build a proof-of-concept in isolation before adding to the main project. Document the decision in an Architecture Decision Record (ADR) so future team members understand the rationale.`,tip:`Libraries that wrap native code (especially camera, biometrics, BLE) need extra scrutiny — a library abandoned after a major iOS update can block your entire release.`},
+
+  {cat:'rn',diff:'m',q:'How do you implement secure local storage in React Native?',a:`AsyncStorage is unencrypted and inappropriate for sensitive data. For tokens and credentials use react-native-keychain (iOS Keychain / Android Keystore/Keychain) which leverages hardware-backed security.\n\nFor larger encrypted datasets use react-native-mmkv with encryption enabled, or SQLCipher-based sqlite3 wrappers. Never store sensitive data in plain AsyncStorage, MMKV without encryption, or Redux state persisted to disk unencrypted.`,code:`import * as Keychain from 'react-native-keychain';\n\n// Store token securely\nawait Keychain.setGenericPassword('accessToken', token, {\n  accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,\n  securityLevel: Keychain.SECURITY_LEVEL.SECURE_HARDWARE\n});\n\n// Retrieve\nconst creds = await Keychain.getGenericPassword();\nconst token = creds ? creds.password : null;`,tip:`WHEN_UNLOCKED_THIS_DEVICE_ONLY prevents token backup to iCloud and blocks access on a locked device — both desirable for auth tokens.`},
+
+  {cat:'rj',diff:'m',q:'How does the useReducer hook work and when should you prefer it over useState?',a:`useReducer takes a reducer function (state, action) => newState and an initial state, returning [state, dispatch]. It is useful when next state depends on previous state in complex ways, when multiple sub-values update together, or when state logic is complex enough to benefit from being extracted and tested independently.\n\nPrefer useReducer over useState when you have 3+ related state values that update together, when state transitions follow defined patterns, or when you want to pass only dispatch down instead of multiple setter functions.`,code:`const reducer = (state, action) => {\n  switch(action.type) {\n    case 'FETCH_START': return {...state, loading:true, error:null};\n    case 'FETCH_SUCCESS': return {loading:false, error:null, data:action.payload};\n    case 'FETCH_ERROR': return {loading:false, data:null, error:action.payload};\n    default: return state;\n  }\n};\n\nconst [{loading,data,error}, dispatch] = useReducer(reducer, {loading:false,data:null,error:null});`,tip:`You can unit test a reducer as a pure function with no component setup — a key advantage for complex state logic.`},
+
+  {cat:'rn',diff:'h',q:'How would you design an offline-first React Native app with sync, conflict resolution, and graceful recovery?',a:`Separate local UX from remote truth. The app should write immediately to a local store so the UI stays fast offline, then enqueue mutations for background sync. Each write should carry metadata such as a client-generated ID, updatedAt timestamp, device ID, and sync status. That lets you render pending, failed, or conflicted items explicitly instead of pretending the network is always available.\n\nOn reconnect, sync in deterministic stages: pull latest server changes, reconcile local pending mutations, then push unsynced operations in order. For conflict resolution, choose a rule per domain. Some fields can use last-write-wins, but collaborative or financial data often needs server-side merge logic or manual resolution UI. As Tech Lead, I would force the product team to define conflict behavior up front because that is a product rule, not just an engineering detail.\n\nOperationally, I would instrument sync latency, queue depth, failed mutation count, and conflict rate. Offline-first is not done when local persistence works; it is done when support can explain what happened to a user whose changes were created on a train, retried twice, and merged against newer server data.`,code:`type PendingMutation = {\n  id: string;\n  entityId: string;\n  op: 'create' | 'update' | 'delete';\n  payload: unknown;\n  updatedAt: number;\n  status: 'pending' | 'syncing' | 'failed';\n};`,tip:`Interviewers usually want to hear both UX behavior and data consistency rules. If you only discuss storage APIs, your answer is too implementation-level.`},
+
+  {cat:'rn',diff:'h',q:'How do you plan OTA updates in React Native without creating version skew between JS and native code?',a:`OTA updates are powerful because they let you patch JavaScript quickly, but they become dangerous when the JS bundle assumes a newer native binary than the installed app actually has. The core rule is compatibility: any OTA bundle must target a native runtime contract that already exists in production. If a feature depends on a new native module, permission flow, or schema change, that feature must stay behind a runtime capability check until the binary adoption rate is high enough.\n\nIn practice, I would version the app in two layers. First, the App Store / Play Store binary version gates native capabilities. Second, the OTA channel controls which JS bundle a binary can receive. Release pipelines should prevent publishing a bundle to binaries that cannot execute it. For risky launches, I would do staged rollout by channel, backed by feature flags and crash monitoring.\n\nThe Tech Lead answer here is governance, not just tooling. Expo Updates or CodePush can distribute code, but the hard part is defining who can ship hotfixes, what validation is required, how rollback works, and how the team proves a hotfix did not silently break older binaries.`,tip:`Say explicitly that OTA is safe for JS-only fixes, copy changes, feature-flagged flows, and some layout updates, but not for arbitrary native capability changes.`},
+
+  {cat:'rn',diff:'m',q:'How do you structure analytics and observability in a React Native app so product data stays trustworthy?',a:`Treat analytics as a product contract, not scattered event calls. I prefer a typed event layer where each event has a stable name, required properties, and owner. Screens, flows, and experiments should emit through that layer instead of calling vendor SDKs directly. That keeps the app portable across Segment, Firebase, Amplitude, or internal pipelines.\n\nI split telemetry into three channels: product analytics, operational logs, and error monitoring. Product analytics answers user behavior questions. Operational logs answer what the app did technically. Error monitoring captures crashes, handled exceptions, breadcrumbs, and release health. Mixing these concerns creates noisy dashboards and bad decision-making.\n\nFor reliability, I would validate event schemas in development, track dropped-event rate, and attach release version, platform, locale, user cohort, and feature-flag context. The leadership angle is making metrics actionable. If the team cannot tie a release to crash-free sessions, funnel conversion, and performance regressions within a day, the telemetry setup is incomplete.`,code:`const track = createAnalyticsClient({\n  LoginFailed: ['reason', 'httpStatus'],\n  CheckoutStarted: ['cartValue', 'itemCount'],\n  InterviewAnswerExpanded: ['category', 'difficulty']\n});\n\ntrack('CheckoutStarted', { cartValue: 199, itemCount: 3 });`,tip:`Strong answers mention schema ownership and versioned events, not just SDK setup.`},
+
+  {cat:'rj',diff:'h',q:'How do React 18 concurrent features change the way you design complex screens?',a:`Concurrent rendering changes scheduling, not your business logic. React can start rendering work, pause it, throw it away, and continue later if a higher-priority update arrives. That means your components must stay pure, derived data should be cheap or deferred, and side effects must live in effects rather than render paths.\n\nThe practical tools are useTransition, useDeferredValue, Suspense, and selective hydration on web. In app screens, I use transitions for state updates that are allowed to feel slightly delayed, such as filter recalculation or large list projection, while preserving immediate feedback for text input, taps, and gestures. Deferred values are useful when the source input must stay responsive but downstream rendering is expensive.\n\nFrom a Tech Lead perspective, the real benefit is controlling user-perceived priority. Not every state update deserves the same urgency. If your team still treats all updates as synchronous UI work, you miss the point of concurrent React. The interview signal is whether you can map the primitives to user experience and not just recite API names.`,code:`const [isPending, startTransition] = useTransition();\n\nfunction onFilterChange(nextFilter) {\n  setFilterInput(nextFilter);\n  startTransition(() => {\n    setAppliedFilter(nextFilter);\n  });\n}`,tip:`Mention that concurrency does not make slow renders fast by itself. It lets React prioritize the right work first.`},
+
+  {cat:'rj',diff:'m',q:'How do you decide between Context, composition, and an external state store in React?',a:`Context is for dependency injection and low-frequency shared values such as theme, auth session, or feature flags. It is not automatically a state management strategy. If a context value changes often and many consumers subscribe to the whole object, you can create broad re-render cascades.\n\nComposition is the first lever. Sometimes the right answer is to move state closer to where it is used and pass children or render props rather than globalize it. When many distant parts of the tree need high-frequency reads and writes, an external store such as Redux Toolkit, Zustand, or Jotai becomes more appropriate because it gives explicit subscription boundaries and better tooling.\n\nMy rule is simple: keep state local until there is a concrete coordination problem, then choose the smallest abstraction that solves it. Tech Leads should push back on premature global stores because they increase coupling, but they should also recognize when ad hoc prop drilling is hiding a real domain boundary that deserves a store.`,tip:`A strong answer discusses render scope, devtools, team conventions, and testability, not just API ergonomics.`},
+
+  {cat:'rj',diff:'h',q:'How do you use error boundaries effectively in a production React application?',a:`Error boundaries catch render-time errors below them in the tree and let you degrade gracefully instead of crashing the entire surface. They do not catch async errors in event handlers, promise chains, or server calls, so you still need explicit error handling for those paths.\n\nI place boundaries by recovery zone. The app shell usually gets a top-level boundary so the app can render a fatal fallback and log context. Then I add more granular boundaries around high-risk areas such as remote-configured widgets, experimental routes, markdown renderers, or third-party components. That limits blast radius and lets the rest of the screen keep working.\n\nAt leadership level, I care about the operational loop: boundary fallback should capture the error, route, release version, user action breadcrumbs, and a reset path. If the fallback cannot recover, give the user a clear retry or restart action. If the team has boundaries but no attached telemetry or recovery UX, they have only hidden the crash, not managed it.`,code:`<AppErrorBoundary fallback={<FatalScreen />}> \n  <NavigationShell />\n</AppErrorBoundary>`,tip:`Say clearly that error boundaries are about isolation and recovery domains, not just avoiding a red screen.`},
+
+  {cat:'js',diff:'h',q:'Explain the JavaScript event loop in a way that matters for React Native performance.',a:`The event loop decides when queued work runs on the JavaScript thread. In React Native, that matters because the JS thread is responsible for React rendering, state updates, timers, many navigation callbacks, and often business logic. If you flood the microtask queue with promise chains or run a large synchronous function, you can delay user input processing and starve frame production.\n\nMicrotasks such as promise callbacks run before the next macrotask, so a large cascade of resolved promises can still block visible work. Timers, I/O callbacks, and message events run as later tasks. The important interview point is not browser terminology; it is understanding that any long synchronous block on the JS thread will make gestures, animations, and state updates feel late unless the heavy work is moved elsewhere or chunked.\n\nAs Tech Lead, I would ask the team to profile before optimizing and to classify heavy work: can it be precomputed, deferred, offloaded to native or a worker-like environment, or eliminated entirely? Correctness first, then scheduling.`,code:`function chunk(items, size, work) {\n  let index = 0;\n  function run() {\n    const next = items.slice(index, index + size);\n    next.forEach(work);\n    index += size;\n    if (index < items.length) setTimeout(run, 0);\n  }\n  run();\n}`,tip:`If you say "JS is single-threaded" without talking about scheduling and user-perceived latency, the answer is incomplete.`},
+
+  {cat:'js',diff:'m',q:'How do you model large domain APIs in TypeScript so teams move quickly without losing safety?',a:`I start from domain contracts, not UI components. Types should encode stable business concepts such as InterviewSession, ReleaseChannel, CandidateScorecard, or SyncConflict rather than leaking raw transport shapes everywhere. External API payloads get decoded at the boundary and mapped into internal models, which keeps the rest of the app resilient when the backend changes.\n\nFor maintainability, I use discriminated unions for state machines and API variants, branded IDs where confusion is expensive, and helper factories for repetitive result types. I avoid giant optional-object interfaces because they silently allow impossible states. If the type admits invalid combinations, the compiler cannot protect you.\n\nAt team level, good TypeScript design reduces cognitive load. Developers should be able to inspect a function signature and know what states are possible, what errors are expected, and what fields are guaranteed. That is a velocity decision as much as a safety decision.`,code:`type RemoteData<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; error: string };`,tip:`Use types to eliminate impossible states. That usually creates bigger wins than adding more generic utility types.`},
+
+  {cat:'js',diff:'m',q:'What are common memory leak patterns in JavaScript apps and how do you prevent them?',a:`The usual leaks come from forgotten subscriptions, timers that keep firing after unmount, retained closures over large objects, caches without eviction, and maps keyed by values that never get cleared. In React apps, a frequent variant is an async callback resolving after the component has logically moved on, keeping references alive longer than expected.\n\nPrevention is mostly lifecycle discipline. Effects should always return cleanup for subscriptions, intervals, listeners, and observers. Long-lived caches need explicit max size or TTL. Closures should capture only what they need. When debugging, compare heap snapshots over repeated navigation cycles and look for objects that keep growing or never become detached.\n\nFor a Tech Lead answer, connect the leak to product symptoms: rising memory, slower navigation after repeated screen visits, OS process death in the background, or crashes on low-end devices. That shows you think beyond code style and into operational behavior.`,tip:`A memory leak is not just "memory goes up once." It is memory that stays retained after the owning feature should have been collectible.`},
+
+  {cat:'sm',diff:'h',q:'How do you choose between Redux Toolkit, Zustand, React Query, and local component state in one app?',a:`These tools solve different classes of state. Local component state is for ephemeral UI behavior such as open panels, form drafts, and temporary selections. React Query or TanStack Query is for server state: fetching, caching, invalidation, background refetch, and mutation lifecycle. Redux Toolkit or Zustand is for client-owned cross-cutting state that multiple features coordinate around, such as session context, feature workflows, offline queues, or global UI orchestration.\n\nI do not choose one library to rule them all. I define ownership boundaries. Server data should not be copied into Redux just because the team is comfortable there; that creates stale duplication and manual cache invalidation. Likewise, not every modal boolean deserves a global store.\n\nFor a Tech Lead, the answer is about team clarity. If developers cannot explain whether a piece of state is server-owned, client-owned, or local UI state, the codebase will drift into redundant sources of truth. Tooling follows that classification.`,tip:`The best answer is a decision framework, not a brand preference.`},
+
+  {cat:'sm',diff:'h',q:'How do you design optimistic updates without corrupting state when the server rejects the change?',a:`Optimistic UI should feel instant, but it must preserve a path back to truth. I model every optimistic mutation as three phases: apply speculative change locally, mark it as pending, then either confirm or roll back when the server responds. The rollback should be deterministic and based on previous state or patch inversion, not a hand-wavy refetch that may briefly show inconsistent data.\n\nFor dependent updates, I maintain a mutation queue so the UI can reason about order. If mutation B assumes mutation A already succeeded, a failure in A must invalidate or recompute B. For collaborative data, I prefer patch-based merges or server-issued versions to detect stale writes. Optimism without concurrency control creates subtle bugs.\n\nAs Tech Lead, I also care about the product semantics. Some actions should not be optimistic at all, especially payments, destructive account changes, or operations with legal consequences. Fast UI is good, but false certainty is worse.`,code:`onMutate: async (patch) => {\n  const previous = queryClient.getQueryData(['todos']);\n  queryClient.setQueryData(['todos'], optimisticApply(previous, patch));\n  return { previous };\n},\nonError: (_err, _patch, ctx) => {\n  queryClient.setQueryData(['todos'], ctx.previous);\n}`,tip:`Mention which domains are safe for optimistic UX and which require stronger confirmation semantics.`},
+
+  {cat:'sm',diff:'m',q:'When would you use a state machine for front-end state, and what benefits does it give a Tech Lead?',a:`State machines are worth it when the workflow has a finite set of meaningful states and transitions, especially if invalid transitions are costly. Examples include onboarding, multi-step checkout, interview scheduling, file upload, authentication, or offline sync. These flows often become bug-prone when modeled as a handful of booleans because the booleans allow impossible combinations.\n\nA machine makes the legal states explicit, centralizes side effects around transitions, and becomes easier to test. Instead of asking "what happens if loading is true and error is also true and step is 3," you ask which state the system is in and what events can move it. That reduces ambiguity in both code and product discussion.\n\nFor leadership, machines are valuable because they create shared language. Product, design, QA, and engineering can review the same diagram and spot missing edge cases early.`,code:`type AuthState =\n  | { value: 'anonymous' }\n  | { value: 'authenticating' }\n  | { value: 'authenticated'; userId: string }\n  | { value: 'error'; message: string };`,tip:`If you describe a machine, also say what pain it replaces: boolean soup, race conditions, and impossible states.`},
+
+  {cat:'sm',diff:'m',q:'How do you prevent global state from becoming a dumping ground in a growing app?',a:`I enforce ownership and deletion discipline. Every global store slice should answer three questions: who owns it, who reads it, and why can it not live closer to the feature? If the answer is vague, the state probably does not belong globally.\n\nI also separate durable domain state from UI control state. For example, selectedInterviewId that coordinates two screens may be global, but isSidebarOpen usually is not. Regular slice audits help: list store keys with subscriber count, mutation frequency, and last meaningful access. You quickly find stale or accidental globals.\n\nLeadership matters here because this is often a governance problem, not a library problem. Teams need written rules for adding global state and a willingness to remove it when the architecture evolves.`,tip:`Healthy stores get smaller over time because teams keep re-evaluating scope instead of only adding new slices.`},
+
+  {cat:'perf',diff:'h',q:'How do you build a performance budget for a React Native app and use it in day-to-day delivery?',a:`A performance budget turns vague complaints into measurable constraints. I define budgets for startup time, screen transition latency, JS frame drops, memory ceiling on target devices, image payload size, and bundle growth per release. The values should be tied to product expectations and device tiers, not arbitrary engineering taste.\n\nOnce budgets exist, they have to become part of the delivery system. CI can track bundle size, image weight, and some automated runtime metrics. Release dashboards should show crash-free sessions and key performance deltas by version. For major features, engineers should state expected budget impact before implementation, then verify after shipping.\n\nThe Tech Lead value is prioritization. Budgets tell you when a feature is too expensive, when a dependency is not worth it, and when you need architectural work rather than another round of local micro-optimizations.`,tip:`If you cannot say which metrics matter to the business and which device class you optimize for, the budget is too abstract to be useful.`},
+
+  {cat:'perf',diff:'m',q:'What is your strategy for image performance in a mobile app with content-heavy screens?',a:`Images usually hurt mobile apps through oversized downloads, decode cost, layout instability, and memory pressure. My strategy starts at the backend or CDN: serve modern formats when supported, pre-generate multiple sizes, compress intelligently, and ensure URLs encode size intent so the client requests the right asset. The UI should know expected aspect ratio to avoid layout jumps.\n\nOn device, I cache aggressively, prefetch only where it improves the next interaction, and avoid loading large originals into list cells. Thumbnails belong in lists; detail screens can request richer assets lazily. If the app shows many media items, I test memory behavior on low-end devices and after repeated scrolling, not just first load time.\n\nFrom a Tech Lead view, image performance is cross-functional. If design, backend, and mobile do not align on asset policy, the app will always fight an uphill battle.`,tip:`Many "React Native performance issues" are really asset pipeline issues with a UI symptom.`},
+
+  {cat:'perf',diff:'h',q:'How do you investigate memory and CPU regressions that appear only after long app sessions?',a:`I try to reproduce the regression as a workload, not as a single screen bug. That means defining a realistic session: log in, browse lists, open detail screens, play media, background and foreground the app, then repeat. Transient spikes are normal; retained growth over multiple cycles is the signal.\n\nFor tooling, I would use Xcode Instruments and Android Studio Profiler for native memory and CPU, plus Hermes or DevTools profiles for JS-heavy paths. I compare snapshots between baseline and regression builds, look for growing object graphs, repeated subscriptions, leaked views, image caches, or heavy work triggered on every navigation focus.\n\nThe leadership piece is containment. While root-causing, I would narrow blast radius with feature flags, cap cache size, disable a suspect animation, or reduce prefetching. Users do not care whether the bug is native or JS; they care that the app stops degrading after ten minutes of normal use.`,tip:`Long-session regressions are often lifecycle bugs, not raw algorithm bugs. Focus on work that repeats and never fully cleans up.`},
+
+  {cat:'ci',diff:'h',q:'What does a safe mobile rollback and hotfix process look like for a Tech Lead?',a:`Mobile rollback is harder than web rollback because native binaries are sticky once downloaded. I think in layers. JavaScript-only regressions may be mitigated with OTA rollback if the app uses it safely. Feature-level regressions should be containable via remote config or feature flags. Native regressions usually require a new binary and a carefully managed store release.\n\nA solid process defines severity tiers, on-call ownership, rollback authority, communication templates, and decision deadlines. For example, if checkout is broken after release, the team should know within minutes who can disable the feature, who validates the fix, and who informs support and stakeholders. This is operational design, not just CI scripting.\n\nThe most important detail is pre-investment. Release channels, runtime kill switches, staged rollout, crash monitoring, and documented hotfix lanes need to exist before the incident. During an incident is too late to invent them.`,tip:`Say explicitly that mobile rollback depends on whether the issue lives in JS, config, backend contract, or native binary.`},
+
+  {cat:'ci',diff:'m',q:'How do feature flags fit into your release strategy for a React Native product?',a:`Feature flags decouple deployment from exposure. That lets the team merge and ship code in small increments while controlling when users actually see behavior changes. I use them for progressive rollout, risky refactors, dark launches, emergency kill switches, and experiment cohorts.\n\nThe trap is unmanaged flag sprawl. Every flag should have an owner, expected removal date, default behavior, analytics plan, and rollout criteria. Flags that permanently fork product logic increase complexity and testing burden. I prefer short-lived release flags and a smaller number of durable entitlement or plan-based flags.\n\nAs Tech Lead, I care that flags are integrated with monitoring. A flag rollout without conversion, crash, and performance signals is just guesswork. The release strategy is not complete until the team knows what success and failure look like and can reverse course quickly.`,tip:`Flags reduce blast radius only when the app can fetch, cache, and evaluate them reliably during startup and degraded network conditions.`},
+
+  {cat:'test',diff:'h',q:'How do you reduce flakiness in Detox or end-to-end mobile tests?',a:`Flaky E2E tests usually come from weak synchronization, unstable selectors, polluted test state, or overreliance on remote systems. The first rule is deterministic state: seed the app, reset storage, mock or stabilize backend responses, and avoid depending on shared environments where data changes underneath you.\n\nSelectors should be explicit and semantic through testID values, not text that product copy may change. Waiting should be based on meaningful app idleness or visible state, not arbitrary sleeps. If a flow depends on animations, network, and background tasks, the test should wait for the UI signal that the work is done.\n\nAt Tech Lead level, I classify E2E tests by business criticality and runtime cost. Keep only the flows that protect the release. If the suite becomes a slow, flaky mirror of manual QA, people will stop trusting it and bypass it under deadline pressure.`,tip:`The fastest way to improve E2E trust is usually to delete weak tests and keep a smaller deterministic core suite.`},
+
+  {cat:'test',diff:'m',q:'How do you test feature flags, experiment variants, and environment-specific behavior without exploding test count?',a:`I do not test every possible combination. Instead I define risk-based coverage. Unit tests validate flag evaluation logic and fallback defaults. Integration tests cover one representative enabled path and one disabled path for each high-risk feature. End-to-end tests cover only the business-critical variants that change purchase, auth, or navigation behavior.\n\nFor experiments, I focus on invariants: both variants must render safely, emit analytics correctly, and respect eligibility rules. The test strategy should prove the contract around the flag, not duplicate every UI permutation manually. Shared rendering helpers can inject flag state and environment config cleanly.\n\nFrom a leadership perspective, this is about test economics. Unlimited combinations are impossible. The team needs a written rule for what gets automated, what is validated with targeted QA, and when old flag branches must be deleted.`,tip:`Good flag testing depends on fast helpers that can inject config intentionally rather than relying on global app bootstrap.`},
+
+  {cat:'lead',diff:'h',q:'How do you create a technical roadmap for a mobile team that balances feature delivery and platform health?',a:`I start from product outcomes and operational pain, not a wishlist of technical improvements. The roadmap should connect customer goals, business milestones, and system constraints. For example, if crash rate is slowing retention and release time is blocking campaigns, then observability, test reliability, and build speed are roadmap items because they directly affect product delivery.\n\nI usually organize the roadmap into three streams: committed business work, risk reduction, and capability building. Each quarter should include explicit investment in platform health such as dependency upgrades, architecture cleanup, CI improvements, or performance remediation. If those items are always deferred, the cost returns later as slower features and more incidents.\n\nThe Tech Lead skill is narrative and prioritization. You need to show why technical work matters, what will happen if it is skipped, and how to sequence it so delivery does not stall. A roadmap is credible when trade-offs are visible, not when everything is labeled P0.`,tip:`Strong roadmap answers tie technical initiatives to delivery speed, reliability, or measurable product impact.`},
+
+  {cat:'lead',diff:'h',q:'How do you run incident response and postmortems as a Tech Lead after a bad production release?',a:`During the incident, optimize for clarity and containment. Establish an incident commander, define the communication channel, assign owners for mitigation, investigation, and stakeholder updates, and keep a time-stamped log of decisions. The first objective is user impact reduction, not root-cause elegance. Disable the bad path, roll back what you can, and confirm recovery with real metrics.\n\nAfter stabilization, the postmortem should be blameless but concrete. I want a timeline, contributing factors, missed signals, detection gaps, and the exact control that would have prevented or shortened the incident. Action items need owners and due dates, and they should address both technical and process failures.\n\nAt leadership level, the postmortem is successful only if behavior changes. If the same class of release issue happens again because rollout gates, test coverage, or ownership were never fixed, then the organization learned nothing.`,tip:`Do not let postmortems degrade into "be more careful next time." The output should be concrete system changes.`}
+];
+
+let active = 'all';
+let search = '';
+
+function render() {
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = categories.map(c => 
+    `<div class="tab${c.id===active?' active':''}" onclick="setTab('${c.id}')">${c.label}</div>`
+  ).join('');
+
+  const filtered = Q.filter(q => {
+    const matchCat = active==='all' || q.cat===active;
+    const matchSearch = !search || q.q.toLowerCase().includes(search) || q.a.toLowerCase().includes(search);
+    return matchCat && matchSearch;
+  });
+
+  const stats = document.getElementById('stats');
+  const cat = categories.find(c=>c.id===active);
+  const total = Q.filter(q=>active==='all'||q.cat===active).length;
+  const easy = Q.filter(q=>(active==='all'||q.cat===active)&&q.diff==='e').length;
+  const med = Q.filter(q=>(active==='all'||q.cat===active)&&q.diff==='m').length;
+  const hard = Q.filter(q=>(active==='all'||q.cat===active)&&q.diff==='h').length;
+  const resultMeta = document.getElementById('resultMeta');
+  resultMeta.innerHTML = `
+    <strong>${filtered.length}</strong> visible${search ? ' for your search' : ''}<br>
+    Scope: <strong>${cat.label}</strong> • ${Q.length} total questions
+  `;
+  stats.innerHTML = `
+    <div class="stat"><div class="stat-n">${total}</div><div class="stat-l">Total</div></div>
+    <div class="stat"><div class="stat-n" style="color:#b8f7ca">${easy}</div><div class="stat-l">Easy</div></div>
+    <div class="stat"><div class="stat-n" style="color:#ffd28b">${med}</div><div class="stat-l">Medium</div></div>
+    <div class="stat"><div class="stat-n" style="color:#ffc3cc">${hard}</div><div class="stat-l">Hard</div></div>
+  `;
+
+  const qlist = document.getElementById('qlist');
+  if(!filtered.length){qlist.innerHTML='<div class="empty">No questions match your search.</div>';return;}
+
+  const catMap = {rn:'qnum-rn',rj:'qnum-rj',js:'qnum-js',sm:'qnum-sm',perf:'qnum-perf',ci:'qnum-ci',test:'qnum-test',lead:'qnum-lead'};
+  const catLabel = {rn:'RN',rj:'React',js:'JS/TS',sm:'State',perf:'Perf',ci:'CI/CD',test:'Test',lead:'Lead'};
+  qlist.innerHTML = filtered.map((q,i) => `
+    <div class="qcard" id="qc${i}" style="--i:${i}">
+      <div class="qhead" onclick="toggle(${i})">
+        <div class="qnum ${catMap[q.cat]}">${String(i+1).padStart(2,'0')}</div>
+        <div class="qcopy">
+          <div class="qmeta">
+            <div class="cat-tag">${catLabel[q.cat]}</div>
+            <div class="badge diff-${q.diff}">${q.diff==='e'?'Easy':q.diff==='m'?'Medium':'Hard'}</div>
+          </div>
+          <div class="qtxt">${q.q}</div>
+        </div>
+        <div class="chevron" id="ch${i}">▾</div>
+      </div>
+      <div class="ans" id="ans${i}">
+        <div class="ans-label">Model Answer</div>
+        <div class="ans-txt">${q.a.replace(/\n/g,'<br>')}</div>
+        ${q.code?`<div class="code">${q.code.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`:''}
+        ${q.tip?`<div class="tip">Tech Lead tip: ${q.tip}</div>`:''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function setTab(id){active=id;render();}
+function filterQ(){search=document.getElementById('search').value.toLowerCase();render();}
+function toggle(i){
+  const ans=document.getElementById('ans'+i);
+  const ch=document.getElementById('ch'+i);
+  const open=ans.classList.toggle('open');
+  ch.classList.toggle('open',open);
+}
+
+render();
+</script>

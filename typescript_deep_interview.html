@@ -1,0 +1,664 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg:#07111f;
+  --bg-elev:#0d1a2d;
+  --panel:rgba(10,21,39,0.76);
+  --panel-strong:rgba(10,21,39,0.92);
+  --panel-soft:rgba(255,255,255,0.06);
+  --line:rgba(255,255,255,0.11);
+  --line-strong:rgba(255,255,255,0.2);
+  --text:#f3f6fb;
+  --muted:#99a8bf;
+  --accent:#7dd3fc;
+  --accent-strong:#38bdf8;
+  --accent-warm:#f59e0b;
+  --accent-pink:#fb7185;
+  --success:#86efac;
+  --shadow:0 24px 80px rgba(0,0,0,0.35);
+  --radius-xl:28px;
+  --radius-lg:20px;
+  --radius-md:14px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:'Sora',ui-sans-serif,system-ui,sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 26rem),
+    radial-gradient(circle at top right, rgba(251,113,133,0.16), transparent 24rem),
+    linear-gradient(180deg, #07111f 0%, #09162a 45%, #050b16 100%);
+  color:var(--text);
+  padding:32px 20px 64px;
+  overflow-x:hidden;
+}
+body::before,
+body::after{
+  content:'';
+  position:fixed;
+  inset:auto;
+  border-radius:999px;
+  filter:blur(80px);
+  pointer-events:none;
+  opacity:0.55;
+}
+body::before{
+  width:20rem;
+  height:20rem;
+  top:4rem;
+  right:-6rem;
+  background:rgba(56,189,248,0.18);
+}
+body::after{
+  width:18rem;
+  height:18rem;
+  bottom:8rem;
+  left:-5rem;
+  background:rgba(245,158,11,0.12);
+}
+
+.wrap{
+  max-width:1160px;
+  margin:0 auto;
+  position:relative;
+}
+.hero,
+.toolbar,
+.qcard,
+.stat{
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0, 1.7fr) minmax(260px, 0.9fr);
+  gap:24px;
+  padding:34px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(125,211,252,0.12), rgba(255,255,255,0.03) 35%, rgba(251,113,133,0.08)),
+    var(--panel);
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.05) 45%, transparent 85%);
+  pointer-events:none;
+}
+.hero-copy{position:relative;z-index:1}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border:1px solid rgba(125,211,252,0.25);
+  border-radius:999px;
+  background:rgba(8,23,42,0.62);
+  color:#c4e9fb;
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.eyebrow::before{
+  content:'';
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--accent), #fff);
+  box-shadow:0 0 18px rgba(125,211,252,0.8);
+}
+.hero h1{
+  font-size:clamp(2rem, 4vw, 3.8rem);
+  line-height:0.98;
+  letter-spacing:-0.04em;
+  max-width:11ch;
+}
+.hero p{
+  margin-top:18px;
+  max-width:62ch;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.8;
+}
+.hero-highlights{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:22px;
+}
+.hero-pill{
+  padding:12px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#dce8f8;
+  font-size:12px;
+  line-height:1.5;
+}
+.hero-side{
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:14px;
+  align-content:start;
+}
+.hero-card{
+  padding:18px 18px 16px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.hero-card-label{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  margin-bottom:10px;
+}
+.hero-card-value{
+  font-size:30px;
+  font-weight:700;
+  letter-spacing:-0.04em;
+  margin-bottom:6px;
+}
+.hero-card p{
+  color:#bfd1e5;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.toolbar{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:var(--panel-strong);
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
+}
+.toolbar-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:16px;
+}
+.section-label{
+  color:#d8e6f6;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:8px;
+}
+.section-title{
+  font-size:24px;
+  letter-spacing:-0.03em;
+}
+.result-meta{
+  min-height:42px;
+  min-width:220px;
+  padding:10px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#d8e6f6;
+  font-size:12px;
+  line-height:1.6;
+  text-align:right;
+}
+.search-shell{
+  position:relative;
+  margin-bottom:18px;
+}
+.search-icon{
+  position:absolute;
+  top:50%;
+  left:16px;
+  transform:translateY(-50%);
+  color:#85a8c8;
+  font-size:16px;
+  pointer-events:none;
+}
+.search{
+  width:100%;
+  padding:16px 18px 16px 44px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.05);
+  color:var(--text);
+  font-size:14px;
+  transition:border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.search::placeholder{color:#7d92aa}
+.search:focus{
+  outline:none;
+  border-color:rgba(125,211,252,0.45);
+  background:rgba(255,255,255,0.07);
+  box-shadow:0 0 0 4px rgba(56,189,248,0.12);
+}
+
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.tab{
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.03);
+  color:#a8bbd1;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.01em;
+  cursor:pointer;
+  transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.tab:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,0.22);
+  color:#eef7ff;
+}
+.tab.active{
+  background:linear-gradient(135deg, rgba(56,189,248,0.24), rgba(125,211,252,0.08));
+  border-color:rgba(125,211,252,0.38);
+  color:#eef9ff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:14px;
+  margin-bottom:18px;
+}
+.stat{
+  padding:20px 18px;
+  border-radius:22px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+}
+.stat-l{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+}
+.stat-n{
+  margin-top:10px;
+  font-size:34px;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:-0.05em;
+  color:var(--text);
+}
+
+.qlist{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.qcard{
+  overflow:hidden;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  box-shadow:0 16px 48px rgba(0,0,0,0.18);
+  animation:cardIn 0.55s ease both;
+  animation-delay:calc(var(--i, 0) * 40ms);
+}
+.qcard:hover{
+  border-color:rgba(255,255,255,0.18);
+}
+.qhead{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:14px;
+  align-items:flex-start;
+  padding:20px 22px;
+  cursor:pointer;
+}
+.qnum{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:700;
+  flex-shrink:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22);
+}
+.qcopy{min-width:0}
+.qmeta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:10px;
+}
+.cat-tag,
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.cat-tag{
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.05);
+  color:#d5e6f7;
+}
+.qtxt{
+  font-size:16px;
+  line-height:1.65;
+  color:var(--text);
+}
+.badge{margin-top:2px}
+.chevron{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.04);
+  color:#d8e6f6;
+  font-size:15px;
+  transition:transform 0.2s ease, background 0.2s ease;
+}
+.chevron.open{
+  transform:rotate(180deg);
+  background:rgba(56,189,248,0.12);
+}
+.ans{
+  display:none;
+  padding:0 22px 22px 78px;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.ans.open{display:block}
+.ans-label{
+  margin:18px 0 10px;
+  color:#b7c9de;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+}
+.ans-txt{
+  color:#c8d7e7;
+  font-size:14px;
+  line-height:1.85;
+}
+.code{
+  margin-top:16px;
+  padding:16px 18px;
+  border-radius:18px;
+  border:1px solid rgba(125,211,252,0.14);
+  background:rgba(4,14,28,0.9);
+  color:#dff3ff;
+  font:13px/1.7 'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  overflow-x:auto;
+  white-space:pre;
+}
+.tip{
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:18px;
+  border:1px solid rgba(125,211,252,0.18);
+  background:linear-gradient(135deg, rgba(56,189,248,0.12), rgba(125,211,252,0.04));
+  color:#d8f2ff;
+  font-size:13px;
+  line-height:1.7;
+}
+.empty{
+  padding:42px 24px;
+  text-align:center;
+  border:1px dashed rgba(255,255,255,0.14);
+  border-radius:24px;
+  background:rgba(255,255,255,0.03);
+  color:var(--muted);
+  font-size:14px;
+}
+.diff-m{background:rgba(245,158,11,0.18);color:#ffd28b}
+.diff-h{background:rgba(251,113,133,0.18);color:#ffc3cc}
+.qnum-type{background:linear-gradient(135deg, rgba(56,189,248,0.26), rgba(125,211,252,0.12));color:#dff4ff}
+.qnum-gen{background:linear-gradient(135deg, rgba(139,92,246,0.24), rgba(196,181,253,0.12));color:#efe7ff}
+.qnum-infer{background:linear-gradient(135deg, rgba(245,158,11,0.24), rgba(253,224,71,0.12));color:#ffedb4}
+.qnum-api{background:linear-gradient(135deg, rgba(16,185,129,0.24), rgba(134,239,172,0.12));color:#d5ffec}
+.qnum-runtime{background:linear-gradient(135deg, rgba(249,115,22,0.24), rgba(251,191,36,0.12));color:#ffe0c2}
+.qnum-build{background:linear-gradient(135deg, rgba(244,63,94,0.24), rgba(251,113,133,0.12));color:#ffd5dc}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width: 980px){
+  .hero{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2, minmax(0, 1fr))}
+}
+
+@media (max-width: 720px){
+  body{padding:18px 14px 40px}
+  .hero,
+  .toolbar{padding:20px}
+  .toolbar-top{flex-direction:column}
+  .result-meta{text-align:left;min-width:0;width:100%}
+  .stats{grid-template-columns:1fr}
+  .qhead{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .chevron{justify-self:start}
+  .ans{padding:0 18px 18px}
+  .hero h1{max-width:none}
+}
+</style>
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">Advanced Type System Drill</div>
+      <h1>TypeScript Deep Interview Pack</h1>
+      <p>Twenty-four expert-level TypeScript questions across the type system, generics, inference, API design, runtime boundaries, and build tooling. This pack is optimized for senior engineers who need to explain why a type design works, where it fails, and what tradeoff they are making.</p>
+      <div class="hero-highlights">
+        <div class="hero-pill">Focuses on how TypeScript actually behaves: distribution, variance, inference limits, project references, and public API design.</div>
+        <div class="hero-pill">Each answer goes beyond syntax and covers the mental model interviewers usually probe next.</div>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="hero-card">
+        <div class="hero-card-label">Coverage</div>
+        <div class="hero-card-value">6 Domains</div>
+        <p>Type system, generics, inference, API design, runtime boundaries, and tooling/build questions.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-label">Mode</div>
+        <div class="hero-card-value">Deep Dive</div>
+        <p>Answer first from first principles, then expand the card to compare against the detailed model answer and code sample.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="toolbar-top">
+      <div>
+        <div class="section-label">Question Navigator</div>
+        <div class="section-title">Type system internals, API design, and TypeScript build strategy</div>
+      </div>
+      <div class="result-meta" id="resultMeta"></div>
+    </div>
+
+    <div class="search-shell">
+      <span class="search-icon">⌕</span>
+      <input class="search" id="search" placeholder="Search questions, answers, or keywords like variance, infer, project references..." oninput="filterQ()">
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+  </section>
+
+  <div class="stats" id="stats"></div>
+  <div class="qlist" id="qlist"></div>
+</div>
+
+<script>
+const categories = [
+  {id:'all',label:'All'},
+  {id:'type',label:'Type System'},
+  {id:'gen',label:'Generics'},
+  {id:'infer',label:'Inference'},
+  {id:'api',label:'API Design'},
+  {id:'runtime',label:'Runtime'},
+  {id:'build',label:'Tooling & Build'},
+];
+
+const Q = [
+  {cat:'type',diff:'h',q:'Explain the practical difference between any, unknown, and never. Where does each belong in a codebase, and what mistakes signal weak TypeScript design?',a:`any opts out of type checking entirely. It is both assignable to and from everything, so it destroys guarantees downstream. unknown is the safe top type: anything can flow into it, but you cannot use the value until you narrow or assert it. never is the bottom type: it represents values that cannot exist, code paths that cannot complete, or branches that should be impossible.\n\nIn practice, unknown belongs at trust boundaries: JSON parsing, third-party callbacks, postMessage payloads, or storage reads. never belongs in exhaustiveness checks and utility types that intentionally filter impossible members. any should be a controlled escape hatch around legacy code or broken typings, not a default. If I see any used where unknown plus narrowing would work, it usually means the team wanted speed at the cost of local correctness and future refactor safety.\n\nInterviewers usually care whether you understand that these are not just three "special types." They encode three fundamentally different stances: I know nothing safely, I know nothing unsafely, and this state should not exist.`,code:`function assertNever(x: never): never {\n  throw new Error('Unexpected value: ' + x);\n}\n\ntype Result =\n  | { kind: 'ok'; value: string }\n  | { kind: 'err'; message: string };\n\nfunction render(result: Result) {\n  switch (result.kind) {\n    case 'ok':\n      return result.value;\n    case 'err':\n      return result.message;\n    default:\n      return assertNever(result);\n  }\n}` ,tip:`A strong answer says unknown is for boundaries, never is for impossible states, and any is an intentional escape hatch with blast radius.`},
+
+  {cat:'type',diff:'h',q:'How do conditional types distribute over unions, and how do you turn that behavior off when you do not want it?',a:`A conditional type of the form T extends U ? X : Y distributes when T is a naked type parameter and the input is a union. TypeScript evaluates the conditional member by member, then unions the results. That is why Exclude<A | B, A> works: the compiler applies the test separately to A and B.\n\nThis is useful for filtering and transforming unions, but it also surprises people when a generic intended to act on the whole union instead acts on each member independently. To disable distribution, wrap the type parameter in a tuple or another container on both sides of extends. That forces the compiler to compare the union as one unit.\n\nThe deep point is that many advanced utilities are built from this behavior. If you do not understand distribution, utility types can feel like magic. If you do understand it, you can reason about when the compiler is mapping over a union versus testing aggregate compatibility.`,code:`type ToArray<T> = T extends string ? T[] : never;\ntype A = ToArray<'a' | 'b'>; // 'a'[] | 'b'[]\n\ntype NonDistributed<T> = [T] extends [string] ? T[] : never;\ntype B = NonDistributed<'a' | 'b'>; // ('a' | 'b')[]`,tip:`Interviewers often follow with "why is naked type parameter important?" If T is wrapped, distribution stops.`},
+
+  {cat:'type',diff:'h',q:'Explain variance in TypeScript with function parameters, return types, and arrays. Why does this matter for library authors?',a:`Variance describes how subtype relationships propagate through type constructors. Return positions are covariant: if Dog extends Animal, then () => Dog is assignable to () => Animal because a more specific return value is safe where a broader one is expected. Function parameters are conceptually contravariant: if a callback can handle Animal, it can safely handle Dog, but not vice versa.\n\nTypeScript is pragmatic rather than purely sound here. For historical reasons, function parameters in method positions are often bivariant unless strictFunctionTypes changes the behavior in relevant contexts. Arrays are mutable, which makes fully covariant arrays unsound, but the language accepts some unsoundness for usability. readonly arrays restore much better variance behavior because you cannot push an incompatible value.\n\nThis matters for library authors because callback APIs, event systems, and container abstractions can accidentally become too permissive or too restrictive. Good library typing depends on understanding where TypeScript is sound, where it is intentionally unsound, and how readonly or generic constraints can recover safety.`,code:`type Animal = { name: string };\ntype Dog = Animal & { bark(): void };\n\ntype HandlesAnimal = (x: Animal) => void;\ntype HandlesDog = (x: Dog) => void;\n\nconst animalHandler: HandlesAnimal = (x) => console.log(x.name);\nconst dogHandler: HandlesDog = (x) => x.bark();`,tip:`If the answer ignores readonly collections, it usually misses one of the most practical ways to improve variance behavior.`},
+
+  {cat:'type',diff:'m',q:'How do mapped types, key remapping, and modifier operators work together in advanced type transformations?',a:`Mapped types iterate over property keys and rebuild an object type. Modifier operators such as +readonly, -readonly, +?, and -? let you preserve or strip mutability and optionality as part of that rebuild. Key remapping with as lets you rename, filter, or synthesize keys, which turns mapped types from simple property transforms into a real type-level projection tool.\n\nIn practice, this is how you build APIs like "all getters for a model," "strip internal fields," "rename snake_case keys to camelCase at type level," or "make every property required except a small subset." The key insight is that mapped types operate on property space, while conditional types often operate on value space. Strong advanced TypeScript design usually combines both.\n\nThe limitation is that these transforms are compile-time descriptions. They do not rename keys at runtime. If the team mistakes type-level projection for actual runtime transformation, you get a dangerously elegant bug.`,code:`type PublicProps<T> = {\n  [K in keyof T as K extends \`_\${string}\` ? never : K]-?: T[K]\n};\n\ntype Getters<T> = {\n  [K in keyof T as \`get\${Capitalize<string & K>}\`]: () => T[K]\n};`,tip:`A mature answer always distinguishes type-level transforms from actual runtime object transforms.`},
+
+  {cat:'gen',diff:'h',q:'How do you design generic APIs so callers get strong inference without having to manually provide type arguments everywhere?',a:`Good generic APIs are designed from call sites backward. The compiler can only infer type parameters from positions where actual values appear, so the function signature should expose the relevant generic relationship through parameters or through contextual return positions. If a type parameter appears only in the return type, callers usually have to specify it manually.\n\nThe trick is to minimize independent type parameters. Many bad APIs introduce four or five generic parameters when two would do, and inference collapses because there is no strong anchor. Defaults, constraints, overload simplification, and helper objects can all improve inference. Sometimes currying or a config object creates better inference because it lets TypeScript capture one generic dimension at a time.\n\nFor library authors, inference quality is part of UX. A theoretically expressive API that forces manual generic arguments everywhere is usually a poor public surface.`,code:`function createMapBy<T, K extends PropertyKey>(\n  items: readonly T[],\n  getKey: (item: T) => K\n): Record<K, T> {\n  return items.reduce((acc, item) => {\n    acc[getKey(item)] = item;\n    return acc;\n  }, {} as Record<K, T>);\n}\n\nconst byId = createMapBy([{ id: 'a', value: 1 }], item => item.id);`,tip:`If an API only infers well when callers annotate every callback parameter manually, the generic design probably needs work.`},
+
+  {cat:'gen',diff:'h',q:'What problem do branded or nominal-like types solve in TypeScript, and what are their limits?',a:`TypeScript is structurally typed, which means two values with the same shape are compatible even if they represent different domain concepts. That is convenient but dangerous for identifiers and validated values. A UserId and OrderId might both be strings, yet mixing them is a real bug. Branded types simulate nominal meaning by intersecting a primitive with an impossible marker property.\n\nThis improves domain safety, but it is only a compile-time discipline. Brands are erased at runtime and can be bypassed with assertions. That means the important design question is where the brand is introduced. Ideally, it should be created only by validated constructors or trusted decoders, not casted at arbitrary call sites.\n\nBranded types are best when the semantic distinction matters and accidental mixing is expensive. They are less useful if every caller ends up asserting into the brand manually, because then you replaced safety with ceremony.`,code:`type Brand<T, Name extends string> = T & { readonly __brand: Name };\n\ntype UserId = Brand<string, 'UserId'>;\ntype OrderId = Brand<string, 'OrderId'>;\n\nfunction asUserId(value: string): UserId {\n  return value as UserId;\n}`,tip:`The strongest answer says branding is only meaningful when creation is centralized behind validation or trusted boundaries.`},
+
+  {cat:'gen',diff:'h',q:'How would you implement DeepReadonly or DeepPartial, and what are the edge cases that make naive implementations wrong?',a:`Recursive utility types look simple at first: map over object properties and reapply the utility recursively. The edge cases are what separate interview-level understanding from production understanding. Arrays, tuples, functions, maps, sets, dates, and branded primitives all need deliberate handling. If you recurse blindly into any object, you can accidentally transform functions into object maps or destroy tuple precision.\n\nYou also need to decide whether "deep" includes container contents for Map and Set, whether readonly arrays should remain arrays or tuples, and whether built-in objects should be treated as leaves. There is no universal perfect version; there is a version aligned to your domain model.\n\nThe point is that recursive type utilities encode policy. Interviewers want to hear that you recognize both the power and the limits of such utilities, especially their cost in compiler performance and maintainability.`,code:`type Primitive = string | number | boolean | bigint | symbol | null | undefined;\n\ntype DeepReadonly<T> =\n  T extends Primitive | Function ? T :\n  T extends readonly [infer A, ...infer B]\n    ? readonly [DeepReadonly<A>, ...{ [K in keyof B]: DeepReadonly<B[K]> }]\n    : T extends ReadonlyArray<infer U>\n      ? ReadonlyArray<DeepReadonly<U>>\n      : { readonly [K in keyof T]: DeepReadonly<T[K]> };`,tip:`A naive DeepReadonly that treats every object the same usually breaks functions, tuples, or special built-in types.`},
+
+  {cat:'gen',diff:'m',q:'What are const type parameters, and how do they differ from as const and satisfies in practice?',a:`These features solve related but different problems around preserving specificity. as const applies to a value expression and freezes its inferred type to literal and readonly forms. satisfies checks that a value conforms to a target type while preserving the value's more specific inferred type. const type parameters tell a generic function to infer literal types more aggressively for a type parameter instead of widening immediately.\n\nThe practical difference is where the control sits. as const is a value-side assertion. satisfies is a value-side conformance check that avoids widening to the target type. const type parameters are API-side control: the function author can request better literal preservation without forcing callers to sprinkle assertions.\n\nTogether, these features make generic DSLs and config objects far more ergonomic. The key is knowing whether you are shaping value inference locally or generic inference from the API surface.`,code:`function defineRoutes<const T extends Record<string, { path: string }>>(routes: T) {\n  return routes;\n}\n\nconst routes = defineRoutes({\n  home: { path: '/' },\n  user: { path: '/users/:id' }\n});`,tip:`A good answer explains why satisfies is usually safer than annotating the object directly when you want validation plus precise inference.`},
+
+  {cat:'infer',diff:'h',q:'How does the infer keyword work inside conditional types, and where is it genuinely powerful rather than just clever?',a:`infer lets you bind part of a type pattern while matching in a conditional type. Instead of manually indexing or reconstructing a shape, you ask the compiler to extract the portion you want if the input matches the pattern. This is especially powerful for function signatures, tuples, promise unwrapping, template literal parsing, and recursive decomposition.\n\nIt becomes genuinely useful when the extraction logic tracks actual structural relationships. Examples include getting function argument lists, promise result types, head and tail of tuples, or parsing route parameters out of a path string. It is less valuable when it is only used for showy type gymnastics that obscure a simpler explicit type.\n\nInterviewers often want to see whether you recognize that infer is just pattern matching at the type level. Once you see it that way, advanced utility types become much easier to reason about.`,code:`type FirstArg<T> = T extends (arg: infer A, ...rest: any[]) => any ? A : never;\ntype UnwrapPromise<T> = T extends Promise<infer U> ? U : T;\n\ntype PathParam<S> = S extends \`\${string}:\${infer Param}/\${infer Rest}\`\n  ? Param | PathParam<Rest>\n  : S extends \`\${string}:\${infer Param}\`\n    ? Param\n    : never;`,tip:`Strong answers use infer for pattern extraction, not as a synonym for "advanced TypeScript magic."`},
+
+  {cat:'infer',diff:'h',q:'How do control-flow narrowing, user-defined type guards, and assertion functions differ? When should each be used?',a:`Control-flow narrowing is TypeScript refining a variable based on runtime checks it understands: typeof, in, equality checks, discriminants, truthiness, and similar constructs. User-defined type guards package that logic into a reusable predicate of the form value is X. Assertion functions go further: they do not return a boolean; they tell the compiler that if the function returns normally, the condition must hold.\n\nUse built-in narrowing when the logic is local and obvious. Use type guards when the narrowing is reusable and semantically meaningful, such as isApiError or isLoadedState. Use assertion functions when failure should throw and the code after the call should proceed with a stronger type, for example assertAuthenticated(user) or assertPresent(value).\n\nThe deep point is that TypeScript trusts these user-declared contracts. If the guard or assertion lies, the compiler becomes confidently wrong. That means the runtime logic inside these helpers deserves the same scrutiny as low-level validation code.`,code:`function isStringArray(value: unknown): value is string[] {\n  return Array.isArray(value) && value.every(item => typeof item === 'string');\n}\n\nfunction assertDefined<T>(value: T): asserts value is NonNullable<T> {\n  if (value == null) throw new Error('Expected value to be defined');\n}`,tip:`Mention that the compiler does not verify the correctness of your custom guard. It only trusts the signature.`},
+
+  {cat:'infer',diff:'m',q:'When do overloads produce a better API than unions, and when do they make inference worse?',a:`Overloads are best when there are a small number of clearly distinct call shapes whose return types depend strongly on the input shape. They let the caller see those discrete entry points explicitly. Unions are often better when the logic is truly uniform and the function can be described as one parameter object or one generic relationship.\n\nOverloads become harmful when they proliferate or when the implementation signature becomes much broader than any one overload. The compiler resolves calls against the overload list, not the implementation, so unclear overload ordering or too many variants can make errors confusing and inference brittle. In many cases, a single generic signature with conditional or inferred relationships is clearer and scales better.\n\nLibrary APIs should optimize for the call-site experience, but not by hiding complexity in a maze of overloads. If the overload list reads like a patch history, the design probably needs a simpler model.`,tip:`A good heuristic: prefer overloads for a few discrete call modes, prefer generics and unions for scalable relationships.`},
+
+  {cat:'infer',diff:'m',q:'Why do literal types widen, and how do you keep specificity when building configuration-heavy APIs?',a:`Literal widening is TypeScript choosing a more general type so values remain assignable and practical in mutable contexts. let x = 'a' widens to string because the variable can change. Object literals also widen unless the compiler has a reason to preserve literal precision.\n\nConfiguration-heavy APIs often want the opposite: preserve exact keys, exact string variants, and readonly tuple-like data. That is where as const, satisfies, readonly tuples, and const type parameters become important. The best API design makes the specific intent easy without making every call site noisy.\n\nIf a library forces callers to sprinkle as const everywhere just to get acceptable inference, the API likely needs redesign. Preservation should be a property of the helper surface, not a burden repeated by every consumer.`,tip:`Literal widening is not a bug. It is the compiler choosing mutability-friendly defaults until you ask for something more specific.`},
+
+  {cat:'api',diff:'h',q:'How do you design a public TypeScript library API that survives versioning without constantly breaking consumers?',a:`Public type design should aim for stable semantic contracts, not just expressive signatures. That means avoiding overly clever exposed conditional types when a simpler named interface would communicate the contract more clearly. Consumers compile your types in their environment, with their tsconfig and their TypeScript version, so every exposed generic trick is part of your support surface.\n\nI prefer a layered public API: small stable interfaces and helper types at the boundary, internal complexity hidden behind implementation details, and explicit export strategy so accidental internal types do not leak into the generated declaration files. Versioning discipline matters too: widening a union, changing a default generic, or making a previously optional field required can all be breaking changes even if runtime behavior still works.\n\nFor library authors, declaration files are product. If your runtime API is stable but your types churn every release, you still have a reliability problem.`,tip:`A mature answer treats .d.ts output as a supported artifact, not as incidental build output.`},
+
+  {cat:'api',diff:'h',q:'How would you type a fluent builder API so methods become available only when prior steps are complete?',a:`This is a state-machine problem expressed through types. The builder should carry a generic state parameter that encodes which requirements are satisfied, and each method should return a new builder type with an updated state. The final build method is available only when the state meets the completion contract.\n\nThe implementation can remain simple at runtime. The important part is preventing invalid call sequences statically without forcing users into unreadable type signatures. Often the cleanest design is a hidden internal implementation with public interfaces describing each stage. That avoids exposing the entire state machine machinery in IntelliSense.\n\nInterviewers want to hear that you can model progressive validity without pretending the type system is the runtime. Validation still matters, but compile-time sequencing can remove large classes of misuse.`,code:`type BuilderState = {\n  hasUrl: boolean;\n  hasMethod: boolean;\n};\n\ntype Ready<S extends BuilderState> =\n  S['hasUrl'] extends true\n    ? S['hasMethod'] extends true\n      ? true\n      : false\n    : false;`,tip:`Do not make the fluent API technically correct but ergonomically unreadable. Builder typing is a UX problem too.`},
+
+  {cat:'api',diff:'m',q:'How do discriminated unions improve domain modeling compared with optional-property bags?',a:`Optional-property bags allow impossible states. A payment object with success: true, errorMessage: 'declined', and no receipt is often legal to the compiler if everything is optional. Discriminated unions force the model to be explicit: each case has a tag and the properties relevant to that case.\n\nThis improves narrowing, exhaustiveness checking, readability, and testability. It also creates better collaboration with product and backend teams because the allowed states become reviewable rather than implicit. In practice, I prefer unions for workflows, async state, feature eligibility, and error models precisely because they make ambiguity costly rather than silent.\n\nThe tradeoff is that unions can become large, but large explicit state spaces are still better than vaguely typed objects that leak invalid combinations everywhere.`,code:`type PaymentState =\n  | { kind: 'idle' }\n  | { kind: 'processing'; requestId: string }\n  | { kind: 'success'; receiptId: string }\n  | { kind: 'failed'; code: 'DECLINED' | 'NETWORK' };`,tip:`Optional bags optimize for writing the model quickly. Discriminated unions optimize for keeping the model correct.`},
+
+  {cat:'api',diff:'h',q:'How would you type an event emitter or command bus so event names and payloads stay aligned?',a:`The core idea is to define a central event map where each key is an event name and each value is the payload contract. Then generic methods constrain the event key and derive the corresponding payload or handler type from that key. This creates one source of truth instead of parallel string constants and loosely typed payload objects.\n\nThe important design choice is whether the event map is open for extension. Internal app buses can often use a closed union or map. Library-level systems may need generic extension points so consumers can augment the event space safely. Either way, the event name should drive payload typing, not the other way around.\n\nThis pattern scales because it keeps the relationship between label and payload structural, searchable, and compiler-enforced.`,code:`type Events = {\n  login: { userId: string };\n  paymentFailed: { code: string; retryable: boolean };\n};\n\nclass TypedEmitter<E extends Record<string, any>> {\n  on<K extends keyof E>(event: K, handler: (payload: E[K]) => void) {}\n  emit<K extends keyof E>(event: K, payload: E[K]) {}\n}\n\nconst emitter = new TypedEmitter<Events>();`,tip:`If event names are strings in one place and payload types live somewhere unrelated, drift is inevitable.`},
+
+  {cat:'runtime',diff:'h',q:'Why is TypeScript not a substitute for runtime validation, and how should a serious codebase handle external data?',a:`TypeScript checks what your program says about values at compile time. It does not inspect network responses, localStorage contents, environment variables, JSON files, browser messages, or user input at runtime. Once code is running, type annotations are erased. That means external data can violate your declared types unless you validate it.\n\nA serious codebase treats external data as unknown first, validates or decodes it, and only then promotes it into trusted domain types. Libraries like Zod, io-ts, valibot, or handwritten decoders can all work. The right pattern is to centralize validation at boundaries rather than sprinkling assertions throughout the application.\n\nThis is one of the most important maturity signals in TypeScript interviews. Engineers who believe "the backend guarantees it" are usually one malformed payload away from runtime chaos wrapped in beautiful editor autocomplete.`,code:`import { z } from 'zod';\n\nconst UserSchema = z.object({\n  id: z.string(),\n  email: z.string().email()\n});\n\ntype User = z.infer<typeof UserSchema>;\n\nfunction parseUser(input: unknown): User {\n  return UserSchema.parse(input);\n}`,tip:`The moment data crosses a trust boundary, unknown is usually the correct starting type.`},
+
+  {cat:'runtime',diff:'m',q:'How do serialization and deserialization break static types, especially around Date, Map, Set, branded values, and class instances?',a:`Serialization usually strips rich runtime structure into plain JSON-compatible values. Date becomes a string, Map and Set become arrays or objects depending on your strategy, branded values lose their trusted construction story, and class instances lose methods and prototype identity. If the static type still claims those richer forms after deserialization, your program is lying to itself.\n\nThe correct model is that serialization creates a wire format, and deserialization maps that wire format back into domain values through explicit decoding. That often means separate wire types and domain types. Yes, it is more typing up front. It is also how you avoid subtle bugs where a value is typed as Date but is actually still a string.\n\nThis is a case where strong TypeScript design means refusing to let the static model collapse runtime distinctions that matter.`,tip:`If a system loads JSON and immediately casts it to a domain type with classes or Dates, it has a trust-boundary bug.`},
+
+  {cat:'runtime',diff:'h',q:'What does type erasure mean in TypeScript, and what design consequences follow from it?',a:`Type erasure means TypeScript types do not exist in emitted JavaScript unless you introduce explicit metadata or runtime values yourself. Interfaces, type aliases, mapped types, conditional types, and generic parameters vanish during compilation. The runtime only sees the JavaScript you wrote.\n\nThe consequence is that any design depending on the runtime knowing generic arguments or interface structure is mistaken by default. Reflection-heavy patterns, schema generation, validation, and DI containers need explicit runtime representations, decorators with metadata, code generation, or parallel schemas. Type-level elegance does not automatically produce runtime knowledge.\n\nThis matters because many TypeScript abstractions feel powerful enough that people subconsciously expect them to survive to runtime. Good architecture accepts the separation: types help you write correct programs, but runtime behavior must still be modeled with actual JavaScript data and logic.`,tip:`A high-signal answer ties type erasure directly to validation, reflection, decorators, and why generic types cannot be inspected at runtime.`},
+
+  {cat:'runtime',diff:'m',q:'What are assertion-heavy anti-patterns in TypeScript, and how do you reduce them in a codebase?',a:`Frequent use of as SomeType, non-null assertions, and double assertions through unknown are often symptoms rather than solutions. They usually indicate that the code lacks a proper trust-boundary strategy, the API shape is under-modeled, or the generic surface is too weak to preserve relationships the compiler could otherwise infer.\n\nThe fix is rarely "ban assertions entirely." The fix is to move them to the few places where they are genuinely justified: runtime decoding, interop boundaries, legacy migration shims, or compiler limitations you intentionally accept. Everywhere else, improve the model. Use type guards, discriminated unions, helper abstractions, better generic signatures, and explicit validation.\n\nIn mature codebases, assertions should feel like concentrated risk, not ambient noise.`,tip:`When every file needs assertions, the problem is usually architectural, not stylistic.`},
+
+  {cat:'build',diff:'h',q:'How would you configure tsconfig strictness for a large codebase, and which flags are the most valuable beyond strict?',a:`strict is a baseline, not the whole story. For larger codebases, I care especially about noUncheckedIndexedAccess, exactOptionalPropertyTypes, noImplicitOverride, useUnknownInCatchVariables, and noPropertyAccessFromIndexSignature depending on the code style. Each of these catches a class of bugs that plain strict mode still allows.\n\nThe right rollout strategy depends on codebase maturity. Enabling everything at once on a legacy repo can paralyze delivery. I usually stage the flags, track violation classes, and introduce targeted helper patterns so the team understands the fix rather than cargo-culting assertions. The flags are only useful if developers learn what design pressure they are applying.\n\nTypeScript configuration is governance. It defines what kinds of mistakes the team is willing to let through.`,code:`{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"noUncheckedIndexedAccess\": true,\n    \"exactOptionalPropertyTypes\": true,\n    \"noImplicitOverride\": true,\n    \"useUnknownInCatchVariables\": true\n  }\n}`,tip:`The strongest answers connect flags to bug classes, not just to "more strict is better."`},
+
+  {cat:'build',diff:'h',q:'What are project references, and why do they matter in monorepos or multi-package TypeScript systems?',a:`Project references let TypeScript treat a codebase as a graph of buildable units rather than one giant compilation context. Each referenced project can emit declarations and build incrementally, and downstream projects can depend on that stable output instead of rechecking the entire transitive source tree all the time.\n\nThis matters for large repos because type checking cost grows nonlinearly when every package sees every source file. References create boundaries, improve build parallelism, and make architectural seams explicit. They also help editor performance because the language service can reason over declarations for some dependencies rather than constantly traversing raw source.\n\nThe tradeoff is operational complexity: you need consistent tsconfig structure, build orchestration, and clarity around what constitutes a public API between packages. But for serious multi-package systems, project references are often the difference between workable and painful TypeScript performance.`,code:`{\n  \"files\": [],\n  \"references\": [\n    { \"path\": \"./packages/core\" },\n    { \"path\": \"./packages/web\" },\n    { \"path\": \"./packages/sdk\" }\n  ]\n}`,tip:`References are not just a build optimization. They force you to be explicit about package boundaries and emitted APIs.`},
+
+  {cat:'build',diff:'m',q:'What problems do path aliases solve, and what problems do they create if the runtime toolchain is not aligned?',a:`Path aliases improve import ergonomics and can express architectural intent, but they only affect the compiler and tooling that know how to read tsconfig. If your runtime, bundler, test runner, Node loader, or package exports configuration does not resolve the same aliases, you get code that type-checks but fails to execute.\n\nThat means aliases should be treated as a cross-tooling contract. If the project uses tsconfig paths, the bundler, Jest or Vitest, ESLint import resolver, and any runtime ts-node or build steps must agree. In package-based systems, package exports or real workspace package names are often more robust than deep alias trees.\n\nAliases are useful, but when they become a substitute for proper package boundaries, they can hide architecture debt rather than solve it.`,tip:`If the team cannot explain how tsconfig paths become real runtime resolution, the setup is incomplete.`},
+
+  {cat:'build',diff:'h',q:'How do you diagnose slow TypeScript performance caused by type explosion or pathological inference?',a:`First, distinguish whether the pain is editor latency, tsc build time, or memory usage. Then profile the type system itself rather than guessing. Large unions, recursive mapped types, heavily nested conditional types, overly generic utility layers, and giant inferred object literals are common causes of type explosion.\n\nRefactoring usually means simplifying type relationships, naming intermediate types, reducing distribution over large unions, cutting recursion depth, or replacing a hyper-generic abstraction with a more concrete one. Sometimes the fastest type is the less clever type. You can also isolate hotspots behind declaration boundaries or project references so the whole repo does not continually re-evaluate them.\n\nA senior answer here emphasizes that type-level code has performance characteristics. The compiler is not an infinite theorem prover.`,tip:`The best optimization is often removing one "beautiful" utility type that everyone was afraid to question.`},
+
+  {cat:'build',diff:'m',q:'How do declaration emit and isolatedModules influence the way you write TypeScript that must be consumed by many tools?',a:`isolatedModules means each file must be transpilable correctly in isolation, without cross-file type information. Tools like Babel, swc, and esbuild often operate this way. That disallows patterns that require whole-program understanding to emit valid JavaScript, such as certain const enum assumptions or value/type ambiguities.\n\nDeclaration emit adds another constraint: exported types should be representable cleanly in generated .d.ts files. If implementation details leak into exported signatures or the code depends on private inferred types that declaration emit cannot name well, the output can become brittle.\n\nThe important design principle is portability. If the code must pass through multiple compilers or bundlers, write TypeScript with clear type/value separation, explicit exports, and awareness that not every tool runs the full TypeScript checker during transpilation.`,tip:`High-signal answers know that "TypeScript code" and "code every TS-adjacent tool can transpile safely" are not always the same set.`},
+
+  {cat:'api',diff:'h',q:'How would you model a strongly typed reducer or command system so actions and handlers stay synchronized?',a:`The cleanest model usually starts from an action map or command map. Each key represents the command name and each value represents the payload contract. From that single source of truth, you derive a union of action objects, handler signatures, and dispatch typing. This avoids the classic drift where action creators, reducers, and consumers all evolve separately.\n\nFor reducers, discriminated unions provide exhaustiveness and per-case narrowing. For command systems, mapped types can derive handler registries that guarantee each command receives the correct payload. The key is to keep the relationship structural and centralized rather than duplicated.\n\nThis pattern is powerful because it keeps both the dynamic behavior and the type design honest.`,code:`type ActionMap = {\n  login: { userId: string };\n  logout: undefined;\n  paymentFailed: { code: string };\n};\n\ntype Action = {\n  [K in keyof ActionMap]: ActionMap[K] extends undefined\n    ? { type: K }\n    : { type: K; payload: ActionMap[K] }\n}[keyof ActionMap];`,tip:`A single source of truth for action names and payloads prevents drift better than scattered type aliases.`},
+
+  {cat:'type',diff:'m',q:'Why are intersection types not "object merge" semantics, and where do people get burned by that assumption?',a:`Intersections mean a value must satisfy both constituent types simultaneously. That is not the same as JavaScript object spread or conflict resolution. If two object types define the same property incompatibly, the resulting property type may become never or otherwise unusable. If one side is broader and the other narrower, the intersection can behave in ways that look like refinement, but it is still logical conjunction, not merge.\n\nPeople get burned when they treat intersections as "combine these models" without checking overlapping keys, optionality semantics, or method compatibility. In API design, explicit mapped transforms or helper types are often safer than piling intersections onto partially overlapping object shapes.\n\nThe mental model should be satisfiability, not merge.`,tip:`Intersections are about values satisfying multiple contracts at once, not about producing a friendly merged object type.`},
+
+  {cat:'infer',diff:'h',q:'How do template literal types enable domain-specific compile-time parsing, and where should you stop before it becomes a liability?',a:`Template literal types let you pattern-match and construct string-based types, which makes them powerful for route params, event names, CSS token conventions, GraphQL-style selector strings, or data attribute APIs. Combined with infer, they can extract pieces of a string into useful unions.\n\nThe benefit is that the stringly API becomes partially structured. The cost is complexity, compile-time performance, and error readability. The more your type-level parser looks like a real parser, the more likely it is that maintainers will stop understanding it or that the compiler will slow down on edge cases.\n\nUse template literal types when they eliminate a high-value class of mistakes and the rule remains intelligible. Stop when the type-level language becomes more complex than the runtime language it is trying to describe.`,tip:`If the type-level parser needs a design doc of its own, consider whether the API itself should be less stringly.`},
+
+  {cat:'runtime',diff:'m',q:'How do you model environment variables in TypeScript without fooling yourself about runtime guarantees?',a:`process.env is fundamentally a runtime string bag where keys may be missing. Typing it globally as if every key is always present can make the code pleasant and dangerously false. The safer design is to read the environment once, validate required keys, normalize values into domain-specific runtime types, and export a trusted config object.\n\nThat trusted config object can be strongly typed because it is created by validated runtime code. This also centralizes parsing of numbers, booleans, URLs, and feature-flag values instead of scattering string coercion across the codebase.\n\nThis is another trust-boundary problem wearing a configuration hat.`,tip:`A typed config object is trustworthy only if it is produced by runtime validation, not by declaration merging alone.`},
+
+  {cat:'gen',diff:'m',q:'When do default generic parameters help API ergonomics, and when do they hide important decisions?',a:`Default generic parameters are useful when most callers want the same mode and the default is unsurprising. They reduce call-site noise and let advanced callers opt into specialization only when needed. They are especially helpful in containers, result wrappers, builders, and library helpers that have one dominant common case.\n\nThey become harmful when the default masks a meaningful architectural choice, changes behavior in subtle ways, or makes error messages harder to interpret because callers do not realize a hidden type argument is in play. Defaults should reduce ceremony, not obscure semantics.\n\nAs with many TypeScript design questions, the right answer is about API clarity rather than maximum generic cleverness.`,tip:`If changing the default generic would be a breaking change users would care about, it is probably a meaningful decision and should be treated carefully.`}
+];
+
+let active = 'all';
+let search = '';
+
+function render() {
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = categories.map(c =>
+    `<div class="tab${c.id===active?' active':''}" onclick="setTab('${c.id}')">${c.label}</div>`
+  ).join('');
+
+  const filtered = Q.filter(q => {
+    const matchCat = active==='all' || q.cat===active;
+    const matchSearch = !search || q.q.toLowerCase().includes(search) || q.a.toLowerCase().includes(search);
+    return matchCat && matchSearch;
+  });
+
+  const stats = document.getElementById('stats');
+  const cat = categories.find(c=>c.id===active);
+  const total = Q.filter(q=>active==='all'||q.cat===active).length;
+  const easy = Q.filter(q=>(active==='all'||q.cat===active)&&q.diff==='m').length;
+  const hard = Q.filter(q=>(active==='all'||q.cat===active)&&q.diff==='h').length;
+  const resultMeta = document.getElementById('resultMeta');
+  resultMeta.innerHTML = `
+    <strong>${filtered.length}</strong> visible${search ? ' for your search' : ''}<br>
+    Scope: <strong>${cat.label}</strong> • ${Q.length} total questions
+  `;
+  stats.innerHTML = `
+    <div class="stat"><div class="stat-n">${total}</div><div class="stat-l">Total</div></div>
+    <div class="stat"><div class="stat-n" style="color:#ffd28b">${easy}</div><div class="stat-l">Medium</div></div>
+    <div class="stat"><div class="stat-n" style="color:#ffc3cc">${hard}</div><div class="stat-l">Hard</div></div>
+    <div class="stat"><div class="stat-n" style="color:#dff4ff">${filtered.length}</div><div class="stat-l">Visible</div></div>
+  `;
+
+  const qlist = document.getElementById('qlist');
+  if(!filtered.length){qlist.innerHTML='<div class="empty">No questions match your search.</div>';return;}
+
+  const catMap = {type:'qnum-type',gen:'qnum-gen',infer:'qnum-infer',api:'qnum-api',runtime:'qnum-runtime',build:'qnum-build'};
+  const catLabel = {type:'Type',gen:'Generic',infer:'Infer',api:'API',runtime:'Runtime',build:'Build'};
+  qlist.innerHTML = filtered.map((q,i) => `
+    <div class="qcard" id="qc${i}" style="--i:${i}">
+      <div class="qhead" onclick="toggle(${i})">
+        <div class="qnum ${catMap[q.cat]}">${String(i+1).padStart(2,'0')}</div>
+        <div class="qcopy">
+          <div class="qmeta">
+            <div class="cat-tag">${catLabel[q.cat]}</div>
+            <div class="badge diff-${q.diff}">${q.diff==='m'?'Medium':'Hard'}</div>
+          </div>
+          <div class="qtxt">${q.q}</div>
+        </div>
+        <div class="chevron" id="ch${i}">▾</div>
+      </div>
+      <div class="ans" id="ans${i}">
+        <div class="ans-label">Model Answer</div>
+        <div class="ans-txt">${q.a.replace(/\n/g,'<br>')}</div>
+        ${q.code?`<div class="code">${q.code.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`:''}
+        ${q.tip?`<div class="tip">Tech Lead tip: ${q.tip}</div>`:''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function setTab(id){active=id;render();}
+function filterQ(){search=document.getElementById('search').value.toLowerCase();render();}
+function toggle(i){
+  const ans=document.getElementById('ans'+i);
+  const ch=document.getElementById('ch'+i);
+  const open=ans.classList.toggle('open');
+  ch.classList.toggle('open',open);
+}
+
+render();
+</script>

@@ -1,0 +1,543 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --panel:rgba(10,21,39,0.76);
+  --panel-strong:rgba(10,21,39,0.92);
+  --line:rgba(255,255,255,0.11);
+  --text:#f3f6fb;
+  --muted:#99a8bf;
+  --accent:#7dd3fc;
+  --shadow:0 24px 80px rgba(0,0,0,0.35);
+  --radius-xl:28px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:'Sora',ui-sans-serif,system-ui,sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 26rem),
+    radial-gradient(circle at top right, rgba(251,113,133,0.16), transparent 24rem),
+    linear-gradient(180deg, #07111f 0%, #09162a 45%, #050b16 100%);
+  color:var(--text);
+  padding:32px 20px 64px;
+  overflow-x:hidden;
+}
+body::before,
+body::after{
+  content:'';
+  position:fixed;
+  border-radius:999px;
+  filter:blur(80px);
+  pointer-events:none;
+  opacity:0.55;
+}
+body::before{
+  width:20rem;
+  height:20rem;
+  top:4rem;
+  right:-6rem;
+  background:rgba(56,189,248,0.18);
+}
+body::after{
+  width:18rem;
+  height:18rem;
+  bottom:8rem;
+  left:-5rem;
+  background:rgba(245,158,11,0.12);
+}
+
+.wrap{max-width:1160px;margin:0 auto}
+.hero,.flow,.diagram-card,.caption-card,.code-card{
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0,1.7fr) minmax(260px,0.9fr);
+  gap:24px;
+  padding:34px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(125,211,252,0.12), rgba(255,255,255,0.03) 35%, rgba(251,113,133,0.08)),
+    var(--panel);
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.05) 45%, transparent 85%);
+  pointer-events:none;
+}
+.hero-copy,.hero-side{position:relative;z-index:1}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border:1px solid rgba(125,211,252,0.25);
+  border-radius:999px;
+  background:rgba(8,23,42,0.62);
+  color:#c4e9fb;
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.eyebrow::before{
+  content:'';
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--accent), #fff);
+  box-shadow:0 0 18px rgba(125,211,252,0.8);
+}
+.hero h1{
+  font-size:clamp(2rem, 4vw, 3.7rem);
+  line-height:0.98;
+  letter-spacing:-0.04em;
+  max-width:12ch;
+}
+.hero p{
+  margin-top:18px;
+  max-width:64ch;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.8;
+}
+.hero-highlights{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:22px;
+}
+.hero-pill{
+  padding:12px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#dce8f8;
+  font-size:12px;
+  line-height:1.5;
+}
+.hero-side{display:grid;gap:14px;align-content:start}
+.hero-card{
+  padding:18px 18px 16px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.hero-card-label{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  margin-bottom:10px;
+}
+.hero-card-value{
+  font-size:30px;
+  font-weight:700;
+  letter-spacing:-0.04em;
+  margin-bottom:6px;
+}
+.hero-card p{
+  color:#bfd1e5;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.flow{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:var(--panel-strong);
+  box-shadow:var(--shadow);
+}
+.toolbar-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:16px;
+}
+.section-label{
+  color:#d8e6f6;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:8px;
+}
+.section-title{
+  font-size:24px;
+  letter-spacing:-0.03em;
+}
+.result-meta{
+  min-height:42px;
+  min-width:220px;
+  padding:10px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#d8e6f6;
+  font-size:12px;
+  line-height:1.6;
+  text-align:right;
+}
+.stepper{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.step-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  background:rgba(255,255,255,0.03);
+  color:#a8bbd1;
+  transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.step-btn:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,0.22);
+  color:#eef7ff;
+}
+.step-btn.active{
+  background:linear-gradient(135deg, rgba(56,189,248,0.24), rgba(125,211,252,0.08));
+  color:#eef9ff;
+  border-color:rgba(125,211,252,0.38);
+}
+.step-index{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.09);
+  font-size:10px;
+  font-weight:700;
+}
+.panel{display:none}
+.panel.active{display:block}
+.panel-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(300px,0.95fr);
+  gap:16px;
+}
+.diagram-card,
+.caption-card,
+.code-card{
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  padding:18px;
+  animation:fadeUp 0.55s ease both;
+}
+.diagram-card svg{
+  width:100%;
+  height:auto;
+  display:block;
+  animation:diagramFloat 9s ease-in-out infinite;
+}
+.detail-column{display:grid;gap:16px}
+.caption-label{
+  color:#b7c9de;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:10px;
+}
+.caption{
+  font-size:14px;
+  color:#c8d7e7;
+  line-height:1.85;
+}
+.caption strong{font-weight:700;color:#f4f8ff}
+.code{
+  overflow:auto;
+  white-space:pre;
+  font:13px/1.7 'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  color:#dff3ff;
+}
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  margin-top:18px;
+}
+.nav-btn{
+  padding:10px 18px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  background:rgba(255,255,255,0.05);
+  color:#eef9ff;
+  transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+.nav-btn:hover:not(:disabled){
+  transform:translateY(-1px);
+  border-color:rgba(125,211,252,0.32);
+  background:rgba(56,189,248,0.12);
+}
+.nav-btn:disabled{opacity:0.35;cursor:default}
+.progress-dots{display:flex;gap:10px;align-items:center}
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.18);
+  transition:transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.dot.active{
+  background:#dff4ff;
+  transform:scale(1.15);
+  box-shadow:0 0 16px rgba(125,211,252,0.65);
+}
+.animated .diagram-card,
+.animated .caption-card,
+.animated .code-card{
+  animation:fadeUp 0.5s ease both;
+}
+
+svg .th{font:700 16px/1.2 'Sora',ui-sans-serif,system-ui,sans-serif}
+svg .ts{font:500 12px/1.45 'Sora',ui-sans-serif,system-ui,sans-serif}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes diagramFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+
+@media (max-width: 980px){
+  .hero{grid-template-columns:1fr}
+  .panel-grid{grid-template-columns:1fr}
+}
+@media (max-width: 720px){
+  body{padding:18px 14px 40px}
+  .hero,.flow{padding:20px}
+  .toolbar-top,.nav{flex-direction:column;align-items:stretch}
+  .result-meta{text-align:left;min-width:0;width:100%}
+  .nav-btn{width:100%}
+}
+</style>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">SDK Integration Flow</div>
+      <h1>React Native SDK Integration Visual Flow</h1>
+      <p>A three-step explainer for interviews: how a native SDK gets wrapped for React Native, how that RN SDK is packaged for third-party use, and how another React Native app consumes it safely.</p>
+      <div class="hero-highlights">
+        <div class="hero-pill">Designed for architecture interviews where you need to explain boundaries, packaging, and host-app integration clearly.</div>
+        <div class="hero-pill">Each step includes a visual flow and a short code sample so the explanation stays grounded in implementation detail.</div>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="hero-card">
+        <div class="hero-card-label">Scope</div>
+        <div class="hero-card-value">3 Steps</div>
+        <p>Native SDK wrapping, package distribution, and host-app usage in one linear flow.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-label">Interview Goal</div>
+        <div class="hero-card-value">Explainable System</div>
+        <p>Built to help you answer clearly at whiteboard level first, then back it up with realistic code and packaging details.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="flow">
+    <div class="toolbar-top">
+      <div>
+        <div class="section-label">Flow Navigator</div>
+        <div class="section-title">From native SDK to reusable RN SDK to host-app integration</div>
+      </div>
+      <div class="result-meta" id="step-meta"></div>
+    </div>
+
+    <div class="stepper" id="stepper"></div>
+    <div id="panels"></div>
+    <div class="nav">
+      <button class="nav-btn" id="prev-btn" onclick="go(-1)">Previous Step</button>
+      <div class="progress-dots" id="dots"></div>
+      <button class="nav-btn" id="next-btn" onclick="go(1)">Next Step</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const steps = [
+  {
+    label:'Native SDK -> RN',
+    svg:`<svg width="100%" viewBox="0 0 680 360">
+      <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect x="40" y="60" width="180" height="72" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+      <text class="th" x="130" y="88" text-anchor="middle" dominant-baseline="central" fill="#26215C">JS / TS Public API</text>
+      <text class="ts" x="130" y="110" text-anchor="middle" dominant-baseline="central" fill="#3C3489">init(), login(), startScan()</text>
+
+      <rect x="250" y="42" width="180" height="108" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+      <text class="th" x="340" y="72" text-anchor="middle" dominant-baseline="central" fill="#0C447C">RN Native Layer</text>
+      <text class="ts" x="340" y="96" text-anchor="middle" dominant-baseline="central" fill="#185FA5">TurboModule / bridge wrapper</text>
+      <text class="ts" x="340" y="118" text-anchor="middle" dominant-baseline="central" fill="#185FA5">Error mapping + argument normalization</text>
+
+      <rect x="460" y="60" width="180" height="72" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+      <text class="th" x="550" y="88" text-anchor="middle" dominant-baseline="central" fill="#085041">Native SDK</text>
+      <text class="ts" x="550" y="110" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">iOS SDK / Android SDK</text>
+
+      <line x1="220" y1="96" x2="248" y2="96" stroke="#185FA5" stroke-width="1.6" marker-end="url(#a)" />
+      <line x1="430" y1="96" x2="458" y2="96" stroke="#0F6E56" stroke-width="1.6" marker-end="url(#a)" />
+
+      <rect x="40" y="196" width="600" height="104" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>
+      <text class="th" x="340" y="224" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">Interview framing</text>
+      <text class="ts" x="340" y="248" text-anchor="middle" dominant-baseline="central" fill="#444441">Do not expose the raw native SDK directly to JS.</text>
+      <text class="ts" x="340" y="270" text-anchor="middle" dominant-baseline="central" fill="#444441">Wrap it with a thin RN-native adapter, normalize errors, and present a stable JS facade.</text>
+    </svg>`,
+    caption:`<strong>Step 1: Wrap the native SDK for React Native.</strong> Start with the real iOS and Android SDKs, then add a React Native native layer that exposes a stable JS-facing contract. That layer is responsible for argument conversion, lifecycle coordination, promise resolution, and mapping platform-specific error codes into one JS error model.\n\nIn interviews, the key point is separation of concerns: the native SDK remains the source of platform capability, the RN native adapter handles platform interop, and the JS/TS surface stays small, stable, and product-friendly.`,
+    code:`// JS facade seen by the host app\nexport async function initialize(config: InitConfig) {\n  return NativeSdkModule.initialize(config);\n}\n\nexport async function startVerification(input: VerificationInput) {\n  try {\n    return await NativeSdkModule.startVerification(input);\n  } catch (error) {\n    throw normalizeSdkError(error);\n  }\n}\n\n// Native layer responsibility:\n// Swift/Kotlin calls the vendor SDK and maps results\n// back into a stable JS contract.`,
+  },
+  {
+    label:'Package the RN SDK',
+    svg:`<svg width="100%" viewBox="0 0 680 360">
+      <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect x="40" y="34" width="220" height="120" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+      <text class="th" x="150" y="62" text-anchor="middle" dominant-baseline="central" fill="#0C447C">RN SDK Package</text>
+      <text class="ts" x="150" y="88" text-anchor="middle" dominant-baseline="central" fill="#185FA5">package.json</text>
+      <text class="ts" x="150" y="108" text-anchor="middle" dominant-baseline="central" fill="#185FA5">ios/*.podspec</text>
+      <text class="ts" x="150" y="128" text-anchor="middle" dominant-baseline="central" fill="#185FA5">android/build.gradle</text>
+
+      <rect x="300" y="34" width="160" height="120" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.8"/>
+      <text class="th" x="380" y="62" text-anchor="middle" dominant-baseline="central" fill="#633806">Publish Layer</text>
+      <text class="ts" x="380" y="88" text-anchor="middle" dominant-baseline="central" fill="#854F0B">npm package</text>
+      <text class="ts" x="380" y="108" text-anchor="middle" dominant-baseline="central" fill="#854F0B">peer deps + docs</text>
+      <text class="ts" x="380" y="128" text-anchor="middle" dominant-baseline="central" fill="#854F0B">versioning rules</text>
+
+      <rect x="500" y="34" width="140" height="120" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+      <text class="th" x="570" y="62" text-anchor="middle" dominant-baseline="central" fill="#085041">Third Parties</text>
+      <text class="ts" x="570" y="88" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">install package</text>
+      <text class="ts" x="570" y="108" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">pod install</text>
+      <text class="ts" x="570" y="128" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">run app</text>
+
+      <line x1="260" y1="94" x2="298" y2="94" stroke="#185FA5" stroke-width="1.6" marker-end="url(#a)" />
+      <line x1="460" y1="94" x2="498" y2="94" stroke="#854F0B" stroke-width="1.6" marker-end="url(#a)" />
+
+      <rect x="40" y="200" width="600" height="104" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>
+      <text class="th" x="340" y="228" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">What "packaging" means in interviews</text>
+      <text class="ts" x="340" y="252" text-anchor="middle" dominant-baseline="central" fill="#444441">More than npm publish: native dependency wiring, autolinking, peer dependency policy, and installation docs.</text>
+      <text class="ts" x="340" y="274" text-anchor="middle" dominant-baseline="central" fill="#444441">Your package must be installable by teams who do not know your internals.</text>
+    </svg>`,
+    caption:`<strong>Step 2: Package the RN SDK for third-party consumption.</strong> The RN SDK becomes a distributable library only when JavaScript packaging and native wiring both work. That means a clean package.json, correctly declared peer dependencies, native iOS and Android integration metadata, and documentation that tells external teams exactly how to install, initialize, and troubleshoot it.\n\nThe interview-quality answer here is operational: version the JS contract carefully, keep the native dependency surface explicit, and make installation friction low. A package that "works on the author’s machine" is not a reusable SDK.`,
+    code:`{\n  \"name\": \"@company/verification-sdk\",\n  \"main\": \"lib/commonjs/index.js\",\n  \"module\": \"lib/module/index.js\",\n  \"types\": \"lib/typescript/index.d.ts\",\n  \"peerDependencies\": {\n    \"react\": \">=18\",\n    \"react-native\": \">=0.74\"\n  }\n}\n\n# iOS\npod install\n\n# Android\n# Gradle + autolinking pick up the native module`,
+  },
+  {
+    label:'RN SDK in Host App',
+    svg:`<svg width="100%" viewBox="0 0 680 360">
+      <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect x="40" y="54" width="180" height="90" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+      <text class="th" x="130" y="84" text-anchor="middle" dominant-baseline="central" fill="#26215C">Host RN App</text>
+      <text class="ts" x="130" y="108" text-anchor="middle" dominant-baseline="central" fill="#3C3489">imports SDK</text>
+      <text class="ts" x="130" y="128" text-anchor="middle" dominant-baseline="central" fill="#3C3489">calls init + feature APIs</text>
+
+      <rect x="260" y="54" width="180" height="90" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+      <text class="th" x="350" y="84" text-anchor="middle" dominant-baseline="central" fill="#0C447C">RN SDK Package</text>
+      <text class="ts" x="350" y="108" text-anchor="middle" dominant-baseline="central" fill="#185FA5">JS facade + native bindings</text>
+      <text class="ts" x="350" y="128" text-anchor="middle" dominant-baseline="central" fill="#185FA5">typed config + errors</text>
+
+      <rect x="480" y="54" width="160" height="90" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+      <text class="th" x="560" y="84" text-anchor="middle" dominant-baseline="central" fill="#085041">Vendor Native SDK</text>
+      <text class="ts" x="560" y="108" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">camera / auth / scan</text>
+      <text class="ts" x="560" y="128" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">platform APIs</text>
+
+      <line x1="220" y1="99" x2="258" y2="99" stroke="#185FA5" stroke-width="1.6" marker-end="url(#a)" />
+      <line x1="440" y1="99" x2="478" y2="99" stroke="#0F6E56" stroke-width="1.6" marker-end="url(#a)" />
+
+      <rect x="40" y="192" width="600" height="112" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>
+      <text class="th" x="340" y="220" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">Host-app concerns interviewers expect</text>
+      <text class="ts" x="340" y="246" text-anchor="middle" dominant-baseline="central" fill="#444441">Initialization order, permissions, config validation, native version compatibility, and graceful failure paths.</text>
+      <text class="ts" x="340" y="268" text-anchor="middle" dominant-baseline="central" fill="#444441">The host app should consume a stable SDK contract, not know platform-specific vendor details.</text>
+    </svg>`,
+    caption:`<strong>Step 3: Consume the RN SDK inside another React Native app.</strong> The host application should see a clean JS API with typed configuration, predictable initialization, and stable error semantics. Installation should autolink native code, initialization should validate configuration early, and failures should surface as SDK-level domain errors instead of leaking raw iOS/Android details.\n\nIn interviews, emphasize ownership boundaries: the host app owns product flow and configuration, the RN SDK owns cross-platform abstraction, and the vendor native SDK owns platform capability. That is the separation that keeps third-party adoption realistic.`,
+    code:`import { initialize, startVerification } from '@company/verification-sdk';\n\nawait initialize({\n  apiKey: 'public-key',\n  environment: 'sandbox'\n});\n\nconst result = await startVerification({\n  userId: 'user-123',\n  flow: 'kyc-basic'\n});\n\nif (result.status === 'completed') {\n  // continue host-app flow\n}`,
+  }
+];
+
+let current = 0;
+
+function buildUI(){
+  const stepper=document.getElementById('stepper');
+  const panels=document.getElementById('panels');
+  const dots=document.getElementById('dots');
+  const meta=document.getElementById('step-meta');
+  stepper.innerHTML=steps.map((s,i)=>
+    `<button class="step-btn${i===0?' active':''}" id="tab${i}" onclick="goto(${i})"><span class="step-index">${String(i+1).padStart(2,'0')}</span><span>${s.label}</span></button>`
+  ).join('');
+  panels.innerHTML=steps.map((s,i)=>
+    `<div class="panel${i===0?' active animated':''}" id="panel${i}">
+      <div class="panel-grid">
+        <div class="diagram-card">${s.svg}</div>
+        <div class="detail-column">
+          <div class="caption-card">
+            <div class="caption-label">Key Idea</div>
+            <div class="caption">${s.caption}</div>
+          </div>
+          <div class="code-card">
+            <div class="caption-label">Sample</div>
+            <div class="code">${s.code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+          </div>
+        </div>
+      </div>
+    </div>`
+  ).join('');
+  dots.innerHTML=steps.map((_,i)=>
+    `<div class="dot${i===0?' active':''}" id="dot${i}"></div>`
+  ).join('');
+  meta.innerHTML=`<strong>Step 1</strong> of ${steps.length}<br><strong>${steps[0].label}</strong>`;
+  updateNav();
+}
+
+function goto(i){
+  document.getElementById('tab'+current).classList.remove('active');
+  document.getElementById('panel'+current).classList.remove('active');
+  document.getElementById('dot'+current).classList.remove('active');
+  current=i;
+  document.getElementById('tab'+i).classList.add('active');
+  const p=document.getElementById('panel'+i);
+  p.classList.add('active','animated');
+  setTimeout(()=>p.classList.remove('animated'),400);
+  document.getElementById('dot'+i).classList.add('active');
+  document.getElementById('step-meta').innerHTML=`<strong>Step ${i+1}</strong> of ${steps.length}<br><strong>${steps[i].label}</strong>`;
+  updateNav();
+}
+
+function go(dir){
+  const next=Math.max(0,Math.min(steps.length-1,current+dir));
+  if(next!==current)goto(next);
+}
+
+function updateNav(){
+  document.getElementById('prev-btn').disabled=current===0;
+  document.getElementById('next-btn').disabled=current===steps.length-1;
+}
+
+buildUI();
+</script>

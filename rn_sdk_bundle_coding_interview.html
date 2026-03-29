@@ -1,0 +1,2013 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg:#07111f;
+  --bg-elev:#0d1a2d;
+  --panel:rgba(10,21,39,0.76);
+  --panel-strong:rgba(10,21,39,0.92);
+  --panel-soft:rgba(255,255,255,0.06);
+  --line:rgba(255,255,255,0.11);
+  --line-strong:rgba(255,255,255,0.2);
+  --text:#f3f6fb;
+  --muted:#99a8bf;
+  --accent:#7dd3fc;
+  --accent-strong:#38bdf8;
+  --accent-warm:#f59e0b;
+  --accent-pink:#fb7185;
+  --success:#86efac;
+  --shadow:0 24px 80px rgba(0,0,0,0.35);
+  --radius-xl:28px;
+  --radius-lg:20px;
+  --radius-md:14px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:'Sora',ui-sans-serif,system-ui,sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 26rem),
+    radial-gradient(circle at top right, rgba(251,113,133,0.16), transparent 24rem),
+    linear-gradient(180deg, #07111f 0%, #09162a 45%, #050b16 100%);
+  color:var(--text);
+  padding:32px 20px 64px;
+  overflow-x:hidden;
+}
+body::before,
+body::after{
+  content:'';
+  position:fixed;
+  inset:auto;
+  border-radius:999px;
+  filter:blur(80px);
+  pointer-events:none;
+  opacity:0.55;
+}
+body::before{
+  width:20rem;
+  height:20rem;
+  top:4rem;
+  right:-6rem;
+  background:rgba(56,189,248,0.18);
+}
+body::after{
+  width:18rem;
+  height:18rem;
+  bottom:8rem;
+  left:-5rem;
+  background:rgba(245,158,11,0.12);
+}
+
+.wrap{
+  max-width:1160px;
+  margin:0 auto;
+  position:relative;
+}
+.hero,
+.toolbar,
+.qcard,
+.stat{
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0, 1.7fr) minmax(260px, 0.9fr);
+  gap:24px;
+  padding:34px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(125,211,252,0.12), rgba(255,255,255,0.03) 35%, rgba(251,113,133,0.08)),
+    var(--panel);
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.05) 45%, transparent 85%);
+  pointer-events:none;
+}
+.hero-copy{position:relative;z-index:1}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border:1px solid rgba(125,211,252,0.25);
+  border-radius:999px;
+  background:rgba(8,23,42,0.62);
+  color:#c4e9fb;
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.eyebrow::before{
+  content:'';
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--accent), #fff);
+  box-shadow:0 0 18px rgba(125,211,252,0.8);
+}
+.hero h1{
+  font-size:clamp(2rem, 4vw, 3.8rem);
+  line-height:0.98;
+  letter-spacing:-0.04em;
+  max-width:12ch;
+}
+.hero p{
+  margin-top:18px;
+  max-width:62ch;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.8;
+}
+.hero-highlights{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:22px;
+}
+.hero-pill{
+  padding:12px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#dce8f8;
+  font-size:12px;
+  line-height:1.5;
+}
+.hero-side{
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:14px;
+  align-content:start;
+}
+.hero-card{
+  padding:18px 18px 16px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.hero-card-label{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  margin-bottom:10px;
+}
+.hero-card-value{
+  font-size:30px;
+  font-weight:700;
+  letter-spacing:-0.04em;
+  margin-bottom:6px;
+}
+.hero-card p{
+  color:#bfd1e5;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.toolbar{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-xl);
+  background:var(--panel-strong);
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
+}
+.toolbar-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:16px;
+}
+.section-label{
+  color:#d8e6f6;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:8px;
+}
+.section-title{
+  font-size:24px;
+  letter-spacing:-0.03em;
+}
+.progress{
+  min-height:42px;
+  min-width:280px;
+  padding:10px 14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#d8e6f6;
+  font-size:12px;
+  line-height:1.6;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.expand-all{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(125,211,252,0.18);
+  background:rgba(56,189,248,0.12);
+  color:#eef7ff;
+  cursor:pointer;
+  transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  white-space:nowrap;
+}
+.expand-all:hover{
+  transform:translateY(-1px);
+  border-color:rgba(125,211,252,0.32);
+  background:rgba(56,189,248,0.18);
+}
+.search-shell{
+  position:relative;
+  margin-bottom:18px;
+}
+.search-icon{
+  position:absolute;
+  top:50%;
+  left:16px;
+  transform:translateY(-50%);
+  color:#85a8c8;
+  font-size:16px;
+  pointer-events:none;
+}
+.search{
+  width:100%;
+  padding:16px 18px 16px 44px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.05);
+  color:var(--text);
+  font-size:14px;
+  transition:border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.search::placeholder{color:#7d92aa}
+.search:focus{
+  outline:none;
+  border-color:rgba(125,211,252,0.45);
+  background:rgba(255,255,255,0.07);
+  box-shadow:0 0 0 4px rgba(56,189,248,0.12);
+}
+
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.tab{
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.03);
+  color:#a8bbd1;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.01em;
+  cursor:pointer;
+  transition:transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.tab:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,0.22);
+  color:#eef7ff;
+}
+.tab.active{
+  background:linear-gradient(135deg, rgba(56,189,248,0.24), rgba(125,211,252,0.08));
+  border-color:rgba(125,211,252,0.38);
+  color:#eef9ff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:14px;
+  margin-bottom:18px;
+}
+.stat{
+  padding:20px 18px;
+  border-radius:22px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+}
+.stat-l{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+}
+.stat-n{
+  margin-top:10px;
+  font-size:34px;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:-0.05em;
+  color:var(--text);
+}
+
+.qlist{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.qcard{
+  overflow:hidden;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  box-shadow:0 16px 48px rgba(0,0,0,0.18);
+  animation:cardIn 0.55s ease both;
+  animation-delay:calc(var(--i, 0) * 40ms);
+}
+.qcard:hover{
+  border-color:rgba(255,255,255,0.18);
+}
+.qhead{
+  display:grid;
+  grid-template-columns:auto 1fr auto auto;
+  gap:14px;
+  align-items:flex-start;
+  padding:20px 22px;
+  cursor:pointer;
+}
+.qnum{
+  min-width:64px;
+  height:40px;
+  padding:0 12px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:700;
+  flex-shrink:0;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22);
+}
+.qtxt{min-width:0}
+.qtitle{
+  font-size:16px;
+  font-weight:600;
+  color:var(--text);
+  line-height:1.65;
+  margin-bottom:6px;
+}
+.qsub{
+  color:#bfd1e5;
+  font-size:12px;
+  line-height:1.65;
+}
+.qside{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:6px;
+  flex-shrink:0;
+}
+.badge,
+.timer{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.diff-m{background:rgba(245,158,11,0.18);color:#ffd28b}
+.diff-h{background:rgba(251,113,133,0.18);color:#ffc3cc}
+.diff-x{background:rgba(139,92,246,0.2);color:#e8dcff}
+.timer{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#d8e6f6;
+}
+.chevron{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.04);
+  color:#d8e6f6;
+  font-size:15px;
+  transition:transform 0.2s ease, background 0.2s ease;
+}
+.chevron.open{
+  transform:rotate(180deg);
+  background:rgba(56,189,248,0.12);
+}
+.ans{
+  display:none;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.ans.open{display:block}
+.ans-inner{
+  padding:0 22px 22px 22px;
+}
+.ans-section{
+  margin-top:18px;
+}
+.ans-label{
+  font-size:11px;
+  font-weight:700;
+  color:#b7c9de;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:10px;
+}
+.ans-txt{
+  color:#c8d7e7;
+  font-size:14px;
+  line-height:1.85;
+}
+.code{
+  margin-top:16px;
+  padding:16px 18px;
+  border-radius:18px;
+  border:1px solid rgba(125,211,252,0.14);
+  background:rgba(4,14,28,0.9);
+  color:#dff3ff;
+  font:13px/1.7 'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  overflow-x:auto;
+  white-space:pre;
+}
+.tip,
+.gotcha,
+.hint,
+.info{
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:18px;
+  font-size:13px;
+  line-height:1.7;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.tip{
+  background:linear-gradient(135deg, rgba(56,189,248,0.12), rgba(125,211,252,0.04));
+  color:#d8f2ff;
+}
+.gotcha{
+  background:linear-gradient(135deg, rgba(245,158,11,0.16), rgba(245,158,11,0.05));
+  color:#ffe3bd;
+}
+.hint{
+  background:linear-gradient(135deg, rgba(134,239,172,0.16), rgba(134,239,172,0.05));
+  color:#dcffe8;
+}
+.info{
+  background:rgba(255,255,255,0.05);
+  color:#d8e6f6;
+}
+.empty{
+  padding:42px 24px;
+  text-align:center;
+  border:1px dashed rgba(255,255,255,0.14);
+  border-radius:24px;
+  background:rgba(255,255,255,0.03);
+  color:var(--muted);
+  font-size:14px;
+}
+.qnum-sdk{background:linear-gradient(135deg, rgba(56,189,248,0.26), rgba(125,211,252,0.12));color:#dff4ff}
+.qnum-bundle{background:linear-gradient(135deg, rgba(16,185,129,0.24), rgba(134,239,172,0.12));color:#d5ffec}
+.qnum-code{background:linear-gradient(135deg, rgba(139,92,246,0.24), rgba(196,181,253,0.12));color:#efe7ff}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media (max-width: 980px){
+  .hero{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2, minmax(0, 1fr))}
+  .qhead{grid-template-columns:auto 1fr auto auto}
+}
+
+@media (max-width: 720px){
+  body{padding:18px 14px 40px}
+  .hero,
+  .toolbar{padding:20px}
+  .toolbar-top{flex-direction:column}
+  .progress{min-width:0;width:100%;flex-direction:column;align-items:flex-start}
+  .stats{grid-template-columns:1fr}
+  .qhead{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .qside,
+  .chevron{justify-self:start;align-items:flex-start}
+  .hero h1{max-width:none}
+}
+</style>
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">Senior Mobile Systems Pack</div>
+      <h1>RN SDK, Bundle, and Coding Interview Prep</h1>
+      <p>Deep-dive questions for engineers who need to explain SDK design, bundle optimization, and live coding tradeoffs under pressure. This pack is tuned for senior-to-tech-lead mobile interviews where implementation details and system reasoning both matter.</p>
+      <div class="hero-highlights">
+        <div class="hero-pill">SDK design, backward compatibility, Codegen, and host-app integration strategy.</div>
+        <div class="hero-pill">Bundle internals, release impact, and coding problems with realistic interview pressure.</div>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="hero-card">
+        <div class="hero-card-label">Coverage</div>
+        <div class="hero-card-value">3 Tracks</div>
+        <p>SDK architecture, bundle optimization, and coding challenges in one interview pack.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-label">Mode</div>
+        <div class="hero-card-value">Pressure Drill</div>
+        <p>Filter by topic, answer out loud, then expand the card for the deeper model answer and follow-ups.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="toolbar-top">
+      <div>
+        <div class="section-label">Question Navigator</div>
+        <div class="section-title">SDK architecture, bundle optimization, and coding pressure drills</div>
+      </div>
+      <div class="progress" id="progress">
+        <span id="prog-txt"></span>
+        <span class="expand-all" onclick="expandAll()">Expand all answers</span>
+      </div>
+    </div>
+
+    <div class="search-shell">
+      <span class="search-icon">⌕</span>
+      <input class="search" id="search" placeholder="Search questions by keyword, concept, API, or failure mode..." oninput="filterQ()">
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+  </section>
+
+  <div class="stats" id="stats"></div>
+  <div class="qlist" id="qlist"></div>
+</div>
+
+<script>
+const cats=[
+  {id:'all',label:'All Questions'},
+  {id:'sdk',label:'SDK Architecture'},
+  {id:'bundle',label:'Bundle Size'},
+  {id:'code',label:'Coding Challenges'},
+];
+
+const Q=[
+
+// ═══════════════════════════════════════════════════════
+// SDK CREATION — 20 DEEP QUESTIONS
+// ═══════════════════════════════════════════════════════
+
+{cat:'sdk',diff:'h',timer:null,
+q:'You are building a React Native SDK that wraps a payment provider (like Stripe or Braintree). Walk me through the complete architecture — from the native layer to the JS public API. What decisions do you make and why?',
+sub:'Architecture design — expect 15 minutes of discussion',
+a:`This is a multi-layer architecture problem. Here is how I would design it:
+
+Layer 1 — Native Layer: Implement separate modules for iOS (Swift) and Android (Kotlin) that wrap the native payment SDKs. These expose async operations (tokenize card, process 3DS, confirm payment) via Promise-based @ReactMethod calls. Use Codegen spec files to generate the bridge interface for the new architecture.
+
+Layer 2 — Bridge Abstraction: A TypeScript NativeModule wrapper that normalizes platform differences, maps native error codes to a unified error enum, and adds retry logic for transient failures.
+
+Layer 3 — JS Business Logic: Pure JS/TS layer — card validation, amount formatting, currency handling, fraud signal collection (device fingerprinting). This layer is fully testable without a device.
+
+Layer 4 — React Component Layer: UI components (CardField, PaymentSheet, 3DS WebView wrapper) built as controlled components with proper TypeScript prop types.
+
+Layer 5 — Public API: A single facade class (PaymentSDK.init(), PaymentSDK.tokenize(), PaymentSDK.presentSheet()) that hides all internal complexity.`,
+code:`// 1. Codegen spec (new arch)
+import type { TurboModule } from 'react-native';
+import { TurboModuleRegistry } from 'react-native';
+export interface Spec extends TurboModule {
+  initializeSDK(publishableKey: string, options: Object): Promise<void>;
+  tokenizeCard(cardParams: Object): Promise<{token: string; last4: string; brand: string}>;
+  confirmPayment(clientSecret: string, returnUrl: string): Promise<{status: string}>;
+}
+export default TurboModuleRegistry.getEnforcing<Spec>('PaymentNativeModule');
+
+// 2. Error normalization layer
+enum PaymentError {
+  CARD_DECLINED = 'CARD_DECLINED',
+  NETWORK_ERROR = 'NETWORK_ERROR',
+  AUTHENTICATION_REQUIRED = 'AUTHENTICATION_REQUIRED',
+  INVALID_CARD = 'INVALID_CARD',
+}
+function normalizeNativeError(nativeCode: string): PaymentError {
+  const map: Record<string, PaymentError> = {
+    'card_declined': PaymentError.CARD_DECLINED,
+    'authentication_required': PaymentError.AUTHENTICATION_REQUIRED,
+  };
+  return map[nativeCode] ?? PaymentError.NETWORK_ERROR;
+}
+
+// 3. Public facade
+class PaymentSDK {
+  private static initialized = false;
+  static async init(key: string, opts?: InitOptions): Promise<void> {
+    if (this.initialized) return;
+    await NativePayment.initializeSDK(key, opts ?? {});
+    this.initialized = true;
+  }
+  static async tokenize(card: CardParams): Promise<TokenResult> {
+    if (!this.initialized) throw new Error('PaymentSDK.init() must be called first');
+    try {
+      return await NativePayment.tokenizeCard(card);
+    } catch(e: any) {
+      throw new PaymentSDKError(normalizeNativeError(e.code), e.message);
+    }
+  }
+}`,
+gotcha:`Killer follow-up: "How do you handle 3D Secure authentication which requires launching a WebView, waiting for a redirect, and resuming the Promise?" — This requires a deferred Promise pattern and deep link handling back into the SDK.`,
+tip:`The interviewer will test whether you know the difference between: (1) wrapping a native SDK, (2) calling HTTP APIs from JS, and (3) a hybrid approach. Payment SDKs must wrap native — PCI compliance requires native card collection.`},
+
+{cat:'sdk',diff:'h',timer:null,
+q:'How do you design a SDK that supports BOTH the old React Native architecture (bridge) AND the new architecture (JSI/Fabric) simultaneously — without shipping two separate packages?',
+sub:'New Architecture Compatibility — Backward Compatibility Design',
+a:`The strategy is to use Codegen for the new arch spec and implement a runtime compatibility shim that detects which arch is active.
+
+Codegen generates the new arch bindings from your TypeScript spec. For old arch, you keep the @ReactMethod implementation in the same native class — they share the same underlying logic.
+
+On the JS side, you write a compatibility layer that detects global.__turboModuleProxy to determine if new arch is active. If yes, use TurboModuleRegistry.get(). If no, fall back to NativeModules.
+
+The package.json codegenConfig field tells the RN build system to run Codegen on your spec. Old arch projects simply ignore this field.`,
+code:`// detect arch at runtime in your JS bridge file
+import { NativeModules } from 'react-native';
+import { TurboModuleRegistry } from 'react-native';
+
+const isNewArch = !!(global as any).__turboModuleProxy;
+
+const NativeMySDK = isNewArch
+  ? TurboModuleRegistry.getEnforcing<Spec>('MySDKModule')
+  : NativeModules.MySDKModule;
+
+// package.json — codegenConfig for new arch
+// {
+//   "codegenConfig": {
+//     "name": "MySDKSpec",
+//     "type": "modules",
+//     "jsSrcsDir": "src/specs"
+//   }
+// }
+
+// Native iOS — same class handles both archs
+// Old arch: auto-registered via RCT_EXPORT_MODULE
+// New arch: conforms to generated protocol from Codegen
+@objc(MySDKModule)
+class MySDKModule: NSObject, MySDKModuleSpec {
+  @objc static func requiresMainQueueSetup() -> Bool { return false }
+  // Methods work for both archs — same implementation
+  func doThing(_ resolve: @escaping RCTPromiseResolveBlock,
+               reject: @escaping RCTPromiseRejectBlock) { ... }
+}`,
+gotcha:`Follow-up: "What breaks in your SDK when a host app enables bridgeless mode?" — Bridgeless mode removes the JS-Native bridge entirely. Any synchronous NativeModules calls silently return undefined. You must use TurboModules exclusively.`,
+tip:`Ship with both. Add a note in your SDK README: "New Architecture supported via Codegen. Old Architecture backward compatible via NativeModules shim." Test against both in your CI.`},
+
+{cat:'sdk',diff:'x',timer:null,
+q:'Design the versioning and breaking change strategy for a React Native SDK that has 200+ consuming apps. How do you deprecate a method, communicate it, and enforce migration without breaking their CI?',
+sub:'SDK Lifecycle Management — Senior/Staff level question',
+a:`This is a multi-phase strategy:
+
+Phase 1 — Semantic Versioning discipline: MAJOR for breaking changes, MINOR for new features, PATCH for bug fixes. Never break in a PATCH or MINOR release.
+
+Phase 2 — Deprecation before removal: Mark a method @deprecated in JSDoc with migration guidance and the target removal version. At runtime, emit a console.warn with the same message. Keep the deprecated method working for at least 2 MINOR versions.
+
+Phase 3 — Migration guides: Every MINOR release that deprecates something ships a MIGRATION.md with a before/after code diff. Ideally ship a codemod (jscodeshift transform) so developers can auto-migrate their call sites.
+
+Phase 4 — Type-level enforcement: In the MAJOR where you remove it, also update TypeScript types to remove the method. TypeScript consumers get compile errors — which is far better than silent runtime breakage.
+
+Phase 5 — CHANGELOG automation: Use conventional commits + semantic-release to auto-generate changelogs and calculate version bumps. Every breaking change must have a footer: BREAKING CHANGE: description.`,
+code:`// Step 1: Runtime deprecation warning
+/**
+ * @deprecated Use PaymentSDK.tokenize() instead.
+ * Will be removed in v3.0.0.
+ * Migration guide: https://docs.myco.com/migrate-v3
+ */
+async createToken(card: CardParams): Promise<string> {
+  if (__DEV__) {
+    console.warn(
+      '[MySDK] createToken() is deprecated and will be removed in v3.0.0. ' +
+      'Use tokenize() instead. See https://docs.myco.com/migrate-v3'
+    );
+  }
+  // delegate to new implementation
+  const result = await this.tokenize(card);
+  return result.token;
+}
+
+// Step 2: jscodeshift codemod for auto-migration
+// migrate-create-token.js
+module.exports = function(fileInfo, api) {
+  return api.jscodeshift(fileInfo.source)
+    .find(api.jscodeshift.CallExpression, {
+      callee: { property: { name: 'createToken' } }
+    })
+    .replaceWith(path => {
+      path.node.callee.property.name = 'tokenize';
+      return path.node;
+    })
+    .toSource();
+};
+// Run: npx jscodeshift -t migrate-create-token.js src/`,
+gotcha:`Killer: "One of your top enterprise clients is on v1.2 and cannot upgrade for 6 months due to their release freeze. There's a critical security vulnerability in v1.2. What do you do?" — Answer: maintain an LTS branch, backport the security fix as a patch, and communicate directly with the client.`,
+tip:`The most senior candidates know that SDK development is a contract. Breaking that contract silently is not a technical failure — it is a trust failure.`},
+
+{cat:'sdk',diff:'h',timer:null,
+q:'How do you implement a thread-safe, in-process event bus inside a React Native SDK that allows native iOS/Android code to push events to the JS layer?',
+sub:'Native → JS Event Emission — Threading Model',
+a:`The React Native EventEmitter pattern. On native side: RCTEventEmitter (iOS) / RCTDeviceEventEmitter (Android). Your native code calls sendEvent() from any thread — RN handles the thread hop to the JS thread internally.
+
+The critical threading issue: native code (network callbacks, hardware callbacks) runs on background threads. You must NOT call sendEvent from a background thread directly on iOS without dispatching to the main queue first — or you hit thread safety issues in the bridge.
+
+On the JS side: create a DeviceEventEmitter subscription manager in your SDK that maps event names to typed callbacks, handles cleanup on unmount, and prevents memory leaks from orphaned listeners.`,
+code:`// iOS (Swift) — thread-safe emission
+@objc(MySDKEvents)
+class MySDKEvents: RCTEventEmitter {
+  override func supportedEvents() -> [String] {
+    return ["onPaymentStatusChange", "onConnectionStateChange", "onError"]
+  }
+  
+  // Called from background network thread — must dispatch to main
+  func emitPaymentStatus(_ status: String, amount: Double) {
+    DispatchQueue.main.async { [weak self] in
+      self?.sendEvent(withName: "onPaymentStatusChange",
+        body: ["status": status, "amount": amount, "timestamp": Date().timeIntervalSince1970])
+    }
+  }
+  
+  // Optimization: don't allocate observers until JS subscribes
+  override static func requiresMainQueueSetup() -> Bool { return false }
+  override func startObserving() { /* start native listeners */ }
+  override func stopObserving() { /* clean up native listeners */ }
+}
+
+// JS SDK — typed event manager
+type PaymentStatusPayload = { status: string; amount: number; timestamp: number };
+class SDKEventManager {
+  private subscriptions = new Map<string, EmitterSubscription>();
+  
+  onPaymentStatusChange(cb: (payload: PaymentStatusPayload) => void): () => void {
+    const sub = DeviceEventEmitter.addListener('onPaymentStatusChange', cb);
+    return () => sub.remove(); // return cleanup function
+  }
+}
+
+// Consumer usage — clean React hook
+function usePaymentStatus(cb: (p: PaymentStatusPayload) => void) {
+  useEffect(() => {
+    return sdk.events.onPaymentStatusChange(cb); // returns cleanup
+  }, []); // eslint-disable-line — cb intentionally stable
+}`,
+gotcha:`"What happens if the JS layer is garbage collected (app backgrounded) and native fires an event?" — On iOS the JSContext may be suspended. Events queued during suspension are delivered on resume. You need a native-side event queue with a max size to prevent memory buildup.`,
+tip:`The startObserving/stopObserving pair is critical for performance — without it, the native module allocates listeners even when no JS code is listening, wasting battery and memory.`},
+
+{cat:'sdk',diff:'h',timer:null,
+q:'How do you expose a React Native SDK as both a standalone npm package and as a pre-built binary (AAR / XCFramework) to avoid exposing proprietary native source code?',
+sub:'SDK Distribution — Intellectual Property Protection',
+a:`Two-layer distribution strategy:
+
+For open-source or client-facing SDKs: ship as source + podspec/gradle. Consumers compile your native code into their app. Simple but exposes source.
+
+For proprietary SDKs: pre-build the native layer as XCFramework (iOS) and AAR (Android). Ship a thin npm package containing: (1) the pre-built binaries, (2) the JS/TS layer, (3) a podspec that references the XCFramework from a CDN or local path, (4) a gradle file that references the AAR.
+
+XCFramework supports multiple architectures (device arm64, simulator arm64 + x86_64) in a single bundle. Build with xcodebuild archive for each target, then xcodebuild -create-xcframework to combine.
+
+For the podspec, use vendored_frameworks to point to the XCFramework. For gradle, publish the AAR to a private Maven repo (GitHub Packages or Artifactory) and reference it with credentials in the consumer's build.gradle.`,
+code:`# Build XCFramework (run in CI)
+xcodebuild archive \\
+  -scheme MySDK -destination "generic/platform=iOS" \\
+  -archivePath ./build/MySDK-iOS.xcarchive \\
+  SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+
+xcodebuild archive \\
+  -scheme MySDK -destination "generic/platform=iOS Simulator" \\
+  -archivePath ./build/MySDK-Sim.xcarchive \\
+  SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+
+xcodebuild -create-xcframework \\
+  -framework ./build/MySDK-iOS.xcarchive/Products/Library/Frameworks/MySDK.framework \\
+  -framework ./build/MySDK-Sim.xcarchive/Products/Library/Frameworks/MySDK.framework \\
+  -output ./output/MySDK.xcframework
+
+# podspec — reference prebuilt framework
+Pod::Spec.new do |s|
+  s.name         = 'MySDK'
+  s.version      = '2.1.0'
+  s.vendored_frameworks = 'ios/MySDK.xcframework'
+  s.dependency 'React-Core'
+end`,
+gotcha:`"How do you handle the Swift ABI stability requirement for XCFrameworks?" — BUILD_LIBRARY_FOR_DISTRIBUTION=YES is mandatory. Without it, Swift modules are not stable across Xcode versions and consumers get "module compiled with different version" errors.`,
+tip:`Always enable BUILD_LIBRARY_FOR_DISTRIBUTION=YES. It enforces Swift's stable ABI and generates a .swiftinterface file instead of .swiftmodule — readable by any Xcode version.`},
+
+{cat:'sdk',diff:'h',timer:null,
+q:'Your SDK needs to capture biometric authentication (Face ID / Fingerprint) natively and return a signed assertion to JS. Walk through the implementation including security hardening.',
+sub:'Native Biometrics + Cryptography Bridge',
+a:`Three-layer implementation:
+
+Layer 1 — Native Key Generation: On first SDK init, generate an asymmetric key pair (EC P-256) in the Secure Enclave (iOS) / Android Keystore (Android). The private key never leaves the secure hardware — it is permanently bound to the device. The public key is exported to your server for verification.
+
+Layer 2 — Biometric Auth Gate: Configure the key to require biometric authentication before use. On iOS: SecAccessControlCreateWithFlags with .biometryCurrentSet. On Android: KeyGenParameterSpec with setUserAuthenticationRequired(true).
+
+Layer 3 — Sign and Return: When the user authenticates, use the hardware-backed private key to sign a server-provided challenge. Return the signature to JS. Your server verifies the signature against the stored public key — proving the user authenticated on this specific device.`,
+code:`// iOS — Secure Enclave key generation
+private func generateKeyPair() throws -> SecKey {
+  let access = SecAccessControlCreateWithFlags(
+    nil,
+    kSecAttrAccessibleWhenUnlockedThisDeviceOnly, // never backed up
+    [.privateKeyUsage, .biometryCurrentSet],      // requires biometry
+    nil
+  )!
+  let attributes: [String: Any] = [
+    kSecAttrKeyType as String: kSecAttrKeyTypeECSECPrimeRandom,
+    kSecAttrKeySizeInBits as String: 256,
+    kSecAttrTokenID as String: kSecAttrTokenIDSecureEnclave,
+    kSecPrivateKeyAttrs as String: [
+      kSecAttrIsPermanent as String: true,
+      kSecAttrApplicationTag as String: "com.myco.sdk.authkey",
+      kSecAttrAccessControl as String: access,
+    ]
+  ]
+  return try SecKeyCreateRandomKey(attributes as CFDictionary, nil)!
+}
+
+// Sign challenge with biometric prompt
+func signChallenge(_ challenge: Data, context: LAContext) throws -> Data {
+  let privateKey = try getStoredPrivateKey()
+  var error: Unmanaged<CFError>?
+  guard let signature = SecKeyCreateSignature(
+    privateKey,
+    .ecdsaSignatureMessageX962SHA256,
+    challenge as CFData,
+    &error
+  ) as Data? else { throw error!.takeRetainedValue() as Error }
+  return signature
+}
+
+// JS-facing React Native method
+@objc func authenticate(_ challenge: String,
+  resolve: @escaping RCTPromiseResolveBlock,
+  reject: @escaping RCTPromiseRejectBlock) {
+  let context = LAContext()
+  context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
+    localizedReason: "Verify your identity") { success, error in
+    guard success else { reject("BIOMETRY_FAILED", error?.localizedDescription, nil); return }
+    let sig = try! self.signChallenge(Data(base64Encoded: challenge)!, context: context)
+    resolve(sig.base64EncodedString())
+  }
+}`,
+gotcha:`"What does .biometryCurrentSet vs .biometryAny mean and when does it matter?" — .biometryCurrentSet invalidates the key if the user adds a new fingerprint. Critical for banking apps — a thief adding their fingerprint would otherwise gain access.`,
+tip:`The challenge must come from your server and be unique per request (nonce). Never let the client generate the challenge — replay attack vector.`},
+
+{cat:'sdk',diff:'h',timer:null,
+q:'How do you implement a robust retry mechanism with exponential backoff and circuit breaker pattern inside a React Native SDK for unstable network environments?',
+sub:'Resilience Patterns in SDK Design',
+a:`Two distinct patterns working together:
+
+Exponential backoff with jitter: on failure, wait (baseDelay * 2^attempt) + random jitter before retry. Jitter prevents the "thundering herd" problem where all clients retry simultaneously after a server outage.
+
+Circuit breaker: tracks failure rate over a time window. States: CLOSED (normal), OPEN (failing — reject all calls immediately without hitting the network), HALF-OPEN (probe with one request). Transitions: CLOSED→OPEN when failure rate exceeds threshold; OPEN→HALF-OPEN after timeout; HALF-OPEN→CLOSED on success; HALF-OPEN→OPEN on failure.`,
+code:`// Exponential backoff with full jitter
+async function withRetry<T>(
+  fn: () => Promise<T>,
+  { maxAttempts = 3, baseDelay = 300, maxDelay = 10000 }: RetryOptions = {}
+): Promise<T> {
+  let lastError: Error;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    try { return await fn(); }
+    catch (e) {
+      lastError = e as Error;
+      if (attempt === maxAttempts - 1) break;
+      // Full jitter: random value in [0, min(maxDelay, base * 2^attempt)]
+      const cap = Math.min(maxDelay, baseDelay * Math.pow(2, attempt));
+      const delay = Math.random() * cap;
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+  throw lastError!;
+}
+
+// Circuit Breaker
+class CircuitBreaker {
+  private state: 'CLOSED' | 'OPEN' | 'HALF_OPEN' = 'CLOSED';
+  private failures = 0;
+  private lastFailureTime = 0;
+  constructor(
+    private readonly threshold = 5,
+    private readonly timeout = 60_000,  // 1 min in OPEN before probe
+  ) {}
+
+  async execute<T>(fn: () => Promise<T>): Promise<T> {
+    if (this.state === 'OPEN') {
+      if (Date.now() - this.lastFailureTime > this.timeout) {
+        this.state = 'HALF_OPEN';
+      } else {
+        throw new Error('Circuit OPEN — service unavailable');
+      }
+    }
+    try {
+      const result = await fn();
+      this.onSuccess();
+      return result;
+    } catch(e) {
+      this.onFailure();
+      throw e;
+    }
+  }
+  private onSuccess() { this.failures = 0; this.state = 'CLOSED'; }
+  private onFailure() {
+    this.failures++;
+    this.lastFailureTime = Date.now();
+    if (this.failures >= this.threshold || this.state === 'HALF_OPEN') {
+      this.state = 'OPEN';
+    }
+  }
+}`,
+gotcha:`"Why is jitter critical and what happens without it?" — Without jitter, all SDK instances (all users' devices) retry at the exact same exponentially-backed-off intervals, creating synchronized load spikes that can prevent a struggling server from recovering.`,
+tip:`Expose the circuit breaker state via an SDK event so host apps can show "service temporarily unavailable" UI instead of showing spinners that eventually timeout.`},
+
+{cat:'sdk',diff:'h',timer:null,
+q:'How do you design the SDK initialization lifecycle to handle: async native setup, config validation, environment detection, and preventing API calls before init completes?',
+sub:'SDK Initialization State Machine',
+a:`Model the lifecycle as a state machine with four states: UNINITIALIZED, INITIALIZING, READY, ERROR. Implement a command queue that buffers API calls made before init completes and drains them once READY is reached.
+
+This pattern prevents the most common SDK integration mistake: developers calling SDK methods before awaiting init. Instead of throwing cryptic errors, you enqueue the work and execute it transparently.`,
+code:`type SDKState = 'UNINITIALIZED' | 'INITIALIZING' | 'READY' | 'ERROR';
+
+class SDKCore {
+  private state: SDKState = 'UNINITIALIZED';
+  private readyPromise: Promise<void>;
+  private resolveReady!: () => void;
+  private rejectReady!: (e: Error) => void;
+  private initError: Error | null = null;
+
+  constructor() {
+    // Create a promise that resolves when SDK is ready
+    this.readyPromise = new Promise((res, rej) => {
+      this.resolveReady = res;
+      this.rejectReady = rej;
+    });
+  }
+
+  async initialize(config: SDKConfig): Promise<void> {
+    if (this.state !== 'UNINITIALIZED') {
+      if (this.state === 'ERROR') throw this.initError;
+      return this.readyPromise;
+    }
+    this.state = 'INITIALIZING';
+    try {
+      validateConfig(config);          // throws if invalid
+      await NativeModule.init(config); // async native setup
+      await this.detectEnvironment();  // prod vs sandbox
+      this.state = 'READY';
+      this.resolveReady();
+    } catch(e) {
+      this.state = 'ERROR';
+      this.initError = e as Error;
+      this.rejectReady(e as Error);
+      throw e;
+    }
+  }
+
+  // ALL public methods call this guard first
+  private async ensureReady(): Promise<void> {
+    if (this.state === 'ERROR') throw this.initError;
+    return this.readyPromise; // resolves immediately if READY
+  }
+
+  async tokenize(card: CardParams) {
+    await this.ensureReady(); // queues if still initializing
+    return NativeModule.tokenize(card);
+  }
+}`,
+gotcha:`"What if initialize() is called twice concurrently before it resolves?" — The second call sees state=INITIALIZING and returns the same readyPromise — they coalesce into one init. This is the deduplication pattern.`,
+tip:`The readyPromise pattern is elegant: if the consumer calls tokenize() before init(), it simply awaits init completion automatically. Zero error surface for the common case.`},
+
+{cat:'sdk',diff:'h',timer:null,
+q:'How do you implement comprehensive SDK analytics and telemetry without violating user privacy, and how do you make it opt-out rather than opt-in for business metrics?',
+sub:'Observability Design in SDK',
+a:`Two categories of telemetry: (1) Operational telemetry — crash rates, method call latencies, error rates, init success/failure. This is your internal observability — no PII, opt-out should not affect it. (2) Usage analytics — which features are used, integration patterns. This is opt-out and must be clearly documented.
+
+Implementation: intercept all public method calls via a Proxy or decorator to measure duration and capture errors. Strip any user-provided data before sending — only capture metadata (method name, duration, error code, SDK version, platform, OS version). Batch events locally and flush on a timer or app background event.`,
+code:`// Method instrumentation via decorator
+function instrument(target: any, key: string, descriptor: PropertyDescriptor) {
+  const original = descriptor.value;
+  descriptor.value = async function(...args: any[]) {
+    const start = Date.now();
+    try {
+      const result = await original.apply(this, args);
+      Telemetry.record({ method: key, durationMs: Date.now() - start, success: true });
+      return result;
+    } catch(e: any) {
+      Telemetry.record({ method: key, durationMs: Date.now() - start,
+        success: false, errorCode: e.code });
+      throw e;
+    }
+  };
+  return descriptor;
+}
+
+class PaymentSDK {
+  @instrument async tokenize(card: CardParams) { /* impl */ }
+  @instrument async confirmPayment(secret: string) { /* impl */ }
+}
+
+// Privacy-safe telemetry batcher
+class Telemetry {
+  private static queue: TelemetryEvent[] = [];
+  private static optedOut = false;
+
+  static record(event: TelemetryEvent) {
+    // Never capture user data — only operational metadata
+    const safe = { ...event, sdkVersion: SDK_VERSION,
+      platform: Platform.OS, osVersion: Platform.Version };
+    this.queue.push(safe);
+    if (this.queue.length >= 20) this.flush();
+  }
+
+  static flush() {
+    if (this.optedOut || this.queue.length === 0) return;
+    const batch = this.queue.splice(0); // drain queue
+    fetch(TELEMETRY_ENDPOINT, { method: 'POST',
+      body: JSON.stringify({ events: batch }) }).catch(() => {}); // silent fail
+  }
+}`,
+gotcha:`"How do you ensure telemetry flush on app kill?" — Register an AppState listener for 'background' — iOS gives you ~5 seconds of background execution. On Android use a Headless JS task triggered by a native lifecycle callback.`,
+tip:`Your telemetry endpoint should accept batches and return immediately (202 Accepted). Never make the SDK wait for telemetry acknowledgment — fire and forget.`},
+
+{cat:'sdk',diff:'h',timer:null,
+q:'How do you implement a plugin architecture in a React Native SDK so third-party developers can extend SDK functionality without modifying the core SDK source?',
+sub:'Extensibility & Plugin System Design',
+a:`Implement a plugin registry with defined lifecycle hooks. The core SDK defines an interface (Plugin) with optional lifecycle methods. Third-party plugins implement this interface and register themselves. The SDK calls plugin hooks at defined points in its lifecycle.
+
+This is similar to how Babel plugins, webpack plugins, and Express middleware work — inversion of control. The SDK remains closed to modification but open to extension.`,
+code:`// Plugin interface — third parties implement this
+interface SDKPlugin {
+  name: string;
+  onInit?: (context: SDKContext) => Promise<void>;
+  onBeforeRequest?: (request: SDKRequest) => SDKRequest; // can modify
+  onAfterResponse?: (response: SDKResponse) => SDKResponse;
+  onError?: (error: SDKError) => void;
+}
+
+// Plugin registry in SDK core
+class PluginRegistry {
+  private plugins: SDKPlugin[] = [];
+
+  register(plugin: SDKPlugin): void {
+    if (this.plugins.find(p => p.name === plugin.name)) {
+      console.warn(\`[SDK] Plugin "\${plugin.name}" already registered.\`);
+      return;
+    }
+    this.plugins.push(plugin);
+  }
+
+  async runInit(context: SDKContext) {
+    for (const plugin of this.plugins) {
+      await plugin.onInit?.(context);
+    }
+  }
+
+  runRequestHooks(request: SDKRequest): SDKRequest {
+    return this.plugins.reduce((req, plugin) =>
+      plugin.onBeforeRequest ? plugin.onBeforeRequest(req) : req, request);
+  }
+}
+
+// Third-party plugin implementation
+const LoggingPlugin: SDKPlugin = {
+  name: 'logging',
+  onInit: async (ctx) => { console.log('[Logger] SDK initialized', ctx.env); },
+  onBeforeRequest: (req) => { console.log('[Logger] →', req.method); return req; },
+  onAfterResponse: (res) => { console.log('[Logger] ←', res.status); return res; },
+};
+
+// Consumer registers plugins before init
+sdk.use(LoggingPlugin);
+sdk.use(SentryPlugin);
+await sdk.initialize(config);`,
+gotcha:`"A plugin throws in onBeforeRequest. Does it break the entire SDK?" — It should not. Wrap each plugin hook call in try/catch. Log the error with the plugin name and continue. Plugin failures must never break core SDK functionality.`,
+tip:`Document your plugin hooks as a stable API. If you add a new hook, it is additive (minor version). If you remove or change a hook signature, it is breaking (major version).`},
+
+// ═══════════════════════════════════════════════════════
+// BUNDLE SIZE — 15 DEEP QUESTIONS
+// ═══════════════════════════════════════════════════════
+
+{cat:'bundle',diff:'h',timer:null,
+q:'Explain exactly how Metro bundler builds a React Native bundle. What is the module resolution order, how does tree-shaking work (or fail), and what can you do to reduce the output?',
+sub:'Metro Internals — Most candidates cannot answer this',
+a:`Metro resolution order: (1) exact path match, (2) platform-specific variant (.ios.js / .android.js), (3) index file of a directory, (4) node_modules lookup following package.json "main" field.
+
+Tree-shaking limitation: Metro uses CommonJS-style require() which is evaluated at runtime — static analysis cannot determine which exports are used. True tree-shaking (dead code elimination) requires ES modules with static import/export. Metro added experimental support for ESM tree-shaking via the unstableTransformProfile: 'hermes-stable' setting, but library support is inconsistent.
+
+What actually works in practice: (1) Inline requires — defer module execution to first use. (2) Library-specific imports — import { debounce } from 'lodash/debounce' instead of import _ from 'lodash'. (3) re.pack (webpack-based bundler) for true tree-shaking. (4) metro-plugin-import-optimizer to auto-convert full imports to specific imports.`,
+code:`// metro.config.js — all optimization flags
+const { getDefaultConfig } = require('@react-native/metro-config');
+module.exports = (async () => {
+  const config = await getDefaultConfig(__dirname);
+  return {
+    ...config,
+    transformer: {
+      ...config.transformer,
+      getTransformOptions: async () => ({
+        transform: {
+          inlineRequires: true,          // defer module eval
+          experimentalImportSupport: true, // ESM tree-shaking attempt
+        },
+      }),
+    },
+    resolver: {
+      ...config.resolver,
+      // Prefer .js over .cjs for ESM-friendly libraries
+      sourceExts: ['tsx','ts','jsx','js','json'],
+    },
+  };
+})();
+
+// WRONG: imports all of lodash (~70kb)
+import _ from 'lodash';
+const x = _.debounce(fn, 300);
+
+// RIGHT: imports only debounce (~2kb)
+import debounce from 'lodash/debounce';
+// OR use lodash-es with re.pack for true tree-shaking`,
+gotcha:`"Why does inlineRequires not reduce bundle SIZE but reduces startup TIME?" — Inline requires defer evaluation, not inclusion. The code is still in the bundle — it just does not execute until first use. Size reduction requires actually removing code.`,
+tip:`For true tree-shaking in React Native, evaluate re.pack (webpack for RN). It brings webpack's dead code elimination to React Native at the cost of Metro ecosystem compatibility.`},
+
+{cat:'bundle',diff:'h',timer:null,
+q:'You are told the app bundle is 18MB. Walk me through your complete bundle analysis and reduction process — tools, techniques, and the order you attack them.',
+sub:'Bundle Audit Methodology — practical deep-dive',
+a:`Step 1 — Baseline measurement: npx react-native bundle --dev false, then run react-native-bundle-visualizer on the output. This renders an interactive treemap showing every module by size. Identify the top 10 largest contributors — they are almost always node_modules.
+
+Step 2 — Categorize: separate source code size vs library size vs assets bundled incorrectly.
+
+Step 3 — Attack libraries first: common culprits: moment.js (full locale data ~66kb, replace with date-fns or dayjs), lodash (full build ~73kb, use per-method imports or lodash-es), icons (bundling all icons — use selective import).
+
+Step 4 — Code splitting: lazy-load heavy screens. Split by navigation routes.
+
+Step 5 — Assets: ensure images are not bundled in the JS bundle (they go in native assets folder). Move large JSON datasets out of bundle (serve from API or native assets).
+
+Step 6 — Duplicate detection: use duplicate-package-checker-webpack-plugin equivalent. Multiple versions of the same library (react 17 and react 18 in the same bundle) are a common issue.`,
+code:`// 1. Generate bundle and analyze
+npx react-native bundle \\
+  --platform ios --dev false \\
+  --entry-file index.js \\
+  --bundle-output /tmp/bundle.js \\
+  --assets-dest /tmp/assets
+
+npx react-native-bundle-visualizer \\
+  --bundle /tmp/bundle.js
+
+// 2. Replace moment.js (66kb) with dayjs (7kb)
+// Before: import moment from 'moment';
+import dayjs from 'dayjs';           // -59kb
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
+
+// 3. Icon libraries — selective import
+// Before: import * as Icons from 'react-native-vector-icons'; // ALL icons
+import SearchIcon from 'react-native-vector-icons/MaterialIcons/Search'; // ONE icon
+
+// 4. Check for duplicate packages
+npx depcheck         // unused deps
+npx npm-dedupe      // deduplicate in node_modules
+cat node_modules/.package-lock.json | \\
+  grep '"version"' | sort | uniq -d  // spot duplicates`,
+gotcha:`"You cut the bundle from 18MB to 12MB but the user still downloads 18MB. Why?" — Hermes compiles JS to bytecode at build time. The bytecode bundle is stored in the binary/APK, not the downloaded JS bundle. The download size the user sees is the APK/IPA which includes native libraries. Understand the difference between JS bundle size and app download size.`,
+tip:`The biggest wins are almost always: replacing moment.js, fixing lodash imports, and eliminating icons you do not use. Together these commonly save 2-5MB of JS bundle size.`},
+
+{cat:'bundle',diff:'h',timer:null,
+q:'Explain RAM Bundles and Indexed RAM Bundles in React Native. How do they differ from a standard bundle and when do you use each?',
+sub:'Advanced Metro Bundle Formats',
+a:`Standard bundle: single JS file with all modules concatenated. The entire file is parsed and evaluated at startup.
+
+RAM Bundle (Random Access Module): modules are stored as individual segments with an index table at the start. The runtime loads only the bootstrap code at launch and lazily loads module segments on first require(). Modules are loaded from the file system on demand — drastically reducing startup time for large apps.
+
+Indexed RAM Bundle: adds an additional binary index for O(1) module lookup. Required for inline requires to work efficiently. This is the format Facebook uses for the main FB app.
+
+When to use: RAM bundles are most beneficial for apps with 1000+ modules. The overhead of random file access is worth it when you have many modules that most users never touch (feature flags, admin screens, rare flows).`,
+code:`// Enable RAM bundle in Android build
+// android/app/build.gradle
+project.ext.react = [
+  bundleCommand: "ram-bundle",
+  extraPackagerArgs: ["--indexed-ram-bundle"]  // indexed for O(1) lookup
+]
+
+// iOS: standard RAM bundle (non-indexed works on iOS)
+// Xcode Build Phase script:
+// react-native bundle --ram-bundle --indexed-ram-bundle ...
+
+// Verify format of generated bundle
+xxd bundle.js | head -1
+// Standard:  starts with '__d(' — plain text
+// RAM:       starts with 0xFB 0x00 — binary magic bytes
+// Indexed:   starts with 0xFB 0x01 — indexed binary magic bytes
+
+// Profile module load times with RAM bundle
+// In Metro output you will see module IDs assigned
+// Use __r(moduleId) to require a specific module
+// Override require in debug to log lazy loads:
+const origRequire = global.__r;
+global.__r = (id) => {
+  console.log('Lazy loading module:', id);
+  return origRequire(id);
+};`,
+gotcha:`"Does enabling a RAM bundle automatically give you lazy loading?" — No. You still need inlineRequires: true in Metro config. Without inline requires, all modules are still required at startup — the RAM bundle format does not help.`,
+tip:`Use RAM bundles + inline requires + Hermes together. These three optimizations compound: Hermes parses bytecode fast, inline requires defer execution, and RAM bundles load only the modules actually executed.`},
+
+{cat:'bundle',diff:'h',timer:null,
+q:'How does Hermes bytecode compilation work, how do you profile it, and what is the difference between the bundle that ships and what the user executes?',
+sub:'Hermes Engine Internals',
+a:`Build pipeline with Hermes: Metro bundles your JS into a single .js file → hermes compiler (hermesc) compiles it to Hermes bytecode (.hbc) → this .hbc file is embedded in the app binary (iOS: inside the app bundle, Android: inside the APK as index.android.bundle).
+
+At runtime: the Hermes VM reads and executes the .hbc file directly — no parsing step. This is why startup is faster — parsing and compilation are moved to build time.
+
+The .hbc file is larger than the .js source (bytecode is more verbose) but faster to execute. The JS source is not shipped — only the bytecode.
+
+Profiling: Hermes includes a CPU sampling profiler. Enable it, perform your slow operation, stop profiling, and convert the output to Chrome DevTools trace format for flame graph analysis.`,
+code:`// Verify Hermes is active at runtime
+if (global.HermesInternal) {
+  console.log('Hermes version:', (global.HermesInternal as any).getRuntimeProperties?.()?.['OSS Release Version']);
+}
+
+// Hermes CPU profiler — in your debug build
+import { Hermes } from 'react-native/Libraries/Utilities/HermesInternalType';
+
+async function profileOperation() {
+  // Start CPU profiling
+  (global as any).HermesInternal.enableSamplingProfiler?.();
+
+  await yourSlowOperation();
+
+  // Stop and get profile data
+  const profileData = (global as any).HermesInternal.disableSamplingProfiler?.();
+
+  // profileData is a Chrome-compatible trace JSON
+  // Paste into chrome://tracing or Speedscope for flame graph
+  console.log(profileData);
+}
+
+// Build-time: inspect bytecode bundle
+# Check if bundle is Hermes bytecode
+file index.android.bundle
+# Output: "Hermes JavaScript bytecode, version 96"  <- good
+# vs:      "ASCII text"  <- plain JS, Hermes not active
+
+# Bytecode size breakdown
+hermesc --print-bytecode index.android.bundle | head -100`,
+gotcha:`"If you enable Hermes but keep Metro source maps in the wrong format, what happens with crash symbolication?" — Stack traces reference bytecode offsets, not source lines. You need Hermes-compatible source maps (generated with --source-map flag) AND the symbolication must use metro-symbolicate with the Hermes flag. Wrong source map format = unreadable production crashes.`,
+tip:`Hermes bytecode is version-pinned to the Hermes version in your react-native version. Never update Hermes independently from your RN version — bytecode version mismatch causes immediate crash on startup.`},
+
+{cat:'bundle',diff:'h',timer:null,
+q:'How do you implement true code splitting and lazy loading in React Native at the navigation-route level? What are the limits Metro imposes?',
+sub:'Code Splitting Strategy in React Native',
+a:`React.lazy + Suspense works in React Native starting from RN 0.64 with the proper Metro config. When you lazy-import a screen, Metro can split the module — but by default it still includes it in the main bundle.
+
+True split point: you need to configure Metro to output separate bundles per split point, or use a bundler that supports this natively (re.pack / webpack).
+
+With Metro: use dynamic import() syntax. Metro will warn about unknown dynamic imports but with experimentalImportSupport it can handle static dynamic imports (import('./Screen') at the top of a file — not inside conditions).
+
+The recommended pattern: lazy-load all navigation screens except the initial route. Combine with Suspense boundaries that show a lightweight loading skeleton while the module chunk loads.`,
+code:`// Lazy navigation screens — reduces initial bundle eval time
+import React, { Suspense, lazy } from 'react';
+import { ActivityIndicator } from 'react-native';
+
+const HomeScreen = lazy(() => import('./screens/HomeScreen'));
+const ProfileScreen = lazy(() => import('./screens/ProfileScreen'));
+const AnalyticsScreen = lazy(() => import('./screens/AnalyticsScreen')); // heavy
+const AdminScreen = lazy(() => import('./screens/AdminScreen')); // rarely visited
+
+function ScreenFallback() {
+  return <ActivityIndicator style={{ flex: 1 }} />;
+}
+
+// In navigator — wrap each screen's component
+function AppNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={() => (
+        <Suspense fallback={<ScreenFallback />}>
+          <HomeScreen />
+        </Suspense>
+      )} />
+      <Stack.Screen name="Analytics" component={() => (
+        <Suspense fallback={<ScreenFallback />}>
+          <AnalyticsScreen />  {/* only loads when first navigated to */}
+        </Suspense>
+      )} />
+    </Stack.Navigator>
+  );
+}
+
+// Metro config for experimental import support
+module.exports = {
+  transformer: {
+    getTransformOptions: async () => ({
+      transform: { experimentalImportSupport: true, inlineRequires: true },
+    }),
+  },
+};`,
+gotcha:`"Does React.lazy reduce bundle SIZE or just defer evaluation?" — With Metro only, it defers evaluation (inline requires). True bundle splitting (separate .js chunk files downloaded on demand) requires re.pack or a custom Metro serializer. Most RN apps only get the timing benefit, not the download size benefit.`,
+tip:`For truly large apps (50+ screens), evaluate re.pack seriously. It is the only way to get webpack-class code splitting with separate downloadable chunks in React Native.`},
+
+{cat:'bundle',diff:'h',timer:null,
+q:'How do you analyze and eliminate duplicate dependencies in a React Native project\'s bundle, and what causes them in the first place?',
+sub:'Dependency Deduplication — Production bundle forensics',
+a:`Root causes of duplicate dependencies: (1) Multiple packages depending on different version ranges of the same library — npm/yarn may install two versions when ranges do not overlap. (2) hoisting failures in monorepos — yarn workspaces may fail to hoist when versions conflict. (3) peer dependency mismatches causing libraries to bundle their own copy.
+
+Detection: yarn why <package> shows why it is installed. npm ls <package> shows all versions installed. In the bundle visualizer, search for the package name — if you see it twice with the same content, you have duplicates.
+
+Resolution: use resolutions (yarn) or overrides (npm 8+) to force a single version. Validate that the forced version satisfies all consumer ranges. For monorepos, ensure nohoist is not too aggressive.`,
+code:`// 1. Detect duplicates
+yarn why react    # shows all paths that include react
+npm ls react      # tree view of all installed versions
+
+// 2. Force single version via resolutions (package.json)
+{
+  "resolutions": {
+    "react": "18.2.0",
+    "react-native": "0.73.0",
+    // Fix transitive dep pulling old version
+    "some-lib/lodash": "^4.17.21"
+  }
+}
+
+// 3. npm overrides equivalent
+{
+  "overrides": {
+    "react": "18.2.0",
+    "some-lib": { "lodash": "^4.17.21" }
+  }
+}
+
+// 4. Validate in bundle — search output bundle
+cat bundle.js | grep -o '"lodash/[^"]*"' | sort | uniq
+# If you see lodash@3.x and lodash@4.x paths — you have a duplicate
+
+// 5. Metro resolver — force single resolution path
+// metro.config.js
+module.exports = {
+  resolver: {
+    extraNodeModules: {
+      // Force all requires of 'react' to resolve to ONE copy
+      react: path.resolve(__dirname, 'node_modules/react'),
+    },
+  },
+};`,
+gotcha:`"You forced react to 18.2.0 via resolutions. A library internally required react@17. What might break and how do you verify?" — Hook semantics changed between major versions. The library may rely on old lifecycle behavior. Run the library's test suite against the forced version. Check the library's peer dependency range.`,
+tip:`In monorepos, run yarn dedupe (Yarn 3+) or npm dedupe after every dependency update. Make it part of your CI — duplicate detection should be automated, not manual.`},
+
+{cat:'bundle',diff:'h',timer:null,
+q:'What are the specific bundle size implications of using TypeScript in React Native and how does your tsconfig.json affect the output bundle?',
+sub:'TypeScript → Bundle Output — Surprisingly deep',
+a:`TypeScript compiles to JavaScript — types are erased and add zero bytes to the bundle. However, tsconfig settings significantly affect output characteristics:
+
+target setting: targeting ES5 emits more polyfill code (class-to-function transforms, for-of loops, spread operators). Targeting ES2017+ with Hermes is more efficient since Hermes understands modern JS natively.
+
+decorators: TypeScript experimental decorators emit __decorate helper functions (~1kb) at every file that uses them. With multiple files this adds up. Use @babel/plugin-proposal-decorators instead (Babel handles this without emitting helpers per file).
+
+importHelpers + tslib: without this, TypeScript emits helper functions (__spread, __awaiter, __generator) inline in EVERY compiled file. With importHelpers: true and tslib in dependencies, these helpers are imported from tslib once — potentially saving significant bundle size in large projects.`,
+code:`// tsconfig.json — optimal for React Native + Hermes
+{
+  "compilerOptions": {
+    "target": "ES2017",        // Hermes understands ES2017 natively
+    "module": "commonjs",
+    "strict": true,
+    "jsx": "react-native",
+    "importHelpers": true,     // CRITICAL: use tslib instead of inlining helpers
+    "noEmitHelpers": true,     // enforce — don't inline helpers
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+  }
+}
+
+// package.json — add tslib as a runtime dependency (not devDependency!)
+{
+  "dependencies": {
+    "tslib": "^2.6.0"  // required for importHelpers to work
+  }
+}
+
+// Verify: without importHelpers, each file gets:
+// var __awaiter = (this && this.__awaiter) || function(...) {...}  // ~500 bytes
+// var __generator = (this && this.__generator) || function(...) {...} // ~800 bytes
+
+// With importHelpers + tslib, each file gets:
+// var tslib_1 = require("tslib");  // imported ONCE, ~3kb total for all helpers`,
+gotcha:`"tslib is in devDependencies in your package.json. The build succeeds locally. What goes wrong in production?" — In production, devDependencies are not installed. Any file using __awaiter will fail to require tslib at runtime. tslib must be in dependencies.`,
+tip:`Run the bundle visualizer and search for '__awaiter' — if you see it defined multiple times across multiple modules, you are not using importHelpers correctly.`},
+
+// ═══════════════════════════════════════════════════════
+// CODING CHALLENGES — 15 PROBLEMS
+// ═══════════════════════════════════════════════════════
+
+{cat:'code',diff:'x',timer:'25 min',
+q:'CODING CHALLENGE: Implement a useInfiniteScroll hook for a FlatList that handles pagination, deduplication, loading states, and automatic retry on network failure.',
+sub:'45 lines max. Implement from scratch. No libraries.',
+a:`This hook manages: page tracking, data accumulation, loading/error state, deduplication by ID, and retry logic. The key design decisions are: use useRef for the page counter (avoid stale closure in loadMore), use a Set for deduplication, and return a stable loadMore callback.`,
+code:`import { useState, useRef, useCallback } from 'react';
+
+interface InfiniteScrollConfig<T> {
+  fetchPage: (page: number) => Promise<T[]>;
+  getId: (item: T) => string;
+  pageSize?: number;
+}
+
+interface InfiniteScrollResult<T> {
+  data: T[];
+  loading: boolean;
+  error: string | null;
+  hasMore: boolean;
+  loadMore: () => void;
+  refresh: () => void;
+}
+
+export function useInfiniteScroll<T>({
+  fetchPage, getId, pageSize = 20
+}: InfiniteScrollConfig<T>): InfiniteScrollResult<T> {
+  const [data, setData] = useState<T[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
+
+  const pageRef = useRef(1);
+  const seenIds = useRef(new Set<string>());
+  const isLoadingRef = useRef(false); // prevent concurrent fetches
+
+  const fetchWithRetry = useCallback(async (page: number, attempts = 3): Promise<T[]> => {
+    for (let i = 0; i < attempts; i++) {
+      try { return await fetchPage(page); }
+      catch(e) {
+        if (i === attempts - 1) throw e;
+        await new Promise(r => setTimeout(r, 300 * Math.pow(2, i))); // backoff
+      }
+    }
+    return [];
+  }, [fetchPage]);
+
+  const loadMore = useCallback(async () => {
+    if (isLoadingRef.current || !hasMore) return;
+    isLoadingRef.current = true;
+    setLoading(true);
+    setError(null);
+    try {
+      const newItems = await fetchWithRetry(pageRef.current);
+      // Deduplicate
+      const unique = newItems.filter(item => {
+        const id = getId(item);
+        if (seenIds.current.has(id)) return false;
+        seenIds.current.add(id);
+        return true;
+      });
+      setData(prev => [...prev, ...unique]);
+      setHasMore(newItems.length === pageSize);
+      pageRef.current++;
+    } catch(e: any) {
+      setError(e.message ?? 'Failed to load');
+    } finally {
+      setLoading(false);
+      isLoadingRef.current = false;
+    }
+  }, [hasMore, fetchWithRetry, getId, pageSize]);
+
+  const refresh = useCallback(() => {
+    pageRef.current = 1;
+    seenIds.current.clear();
+    setData([]);
+    setHasMore(true);
+    setError(null);
+    loadMore();
+  }, [loadMore]);
+
+  return { data, loading, error, hasMore, loadMore, refresh };
+}`,
+hint:`Expected follow-ups: (1) "How do you prevent loadMore being called during an active fetch?" — isLoadingRef pattern. (2) "Why useRef for page instead of useState?" — useState would cause a stale closure in loadMore; useRef always has the latest value.`,
+tip:`The isLoadingRef guard is the most important part. Without it, fast scrollers trigger multiple concurrent requests for the same page. The ref is synchronized; state is not.`},
+
+{cat:'code',diff:'x',timer:'20 min',
+q:'CODING CHALLENGE: Implement a type-safe event emitter class in TypeScript that is used inside a React Native SDK — with proper typing for event names and their payloads.',
+sub:'Zero runtime dependencies. Full TypeScript generics.',
+a:`The key challenge is making the TypeScript compiler enforce that the callback type matches the event name — so addListener("payment", (e: NetworkEvent) => {}) is a compile error.`,
+code:`// Step 1: Define the event map (SDK consumer defines this)
+interface SDKEventMap {
+  'payment:success': { transactionId: string; amount: number; currency: string };
+  'payment:failure': { code: string; message: string; retryable: boolean };
+  'auth:biometric': { success: boolean; method: 'faceid' | 'fingerprint' };
+  'connection:change': { isOnline: boolean };
+}
+
+// Step 2: Typed EventEmitter — keys and payloads enforced by compiler
+class TypedEventEmitter<TMap extends Record<string, any>> {
+  private listeners = new Map<keyof TMap, Set<Function>>();
+
+  on<K extends keyof TMap>(
+    event: K,
+    listener: (payload: TMap[K]) => void
+  ): () => void {   // returns unsubscribe function
+    if (!this.listeners.has(event)) {
+      this.listeners.set(event, new Set());
+    }
+    this.listeners.get(event)!.add(listener);
+    return () => this.off(event, listener); // cleanup
+  }
+
+  off<K extends keyof TMap>(event: K, listener: (payload: TMap[K]) => void): void {
+    this.listeners.get(event)?.delete(listener);
+  }
+
+  once<K extends keyof TMap>(
+    event: K,
+    listener: (payload: TMap[K]) => void
+  ): () => void {
+    const wrapper = (payload: TMap[K]) => {
+      listener(payload);
+      this.off(event, wrapper);
+    };
+    return this.on(event, wrapper);
+  }
+
+  emit<K extends keyof TMap>(event: K, payload: TMap[K]): void {
+    this.listeners.get(event)?.forEach(l => {
+      try { l(payload); }
+      catch(e) { console.error(\`[EventEmitter] listener error on "\${String(event)}":\`, e); }
+    });
+  }
+
+  removeAllListeners(event?: keyof TMap): void {
+    event ? this.listeners.delete(event) : this.listeners.clear();
+  }
+
+  listenerCount(event: keyof TMap): number {
+    return this.listeners.get(event)?.size ?? 0;
+  }
+}
+
+// Step 3: SDK usage — fully type-safe
+const emitter = new TypedEventEmitter<SDKEventMap>();
+
+// ✅ Compiler enforces payload type
+emitter.on('payment:success', (e) => {
+  console.log(e.transactionId, e.amount); // fully typed
+});
+
+// ✅ emit enforces correct payload shape
+emitter.emit('payment:success', {
+  transactionId: 'txn_123', amount: 99.99, currency: 'USD'
+});
+
+// ❌ Compile error: 'networkError' is not a key of SDKEventMap
+// emitter.on('networkError', () => {});
+
+// React hook integration
+function useSDKEvent<K extends keyof SDKEventMap>(
+  event: K, handler: (payload: SDKEventMap[K]) => void
+) {
+  useEffect(() => emitter.on(event, handler), [event]);
+}`,
+hint:`Follow-up: "What is the memory leak risk with this implementation?" — If consumers call on() without storing and calling the returned unsubscribe function, the listener is never removed. The once() wrapper self-cleans, but on() depends on caller discipline.`,
+tip:`The try/catch inside emit is non-negotiable in an SDK — a misbehaving consumer listener must never crash the SDK's internal logic.`},
+
+{cat:'code',diff:'x',timer:'30 min',
+q:'CODING CHALLENGE: Build a request queue with concurrency control — maximum 3 simultaneous requests, FIFO ordering, priority support, and cancellation.',
+sub:'This is used in your SDK\'s network layer. No libraries.',
+a:`This models a bounded worker pool. The queue holds pending requests. The scheduler drains the queue whenever running < maxConcurrent. Priority items jump to the front of the pending queue.`,
+code:`interface QueuedRequest<T> {
+  id: string;
+  priority: 'high' | 'normal' | 'low';
+  execute: () => Promise<T>;
+  resolve: (value: T) => void;
+  reject: (error: Error) => void;
+  cancelled: boolean;
+}
+
+class RequestQueue {
+  private pending: QueuedRequest<any>[] = [];
+  private running = 0;
+  private readonly maxConcurrent: number;
+
+  constructor(maxConcurrent = 3) {
+    this.maxConcurrent = maxConcurrent;
+  }
+
+  enqueue<T>(
+    execute: () => Promise<T>,
+    options: { priority?: 'high' | 'normal' | 'low'; id?: string } = {}
+  ): { promise: Promise<T>; cancel: () => void } {
+    let resolve!: (v: T) => void;
+    let reject!: (e: Error) => void;
+    const promise = new Promise<T>((res, rej) => { resolve = res; reject = rej; });
+
+    const id = options.id ?? Math.random().toString(36).slice(2);
+    const priority = options.priority ?? 'normal';
+    const item: QueuedRequest<T> = { id, priority, execute, resolve, reject, cancelled: false };
+
+    // Priority insertion: high → front, low → back
+    if (priority === 'high') {
+      this.pending.unshift(item);
+    } else if (priority === 'low') {
+      this.pending.push(item);
+    } else {
+      // Insert after all 'high' items but before 'low' items
+      const insertAt = this.pending.findIndex(p => p.priority === 'low');
+      insertAt === -1 ? this.pending.push(item) : this.pending.splice(insertAt, 0, item);
+    }
+
+    this.drain();
+    const cancel = () => {
+      item.cancelled = true;
+      const idx = this.pending.indexOf(item);
+      if (idx !== -1) {
+        this.pending.splice(idx, 1);
+        reject(new Error('Request cancelled'));
+      }
+    };
+    return { promise, cancel };
+  }
+
+  private drain(): void {
+    while (this.running < this.maxConcurrent && this.pending.length > 0) {
+      const item = this.pending.shift()!;
+      if (item.cancelled) { this.drain(); return; }
+      this.running++;
+      item.execute()
+        .then(item.resolve)
+        .catch(item.reject)
+        .finally(() => {
+          this.running--;
+          this.drain(); // process next item
+        });
+    }
+  }
+
+  get stats() {
+    return { pending: this.pending.length, running: this.running };
+  }
+
+  cancelAll(): void {
+    this.pending.forEach(item => {
+      item.cancelled = true;
+      item.reject(new Error('Queue cancelled'));
+    });
+    this.pending = [];
+  }
+}
+
+// Usage in SDK
+const networkQueue = new RequestQueue(3);
+
+const { promise, cancel } = networkQueue.enqueue(
+  () => fetch('/api/payment').then(r => r.json()),
+  { priority: 'high', id: 'payment-req' }
+);
+
+// Component unmount — cancel pending request
+useEffect(() => cancel, []);`,
+hint:`Follow-up: "The drain() method is called recursively. What is the stack depth risk for a queue of 1000 items?" — drain() calls itself inside .finally(), but each call is asynchronous (inside a Promise callback). The call stack resets between async steps — not a stack overflow risk.`,
+tip:`The finally(() => { this.running--; this.drain(); }) pattern is the core of the bounded worker pool. Self-healing and self-draining — no external scheduler needed.`},
+
+{cat:'code',diff:'x',timer:'20 min',
+q:'CODING CHALLENGE: Implement a memoization function that handles async functions, caches by serialized arguments, has a TTL (time-to-live), and properly handles in-flight deduplication.',
+sub:'Used in your SDK\'s API caching layer.',
+a:`Three behaviours to implement: (1) Return cached value if not expired. (2) If a request for the same key is in flight, return the same promise (deduplication — not a new request). (3) After TTL expires, make a fresh request.`,
+code:`interface CacheEntry<T> {
+  value?: T;
+  promise?: Promise<T>;
+  expiresAt: number;
+}
+
+function memoizeAsync<TArgs extends any[], TReturn>(
+  fn: (...args: TArgs) => Promise<TReturn>,
+  {
+    ttl = 30_000,                                   // 30 seconds default
+    keyFn = (...args: TArgs) => JSON.stringify(args), // custom key serializer
+  }: { ttl?: number; keyFn?: (...args: TArgs) => string } = {}
+) {
+  const cache = new Map<string, CacheEntry<TReturn>>();
+
+  return function memoized(...args: TArgs): Promise<TReturn> {
+    const key = keyFn(...args);
+    const now = Date.now();
+    const entry = cache.get(key);
+
+    // 1. Valid cached value — return immediately
+    if (entry?.value !== undefined && now < entry.expiresAt) {
+      return Promise.resolve(entry.value);
+    }
+
+    // 2. In-flight request for same key — return same promise (deduplicate)
+    if (entry?.promise) {
+      return entry.promise;
+    }
+
+    // 3. Cache miss or expired — make fresh request
+    const promise = fn(...args)
+      .then(value => {
+        // On success: cache the value, clear the in-flight promise
+        cache.set(key, { value, expiresAt: now + ttl });
+        return value;
+      })
+      .catch(error => {
+        // On failure: remove the entry so next call retries
+        cache.delete(key);
+        throw error;
+      });
+
+    // Store in-flight promise for deduplication
+    cache.set(key, { promise, expiresAt: now + ttl });
+    return promise;
+  };
+}
+
+// SDK usage
+const getUser = memoizeAsync(
+  async (userId: string) => {
+    const res = await fetch(\`/api/users/\${userId}\`);
+    return res.json() as Promise<User>;
+  },
+  { ttl: 60_000 } // 1 minute cache
+);
+
+// Three concurrent calls for same userId → only ONE fetch happens
+const [a, b, c] = await Promise.all([
+  getUser('123'), // triggers fetch
+  getUser('123'), // returns same in-flight promise
+  getUser('123'), // returns same in-flight promise
+]);
+
+// Manual cache invalidation
+function invalidateUser(userId: string) {
+  getUser.invalidate(userId); // need to extend above to expose this
+}`,
+hint:`Follow-up: "Your memoize function has no size limit. What happens after 10,000 unique users are fetched in one session?" — Memory leak. Add an LRU eviction policy: cap the Map at N entries. When full, delete the least-recently-used entry before inserting.`,
+tip:`The in-flight deduplication is the hardest part to get right. Without it, a component that mounts 5 times simultaneously (React strict mode double-invoke + 4 component instances) fires 5 identical API requests.`},
+
+{cat:'code',diff:'x',timer:'15 min',
+q:'CODING CHALLENGE: Write a function that deeply compares two objects for equality without using JSON.stringify — handling circular references, Dates, Sets, Maps, and Arrays.',
+sub:'Used in SDK\'s shouldComponentUpdate / useMemo dependency comparison.',
+a:`Standard deep equal fails on: circular references (infinite loop), Date objects (by reference), Set/Map (by reference), NaN !== NaN. Must handle all of these.`,
+code:`function deepEqual(a: unknown, b: unknown, seen = new WeakMap()): boolean {
+  // Primitive fast-path (handles NaN === NaN correctly)
+  if (Object.is(a, b)) return true;
+
+  // Type mismatch
+  if (typeof a !== typeof b) return false;
+  if (a === null || b === null) return false;
+  if (typeof a !== 'object') return false;
+
+  // Date
+  if (a instanceof Date && b instanceof Date) {
+    return a.getTime() === b.getTime();
+  }
+
+  // RegExp
+  if (a instanceof RegExp && b instanceof RegExp) {
+    return a.source === b.source && a.flags === b.flags;
+  }
+
+  // Set
+  if (a instanceof Set && b instanceof Set) {
+    if (a.size !== b.size) return false;
+    for (const val of a) {
+      if (!b.has(val)) return false; // note: does not deep-compare Set values
+    }
+    return true;
+  }
+
+  // Map
+  if (a instanceof Map && b instanceof Map) {
+    if (a.size !== b.size) return false;
+    for (const [key, val] of a) {
+      if (!b.has(key) || !deepEqual(val, b.get(key), seen)) return false;
+    }
+    return true;
+  }
+
+  // Circular reference detection
+  if (seen.has(a as object)) return seen.get(a as object) === b;
+  seen.set(a as object, b);
+
+  // Array
+  if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.length !== b.length) return false;
+    return a.every((item, i) => deepEqual(item, b[i], seen));
+  }
+
+  // Plain object — check both directions
+  const aKeys = Object.keys(a as object);
+  const bKeys = Object.keys(b as object);
+  if (aKeys.length !== bKeys.length) return false;
+
+  return aKeys.every(key =>
+    Object.prototype.hasOwnProperty.call(b, key) &&
+    deepEqual((a as any)[key], (b as any)[key], seen)
+  );
+}
+
+// Test cases
+console.assert(deepEqual(NaN, NaN) === true);
+console.assert(deepEqual(new Date('2024'), new Date('2024')) === true);
+console.assert(deepEqual({a: {b: 1}}, {a: {b: 1}}) === true);
+console.assert(deepEqual(new Set([1,2]), new Set([1,2])) === true);
+const circ: any = {}; circ.self = circ;
+console.assert(deepEqual(circ, circ) === true); // circular ref — same object`,
+hint:`Follow-up: "Object.keys() does not include Symbol keys. How do you extend this to compare Symbol-keyed properties?" — Use Object.getOwnPropertySymbols() and compare those separately. Symbols are important in SDK internals for brand-checking.`,
+tip:`Object.is(NaN, NaN) returns true — this is the ONLY reliable way to check NaN equality in JavaScript. NaN === NaN is false.`},
+
+{cat:'code',diff:'x',timer:'20 min',
+q:'CODING CHALLENGE: Implement an observable state store from scratch — similar to a minimal MobX or Zustand — with subscriptions, computed values, and automatic dependency tracking.',
+sub:'Core state management concepts. 60 lines target.',
+a:`The core mechanism: when a computed value is being evaluated, any observable it reads should register it as a dependent. When the observable changes, all dependents re-evaluate. This is push-based reactive programming.`,
+code:`// Observable primitive
+function observable<T>(initial: T) {
+  let value = initial;
+  const subscribers = new Set<() => void>();
+
+  return {
+    get(): T {
+      // If inside a computed/reaction context, track as dependency
+      if (currentTracking) currentTracking.add(() => subscribers.forEach(s => s()));
+      return value;
+    },
+    set(next: T): void {
+      if (Object.is(value, next)) return; // no-op for same value
+      value = next;
+      subscribers.forEach(s => s());
+    },
+    subscribe(fn: () => void): () => void {
+      subscribers.add(fn);
+      return () => subscribers.delete(fn);
+    },
+  };
+}
+
+// Dependency tracking context
+let currentTracking: Set<() => void> | null = null;
+
+// Computed value with automatic dependency tracking
+function computed<T>(fn: () => T) {
+  let cachedValue: T;
+  let dirty = true;
+  const subscribers = new Set<() => void>();
+  const invalidators = new Set<() => void>();
+
+  function invalidate() { dirty = true; subscribers.forEach(s => s()); }
+
+  return {
+    get(): T {
+      if (dirty) {
+        // Track which observables fn reads
+        invalidators.forEach(unsub => unsub()); // clean old deps
+        invalidators.clear();
+        const deps = new Set<() => void>();
+        const prev = currentTracking;
+        currentTracking = deps;
+        cachedValue = fn();  // run fn — observables register themselves
+        currentTracking = prev;
+        deps.forEach(notifier => {
+          const unsub = { fn: () => invalidate() };
+          notifier(); // this registers invalidate with the observable
+        });
+        dirty = false;
+      }
+      return cachedValue;
+    },
+    subscribe(s: () => void) { subscribers.add(s); return () => subscribers.delete(s); },
+  };
+}
+
+// Reaction — side effect that re-runs when dependencies change
+function reaction(fn: () => void): () => void {
+  const deps = new Set<() => void>();
+  const run = () => {
+    deps.forEach(unsub => unsub()); deps.clear();
+    currentTracking = deps;
+    fn();
+    currentTracking = null;
+  };
+  run();
+  return () => deps.forEach(unsub => unsub());
+}
+
+// Usage
+const count = observable(0);
+const doubled = computed(() => count.get() * 2);
+
+reaction(() => {
+  console.log('count:', count.get(), 'doubled:', doubled.get());
+});
+
+count.set(5);  // logs: count: 5 doubled: 10
+count.set(5);  // no log — same value, no-op
+count.set(7);  // logs: count: 7 doubled: 14`,
+hint:`Follow-up: "What is the diamond dependency problem in reactive systems and does this implementation handle it?" — When A depends on B and C, and both B and C depend on D, updating D causes A to re-compute twice. MobX solves this with a transaction/batch mechanism. This simple implementation does not.`,
+tip:`This is the essence of every reactive framework: MobX, Vue's reactivity system, SolidJS signals, and even React's upcoming compiler. Understanding it deeply makes you a better user of all of them.`},
+
+];
+
+let active='all';
+let search='';
+
+function render(){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML=cats.map(c=>
+    `<div class="tab${c.id===active?' active':''}" onclick="setTab('${c.id}')">${c.label}</div>`
+  ).join('');
+
+  const filtered=Q.filter(q=>{
+    const mc=active==='all'||q.cat===active;
+    const ms=!search||q.q.toLowerCase().includes(search)||
+      (q.a&&q.a.toLowerCase().includes(search));
+    return mc&&ms;
+  });
+
+  const base=Q.filter(q=>active==='all'||q.cat===active);
+  const activeLabel=cats.find(c=>c.id===active)?.label ?? 'All Questions';
+  const hard=base.filter(q=>q.diff==='h').length;
+  const extreme=base.filter(q=>q.diff==='x').length;
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><div class="stat-l">In Scope</div><div class="stat-n">${base.length}</div></div>
+    <div class="stat"><div class="stat-l">Hard</div><div class="stat-n" style="color:#ffd8dd">${hard}</div></div>
+    <div class="stat"><div class="stat-l">Extreme</div><div class="stat-n" style="color:#ffe1e8">${extreme}</div></div>
+    <div class="stat"><div class="stat-l">Visible</div><div class="stat-n" style="color:#ffe2c9">${filtered.length}</div></div>`;
+
+  document.getElementById('prog-txt').textContent=`${activeLabel} • ${filtered.length} of ${Q.length} shown`;
+
+  const cm={sdk:'qnum-sdk',bundle:'qnum-bundle',code:'qnum-code'};
+  const catLabel={sdk:'SDK',bundle:'Bundle',code:'Code'};
+  const ql=document.getElementById('qlist');
+  if(!filtered.length){ql.innerHTML='<div class="empty">No results found.</div>';return;}
+
+  ql.innerHTML=filtered.map((q,i)=>`
+    <div class="qcard" style="--i:${i}">
+      <div class="qhead" onclick="toggle(${i})">
+        <div class="qnum ${cm[q.cat]}">${catLabel[q.cat]}</div>
+        <div class="qtxt">
+          <div class="qtitle">${q.q}</div>
+          ${q.sub?`<div class="qsub">${q.sub}</div>`:''}
+        </div>
+        <div class="qside">
+          <div class="badge diff-${q.diff}">${q.diff==='x'?'EXTREME':q.diff==='h'?'Hard':'Medium'}</div>
+          ${q.timer?`<div class="timer">${q.timer}</div>`:''}
+        </div>
+        <div class="chevron" id="ch${i}">▾</div>
+      </div>
+      <div class="ans" id="ans${i}">
+        <div class="ans-inner">
+          ${q.a?`<div class="ans-section"><div class="ans-label">Expert Answer</div><div class="ans-txt">${q.a.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>')}</div></div>`:''}
+          ${q.code?`<div class="code">${q.code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`:''}
+          ${q.gotcha?`<div class="gotcha">Killer follow-up: ${q.gotcha}</div>`:''}
+          ${q.hint?`<div class="hint">Expected follow-ups: ${q.hint}</div>`:''}
+          ${q.tip?`<div class="tip">Tech Lead tip: ${q.tip}</div>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function setTab(id){active=id;render();}
+function filterQ(){search=document.getElementById('search').value.toLowerCase();render();}
+function toggle(i){
+  const a=document.getElementById('ans'+i);
+  const c=document.getElementById('ch'+i);
+  const o=a.classList.toggle('open');
+  c.classList.toggle('open',o);
+}
+let allOpen=false;
+function expandAll(){
+  allOpen=!allOpen;
+  document.querySelectorAll('.ans').forEach((el,i)=>{
+    el.classList.toggle('open',allOpen);
+    const c=document.getElementById('ch'+i);
+    if(c)c.classList.toggle('open',allOpen);
+  });
+  document.querySelector('.expand-all').textContent=allOpen?'Collapse all':'Expand all answers';
+}
+render();
+</script>
