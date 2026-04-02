@@ -32,6 +32,14 @@ const interviewPacks = [
     description:
       "An animated explainer page covering the old bridge, JSI, Codegen, TurboModules, Fabric, and how the pieces fit together through diagrams and narrative captions.",
     stats: "7-step visual architecture explainer"
+  },
+  {
+    href: "/interviews/rn-js-coding-challenges",
+    label: "RN + JS Challenges",
+    title: "Interview-standard coding tasks with inputs, outputs, and review signals.",
+    description:
+      "A focused prep route with five JavaScript challenges, four React Native tasks, interview standards, and a suggested practice order.",
+    stats: "9 coding challenges in one route"
   }
 ] as const;
 
@@ -47,12 +55,13 @@ export default function HomePage() {
                 Interview Prep Hub
               </div>
               <h1 className="max-w-4xl text-4xl font-bold tracking-[-0.05em] text-slate-50 sm:text-6xl">
-                One landing page for all four React Native prep pages.
+                One landing page for five focused interview prep routes.
               </h1>
               <p className="mt-5 max-w-3xl text-sm leading-8 text-slate-300 sm:text-base">
                 This Next.js entry point gives you a clean index to launch each
-                preparation pack while keeping the original self-contained HTML
-                interview content intact.
+                preparation pack, including the new JavaScript and React Native
+                coding challenges page, while keeping the original self-contained
+                HTML interview content intact.
               </p>
             </div>
 
@@ -66,7 +75,8 @@ export default function HomePage() {
                 </div>
                 <p className="mt-3 text-sm leading-7 text-slate-300">
                   Landing page and viewer routes are built in the app router,
-                  while the interview packs remain directly executable HTML.
+                  while several deeper interview packs remain directly
+                  executable HTML.
                 </p>
               </div>
 
@@ -75,7 +85,7 @@ export default function HomePage() {
                   Access
                 </div>
                 <div className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-slate-50">
-                  Four focused routes
+                  Five focused routes
                 </div>
                 <p className="mt-3 text-sm leading-7 text-slate-300">
                   Open each pack inside a dedicated viewer page or jump straight
@@ -86,7 +96,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
+        <section className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
           {interviewPacks.map((pack) => (
             <article
               key={pack.href}
